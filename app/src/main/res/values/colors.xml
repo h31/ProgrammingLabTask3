@@ -4,5 +4,5 @@
     <color name="colorPrimaryDark">#070719</color>
     <color name="colorAccent">#FF4081</color>
     <color name="background">#070719</color>
-    <color name="menuButtons">#f2f5ff</color>
+    <color name="menuButtons">#ffffff</color>
 </resources>

@@ -2,35 +2,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/pohbase"
-        android:checkable="false"
-        android:icon="@drawable/ic_send_purple_24dp"
+        android:icon="@drawable/ic_home_black_24dp"
         android:title="Home" />
     <item
         android:id="@+id/heroes"
         android:title="Heroes"
-        android:icon="@drawable/ic_send_purple_24dp"/>
+        android:icon="@drawable/ic_sentiment_neutral_black_24dp"/>
     <item
         android:id="@+id/sparks"
         android:title="Sparks"
-        android:icon="@drawable/ic_send_purple_24dp"/>
+        android:icon="@drawable/ic_whatshot_black_24dp"/>
     <item
         android:id="@+id/guides"
         android:title="Guides"
-        android:icon="@drawable/ic_send_purple_24dp"/>
+        android:icon="@drawable/ic_view_list_black_24dp"/>
     <item
         android:id="@+id/calculator"
         android:title="Calculator"
-        android:icon="@drawable/ic_send_purple_24dp"/>
+        android:icon="@drawable/ic_settings_black_24dp"/>
     <item
         android:id="@+id/tournaments"
         android:title="Tournaments"
-        android:icon="@drawable/ic_send_purple_24dp"/>
+        android:icon="@drawable/ic_grade_black_24dp"/>
     <item
         android:id="@+id/arts"
         android:title="Arts"
-        android:icon="@drawable/ic_send_purple_24dp"/>
+        android:icon="@drawable/ic_palette_black_24dp"/>
     <item
         android:id="@+id/about"
         android:title="About us"
-        android:icon="@drawable/ic_send_purple_24dp"/>
+        android:icon="@drawable/ic_person_black_24dp"/>
 </menu>
