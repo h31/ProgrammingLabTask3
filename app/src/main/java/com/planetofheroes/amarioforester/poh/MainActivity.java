@@ -1,15 +1,14 @@
 package com.planetofheroes.amarioforester.poh;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.net.Network;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.Window;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -19,13 +18,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        NavigationView nvDrawer = (NavigationView) findViewById(R.id.nv);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setupDrawerContent(nvDrawer);
+        android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.replace(R.id.flcontent, new PoHBase());
+        tx.commit();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
-        NavigationView nvDrawer = (NavigationView) findViewById(R.id.nv);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setupDrawerContent(nvDrawer);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setTitle("PoHBase");
+        }
     }
 
     @Override
@@ -40,8 +45,29 @@ public class MainActivity extends AppCompatActivity {
         android.support.v4.app.Fragment myFragment = null;
         Class fragmentClass;
         switch (menuItem.getItemId()) {
-            case R.id.gallery:
+            case R.id.pohbase:
+                fragmentClass = PoHBase.class;
+                break;
+            case R.id.heroes:
                 fragmentClass = Heroes.class;
+                break;
+            case R.id.sparks:
+                fragmentClass = Sparks.class;
+                break;
+            case R.id.guides:
+                fragmentClass = Guides.class;
+                break;
+            case R.id.calculator:
+                fragmentClass = Calculator.class;
+                break;
+            case R.id.tournaments:
+                fragmentClass = Tournaments.class;
+                break;
+            case R.id.arts:
+                fragmentClass = Arts.class;
+                break;
+            case R.id.about:
+                fragmentClass = About_us.class;
                 break;
                 default:
                     fragmentClass = Heroes.class;

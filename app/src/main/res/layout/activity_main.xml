@@ -6,25 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <FrameLayout
-        android:orientation="vertical"
         android:id="@+id/flcontent"
-        android:background="@drawable/background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:background="@drawable/background"
+        android:orientation="vertical"></FrameLayout>
 
 
     <android.support.design.widget.NavigationView
+        android:id="@+id/nv"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/background"
-        app:itemTextColor="@color/menuButtons"
-        app:itemIconTint="@color/menuButtons"
-        app:menu="@menu/drawermenu"
         android:layout_gravity="start"
-        android:id="@+id/nv"
-        >
+        android:background="@color/background"
+        android:visibility="invisible"
+        app:itemIconTint="@color/menuButtons"
+        app:itemTextColor="@color/menuButtons"
+        app:menu="@menu/drawermenu">
 
     </android.support.design.widget.NavigationView>
 
