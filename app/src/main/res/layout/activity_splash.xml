@@ -4,33 +4,34 @@
     android:id="@+id/activity_spalsh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3d5ecb"
+    android:layout_gravity="center"
 
     tools:context="com.planetofheroes.amarioforester.poh.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:gravity="center|fill"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginTop="300dp"
+            android:background="@color/colorPrimary"
             android:fontFamily="@font/magneto"
-            android:text="PoHBase"
+            android:gravity="center"
+            android:text="@string/pohbase"
             android:textColor="@color/menuButtons"
-            android:textSize="50sp"
-            android:textStyle="bold" />
+            android:textSize="35sp"
+            />
 
         <ImageView
             android:id="@+id/iv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
+            android:layout_height="640sp"
+            android:background="@color/colorPrimary" />
 
     </LinearLayout>
 
