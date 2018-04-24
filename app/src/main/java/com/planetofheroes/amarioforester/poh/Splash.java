@@ -3,10 +3,12 @@ package com.planetofheroes.amarioforester.poh;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Splash extends AppCompatActivity {
 
@@ -41,4 +43,13 @@ public class Splash extends AppCompatActivity {
         };
         timer.start();
     }
-}
+
+    @Override //masha
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK)
+            Toast.makeText(getApplicationContext(), "loading...",
+                    Toast.LENGTH_LONG).show();
+        return false;
+    }
+    }
+
