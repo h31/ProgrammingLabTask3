@@ -12,6 +12,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+
     ViewPager viewPager;
     int images[] = {R.drawable.frag, R.drawable.frag2, R.drawable.frag, R.drawable.frag2};
     MyCustomPagerAdapter myCustomPagerAdapter;
@@ -21,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         viewPager = (ViewPager)findViewById(R.id.viewPager);
 
