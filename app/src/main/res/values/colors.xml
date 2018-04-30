@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#070719</color>
     <color name="colorPrimaryDark">#070719</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#bda3ff</color>
     <color name="background">#070719</color>
     <color name="menuButtons">#ffffff</color>
 
