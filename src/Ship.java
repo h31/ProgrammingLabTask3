@@ -36,6 +36,33 @@ public class Ship {
         return false;
     }
 
+    boolean isShipTouching(Ship workingShip) {
+        for (Cell cell : cells) {
+            if (workingShip.isCellTouching(cell)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean isHit(int x, int y) {
+        for (Cell cell : cells) {
+            if (cell.isHit(x, y)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean isAlive() {
+        for (Cell cell : cells) {
+            if (cell.isAlive()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void drawingShip(GraphicsContext ship, int sizeOfCell, boolean hide) {
         for (Cell cell : cells) {
             cell.drawingGridlines(ship, sizeOfCell, hide);
