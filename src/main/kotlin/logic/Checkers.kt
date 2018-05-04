@@ -1,15 +1,17 @@
 package logic
 
+import logic.Board.*
+
 interface Checkers {
     val board: Board
     val playerWhite: Player
     val playerBlack: Player
     var turn: Side
-    var selectedChecker: Board.Position?
+    var selectedChecker: Position?
     var needCapture: Boolean
 
-    fun selectChecker(position: Board.Position)
-    fun moveChecker(position: Board.Position)
+    fun selectChecker(position: Position): List<Move>
+    fun moveChecker(position: Position)
 
     fun changeTurn() {
         turn = if (turn == Side.WHITE) Side.BLACK
