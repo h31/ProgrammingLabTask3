@@ -11,10 +11,6 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppBaseActivity {
 
-    ViewPager viewPager;
-    int images[] = {R.drawable.frag, R.drawable.frag2, R.drawable.frag, R.drawable.frag2};
-    MyCustomPagerAdapter myCustomPagerAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
