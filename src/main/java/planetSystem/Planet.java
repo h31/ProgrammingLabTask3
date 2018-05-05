@@ -1,21 +1,19 @@
 package planetSystem;
 
 public class Planet {
-    public int a;
 
-    public int b;
+    public String name;
 
-    public int r;
+    public int a, b, r, x, y;
 
-    public int x;
+    public int t = 0;
 
-    public int y;
-
-    public double t = 0.0;
+    private int dt = 1;
 
     public double period;
 
-    public Planet(int a, int b, int r) {
+    public Planet(String name, int a, int b, int r) {
+        this.name = name;
         this.a = a;
         this.b = b;
         this.r = r;
@@ -23,9 +21,21 @@ public class Planet {
     }
 
     public void step() {
-        x = (int) (400 + a * Math.cos(2 * Math.PI / period * t));
-        y = (int) (300 + a * Math.sin(2 * Math.PI / period * t));
-        t = t + 1;
+        x = (int) (400 + a / 2 * Math.cos(2 * Math.PI / period * t));
+        y = (int) (300 + b / 2* Math.sin(2 * Math.PI / period * t));
+        t = t + dt;
+    }
+
+    public void step(int dt) {
+        t = t + dt;
+    }
+
+    public void pause() {
+        dt = 0;
+    }
+
+    public void play() {
+        dt = 1;
     }
 
 }

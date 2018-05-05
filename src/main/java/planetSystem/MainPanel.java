@@ -4,50 +4,60 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
-import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class MainPanel extends JPanel {
 
-    public int starRadius = 50;
+    public PlanetSystem pS = new PlanetSystem(new Star("Solar", 50),
+            Arrays.asList(new Planet("Earth",400, 200, 10), new Planet("Mars",200, 150, 5),
+            new Planet("Venera",100, 80, 5), new Planet("Titan",600, 400, 20),
+            new Planet("Europe",500, 300, 15) ));
 
-    public List<Planet> planets = Arrays.asList(new Planet(100, 50, 10), new Planet(150, 70, 5),
-            new Planet(60, 50, 5), new Planet(200, 150, 20), new Planet(250, 50, 15),
-            new Planet(180, 150, 8), new Planet(250, 200, 4), new Planet(170, 100, 5));
 
     public MainPanel() {
-        setBackground(Color.BLACK);
-        ActionListener timerListener = e -> {
-            for (Planet planet:planets) {
-                planet.step();
-            }
-            repaint();
-        };
-        Timer timer = new Timer(5, timerListener);
-        timer.start();
+        if (!pS.planets.isEmpty()) {
+            ActionListener timerListener = e -> {
+                for (Planet planet : pS.planets) {
+                    planet.step();
+                }
+                repaint();
+            };
+            Timer timer = new Timer(10, timerListener);
+            timer.start();
+        }
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(new Color(255, 223, 26));
-        g.fillOval(400 - starRadius / 2 ,300 - starRadius / 2  , starRadius,starRadius);
-        for (Planet p:planets) {
-            paintPlanet(g, p);
+        if (pS.star.r != 0) {
+            g.setColor(new Color(255, 223, 26));
+            g.fillOval(pS.star.x, pS.star.y, pS.star.r, pS.star.r);
+            g.setFont(new Font("Serif", Font.ITALIC, 20));
+            g.drawString(pS.star.name, pS.star.x + pS.star.r / 2, pS.star.y);
         }
+        if (!pS.planets.isEmpty()) {
+            for (Planet p : pS.planets) {
+                paintPlanet(g, p);
+                paintOrbite(g, p);
+            }
+        }
+    }
 
-        /*
-        for (Planet planet:planets) {
-            g.setColor(new Color(0xFF2A18));
-            g.drawOval(400 - planet.a / 2, 300 - planet.b / 2, planet.a, planet.b);
-        }
-        */
+    private void paintOrbite(Graphics g, Planet p) {
+        g.setColor(new Color(0x2AE2FF));
+        g.drawOval(400 - p.a / 2, 300 - p.b / 2, p.a, p.b);
     }
 
     private void paintPlanet(Graphics g, Planet p) {
         g.setColor(new Color(0x2AE2FF));
         int radius = p.r;
         g.fillOval(p.x - radius, p.y - radius, 2 * radius, 2 * radius);
+        g.setColor(new Color(0, 128, 0));
+        g.setFont(new Font("Serif", Font.ITALIC, 20));
+        g.drawString("Day " + p.t, 20, 20);
+        g.setFont(new Font("Serif", Font.ITALIC, 20));
+        g.drawString(p.name, p.x + radius / 2, p.y - radius);
     }
 
 }
