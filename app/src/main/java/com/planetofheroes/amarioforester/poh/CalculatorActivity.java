@@ -3,7 +3,7 @@ package com.planetofheroes.amarioforester.poh;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CalculatorActivity extends AppCompatActivity {
+public class CalculatorActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

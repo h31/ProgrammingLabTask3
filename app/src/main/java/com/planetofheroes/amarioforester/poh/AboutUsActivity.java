@@ -3,7 +3,7 @@ package com.planetofheroes.amarioforester.poh;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class AboutUsActivity extends AppCompatActivity {
+public class AboutUsActivity extends MainActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
