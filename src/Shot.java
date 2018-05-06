@@ -11,7 +11,7 @@ public class Shot {
     public int getY() {
         return y;
     }
-    
+
     public boolean isShot() {
         return shot;
     }

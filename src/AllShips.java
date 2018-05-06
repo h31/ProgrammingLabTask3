@@ -22,6 +22,25 @@ public class AllShips {
             }
         }
     }
+
+    boolean checkAlive() {
+        for (Ship ship: ships) {
+            if (ship.isAlive()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean checkHit(int x, int y) {
+        for (Ship ship: ships) {
+            if (ship.isHit(x, y)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void drawingShips(GraphicsContext shipsDraw) {
         for (Ship ship: ships) {
             ship.drawingShip(shipsDraw, 10, hide);
