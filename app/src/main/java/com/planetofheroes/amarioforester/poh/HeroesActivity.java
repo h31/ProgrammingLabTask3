@@ -54,15 +54,12 @@ public class HeroesActivity extends MainActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.mytransition);
-                view.startAnimation(animation);
-
                 if (position == 0) {
-                    Intent myintent = new Intent(view.getContext(), PoHBaseActivity.class);
+                    Intent myintent = new Intent(view.getContext(), BlueBeard.class);
                     startActivityForResult(myintent, 0);
                 }
                 if (position == 1) {
-                    Intent myintent = new Intent(view.getContext(), ArtsActivity.class);
+                    Intent myintent = new Intent(view.getContext(), Bubbles.class);
                     startActivityForResult(myintent, 1);
                 }
                 if (position == 2) {
