@@ -16,11 +16,18 @@ public class HeroesActivity extends MainActivity {
 
         listView = (ListView) findViewById(R.id.heroes_list);
         ArrayList<Hero> heroesList = new ArrayList<>();
-        heroesList.add(new Hero(R.drawable.beardlayer));
-        heroesList.add(new Hero(R.drawable.bubbleslayer));
-        heroesList.add(new Hero(R.drawable.duncanlayer));
-        heroesList.add(new Hero(R.drawable.sofialayer));
-        heroesList.add(new Hero(R.drawable.timmylayer));
+        heroesList.add(new Hero(R.drawable.blue));
+        heroesList.add(new Hero(R.drawable.bubb));
+        heroesList.add(new Hero(R.drawable.dun));
+        heroesList.add(new Hero(R.drawable.can));
+        heroesList.add(new Hero(R.drawable.sky));
+        heroesList.add(new Hero(R.drawable.timm));
+        heroesList.add(new Hero(R.drawable.iff));
+        heroesList.add(new Hero(R.drawable.blue));
+        heroesList.add(new Hero(R.drawable.bubb));
+        heroesList.add(new Hero(R.drawable.can));
+        heroesList.add(new Hero(R.drawable.sky));
+
 
         mAdapter = new HeroAdapter(this, heroesList);
         listView.setAdapter(mAdapter);
