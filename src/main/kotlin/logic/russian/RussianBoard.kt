@@ -3,6 +3,7 @@ package logic.russian
 import logic.*
 import logic.Side.*
 import logic.Board.*
+import logic.MoveType.*
 
 class RussianBoard : Board {
     override val boardSize = 8
@@ -45,16 +46,45 @@ class RussianBoard : Board {
     }
 
     override fun isCaptureNeed(side: Side): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        for (row in 0..(boardSize - 1)) {
+            for (col in 0..(boardSize - 1)) {
+                if (board[row][col]?.side == side)
+                    if (canCapture(Position(col + 1, row + 1))) return true
+            }
+        }
+        return false
     }
 
     override fun possibleMoves(position: Position): List<Move> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val checker = checkChecker(position) ?: throw IllegalArgumentException("It must be checker on position")
+        val side = checker.side
+        val result = mutableListOf<Move>()
+
+        for (direction in if (checker.isKing) whiteDirections + blackDirections
+        else if (side == WHITE) whiteDirections else blackDirections) {
+            var nextPosition = position
+            while (true) {
+                nextPosition += direction
+                if (isPositionOnBoard(nextPosition)) {
+                    val nextChecker = checkChecker(nextPosition)
+                    if (nextChecker == null) {
+                        result.add(Move(nextPosition, MOVE))
+                        if (checker.isKing) continue
+                    } else if (nextChecker.side != side) {
+                        val nextCapture = nextPosition + direction
+                        if (isPositionOnBoard(nextCapture) && checkChecker(nextCapture) == null)
+                            result.add(Move(nextCapture, CAPTURE))
+                    }
+                    break
+                } else break
+            }
+        }
+        return result.toList()
     }
 
     override fun moveChecker(position: Position, move: Move): MoveType {
         board[move.position.y - 1][move.position.x - 1] = board[position.y - 1][position.x - 1]
-        if (move.moveType != MoveType.MOVE)
+        if (move.moveType != MOVE)
             board[(position.y + move.position.y) / 2 - 1][(position.x + move.position.x) / 2 - 1] = null
         board[position.y - 1][position.x - 1] = null
         return move.moveType
