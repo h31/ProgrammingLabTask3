@@ -1,0 +1,55 @@
+package logic.russian
+
+import logic.Board.*
+import logic.MoveType.*
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.*
+
+class CheckersTest {
+    val checkers = RussianCheckers()
+
+    fun printBoard() {
+        println(checkers.board.toString() + "\n")
+    }
+
+    @Test
+    fun checkersTest() {
+        printBoard()
+        assertEquals(emptySet<Move>(), checkers.selectChecker(2, 1))
+        assertEquals(emptySet<Move>(), checkers.selectChecker(4, 3))
+        assertEquals(setOf(Move(2, 5, MOVE), Move(4, 5, MOVE)), checkers.selectChecker(3, 6))
+
+        checkers.moveChecker(4, 5, MOVE)
+        checkers.selectChecker(2, 3)
+        checkers.moveChecker(3, 4, MOVE)
+
+        printBoard()
+        assertEquals(setOf(Move(2, 3, CAPTURE)), checkers.selectChecker(4, 5))
+
+        checkers.moveChecker(2, 3, CAPTURE)
+        printBoard()
+    }
+
+    @Test
+    fun doubleCaptureTest() {
+        printBoard()
+        checkers.selectChecker(7, 6)
+        checkers.moveChecker(8, 5, MOVE)
+        checkers.selectChecker(2, 3)
+        checkers.moveChecker(3, 4, MOVE)
+        checkers.selectChecker(5, 6)
+        checkers.moveChecker(6, 5, MOVE)
+        checkers.selectChecker(1, 2)
+        checkers.moveChecker(2, 3, MOVE)
+        checkers.selectChecker(4, 7)
+        checkers.moveChecker(5, 6, MOVE)
+        checkers.selectChecker(3,4)
+        checkers.moveChecker(4, 5, MOVE)
+        printBoard()
+        checkers.selectChecker(5, 6)
+        checkers.moveChecker(3, 4, CAPTURE)
+        checkers.selectChecker(3, 4)
+        checkers.moveChecker(1, 2, CAPTURE)
+        printBoard()
+    }
+}

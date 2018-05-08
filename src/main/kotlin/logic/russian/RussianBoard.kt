@@ -1,9 +1,15 @@
 package logic.russian
 
-import logic.*
-import logic.Side.*
-import logic.Board.*
-import logic.MoveType.*
+import logic.Board
+import logic.Board.Move
+import logic.Board.Position
+import logic.Checker
+import logic.MoveType
+import logic.MoveType.CAPTURE
+import logic.MoveType.MOVE
+import logic.Side
+import logic.Side.BLACK
+import logic.Side.WHITE
 
 class RussianBoard : Board {
     override val boardSize = 8
@@ -55,10 +61,10 @@ class RussianBoard : Board {
         return false
     }
 
-    override fun possibleMoves(position: Position): List<Move> {
+    override fun possibleMoves(position: Position): Set<Move> {
         val checker = checkChecker(position) ?: throw IllegalArgumentException("It must be checker on position")
         val side = checker.side
-        val result = mutableListOf<Move>()
+        val result = mutableSetOf<Move>()
 
         for (direction in if (checker.isKing) whiteDirections + blackDirections
         else if (side == WHITE) whiteDirections else blackDirections) {
@@ -79,7 +85,7 @@ class RussianBoard : Board {
                 } else break
             }
         }
-        return result.toList()
+        return result.toSet()
     }
 
     override fun moveChecker(position: Position, move: Move): MoveType {
