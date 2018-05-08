@@ -4,6 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BlueBeard">
+    android:background="@drawable/ttt"
+    tools:context=".BlueBeard"
+    android:id="@+id/blue">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/a_avanebs"
+        android:text="Razy Pidor"
+        android:textSize="50dp"
+        android:gravity="center"
+        android:textColor="@color/menuButtons"
+        />
 
 </android.support.constraint.ConstraintLayout>
