@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:text="Razy Pidor"
+        android:text="Text Test"
         android:textSize="50dp"
         android:gravity="center"/>
 </FrameLayout>

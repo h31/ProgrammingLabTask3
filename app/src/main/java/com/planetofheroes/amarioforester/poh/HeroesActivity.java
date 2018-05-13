@@ -3,18 +3,8 @@ package com.planetofheroes.amarioforester.poh;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -55,31 +45,31 @@ public class HeroesActivity extends MainActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position == 0) {
-                    Intent myintent = new Intent(view.getContext(), BlueBeard.class);
+                    Intent myintent = new Intent(view.getContext(), Hero_BlueBeard.class);
                     startActivityForResult(myintent, 0);
                 }
                 if (position == 1) {
-                    Intent myintent = new Intent(view.getContext(), Bubbles.class);
+                    Intent myintent = new Intent(view.getContext(), Hero_Bubbles.class);
                     startActivityForResult(myintent, 1);
                 }
                 if (position == 2) {
-                    Intent myintent = new Intent(view.getContext(), ArtsActivity.class);
+                    Intent myintent = new Intent(view.getContext(), Hero_Duncan.class);
                     startActivityForResult(myintent, 2);
                 }
                 if (position == 3) {
-                    Intent myintent = new Intent(view.getContext(), ArtsActivity.class);
+                    Intent myintent = new Intent(view.getContext(), Hero_Candy.class);
                     startActivityForResult(myintent, 3);
                 }
                 if (position == 4) {
-                    Intent myintent = new Intent(view.getContext(), ArtsActivity.class);
+                    Intent myintent = new Intent(view.getContext(), Hero_Skylee.class);
                     startActivityForResult(myintent, 4);
                 }
                 if (position == 5) {
-                    Intent myintent = new Intent(view.getContext(), ArtsActivity.class);
+                    Intent myintent = new Intent(view.getContext(), Hero_Timmy.class);
                     startActivityForResult(myintent, 5);
                 }
                 if (position == 6) {
-                    Intent myintent = new Intent(view.getContext(), ArtsActivity.class);
+                    Intent myintent = new Intent(view.getContext(), Hero_Iffir.class);
                     startActivityForResult(myintent, 6);
                 }
             }

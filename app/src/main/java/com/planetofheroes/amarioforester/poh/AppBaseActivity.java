@@ -36,7 +36,7 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
         navigation_view = (NavigationView) findViewById(R.id.navigation_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         drawerMenu = navigation_view.getMenu();

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.planetofheroes.amarioforester.poh">
 
     <application
         android:allowBackup="true"
-        android:label="PoHBase"
+        android:icon="@mipmap/pohbase_icon"
+        android:label="Planet of Heroes Base"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        >
+        tools:ignore="ExtraText">
         <activity
             android:name=".Splash"
             android:theme="@style/IntroTheme">
@@ -17,18 +19,65 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".AboutUsActivity" />
-        <activity android:name=".CalculatorActivity" />
-        <activity android:name=".ArtsActivity" />
-        <activity android:name=".GuidesActivity" />
-        <activity android:name=".HeroesActivity" />
-        <activity android:name=".PoHBaseActivity" />
-        <activity android:name=".SparksActivity" />
-        <activity android:name=".TournamentsActivity" />
-        <activity android:name=".BlueBeard" />
-        <activity android:name=".Bubbles"
-            android:theme="@style/IntroTheme"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CalculatorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ArtsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GuidesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HeroesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PoHBaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SparksActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TournamentsActivity"
+            android:screenOrientation="portrait" />
+
+        //                                             Heroes Page
+        <activity
+            android:name=".Hero_BlueBeard"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Hero_Bubbles"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Hero_Duncan"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Hero_Candy"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Hero_Skylee"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Hero_Timmy"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Hero_Iffir"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme">
+
+        </activity>
     </application>
 
 </manifest>
