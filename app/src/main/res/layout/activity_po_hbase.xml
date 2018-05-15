@@ -28,7 +28,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1.5">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/mainlayout"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center">
+        </ImageView>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/bestpicks"
@@ -36,22 +44,38 @@
             android:layout_height="fill_parent"
             />
 
+        <TextView
+            android:layout_width="400dp"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="28dp"
+            android:fontFamily="@font/extrabold"
+            android:textStyle="bold"
+            android:text="Best Team Picks"
+            android:textSize="20dp"
+            android:textColor="@color/menuButtons"
+            android:layout_marginLeft="28dp"
+            android:layout_alignParentLeft="true" />
+
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/bestpicks2"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
+            android:layout_width="119dp"
+            android:layout_height="45dp"
 
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="11dp"
-            android:layout_marginEnd="15dp" />
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp" />
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        android:src="@drawable/svintoz"
-        android:scaleType="centerCrop">
+        android:layout_weight="2.5"
+        android:src="@drawable/exploremaps"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center">
     </ImageView>
 </LinearLayout>

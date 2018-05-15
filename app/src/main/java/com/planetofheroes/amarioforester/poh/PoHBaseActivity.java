@@ -26,7 +26,7 @@ public class PoHBaseActivity extends MainActivity {
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static final Integer[] XMEN= {R.drawable.introimage};
-    private static final Integer[] XMEN2= {R.drawable.svintoz22,R.drawable.svintoz22};
+    private static final Integer[] XMEN2= {R.drawable.icons,R.drawable.icons};
     private ArrayList<Integer> XMENArray = new ArrayList<>();
     private ArrayList<Integer> XMENArray2 = new ArrayList<>();
     @Override
