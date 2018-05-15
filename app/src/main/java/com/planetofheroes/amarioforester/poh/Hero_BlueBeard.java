@@ -1,12 +1,15 @@
 package com.planetofheroes.amarioforester.poh;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 
 public class Hero_BlueBeard extends AppCompatActivity {
+    Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +25,15 @@ public class Hero_BlueBeard extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("BlueBeard");
         }
+
+        backButton = (Button) findViewById(R.id.backBtn1);
+        }
+
+    public void backBtnClick(View v){
+        Intent intent = new Intent(Hero_BlueBeard.this, HeroesActivity.class);
+        startActivity(intent);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
