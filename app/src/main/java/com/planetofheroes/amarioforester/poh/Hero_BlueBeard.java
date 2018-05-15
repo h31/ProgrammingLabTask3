@@ -1,8 +1,10 @@
 package com.planetofheroes.amarioforester.poh;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 public class Hero_BlueBeard extends AppCompatActivity {
 
@@ -20,5 +22,16 @@ public class Hero_BlueBeard extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("BlueBeard");
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            }
+        }, 0);
     }
 }

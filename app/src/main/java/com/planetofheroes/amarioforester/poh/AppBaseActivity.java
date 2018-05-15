@@ -3,6 +3,7 @@ package com.planetofheroes.amarioforester.poh;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 public abstract class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
@@ -26,11 +28,7 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.app_base_layout);// The base layout that contains your navigation drawer.
 
-        View overlay = findViewById(R.id.drawer_layout);
 
-        overlay.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         view_stub = (FrameLayout) findViewById(R.id.view_stub);
         navigation_view = (NavigationView) findViewById(R.id.navigation_view);
@@ -45,6 +43,20 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
         }
         // and so on...
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            }
+        }, 0);
+    }
+
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

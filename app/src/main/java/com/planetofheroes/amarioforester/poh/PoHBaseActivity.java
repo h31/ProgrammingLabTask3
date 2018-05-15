@@ -25,25 +25,38 @@ public class PoHBaseActivity extends MainActivity {
 
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private static final Integer[] XMEN= {R.drawable.dun,R.drawable.bubb};
+    private static final Integer[] XMEN= {R.drawable.introimage};
+    private static final Integer[] XMEN2= {R.drawable.svintoz22,R.drawable.svintoz22};
     private ArrayList<Integer> XMENArray = new ArrayList<>();
+    private ArrayList<Integer> XMENArray2 = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_po_hbase);
         init();
     }
+
     private void init() {
         for(int i=0;i<XMEN.length;i++)
             XMENArray.add(XMEN[i]);
+
+        for(int i=0;i<XMEN2.length;i++)
+            XMENArray2.add(XMEN2[i]);
 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new MyAdapter(PoHBaseActivity.this,XMENArray));
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 
+        mPager = (ViewPager) findViewById(R.id.bestpicks);
+        mPager.setAdapter(new MyAdapter(PoHBaseActivity.this,XMENArray2));
+        indicator = (CircleIndicator) findViewById(R.id.bestpicks2);
+        indicator.setViewPager(mPager);
+
+
         // Auto start of viewpager
         final Handler handler = new Handler();
+        final Handler handler2 = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
                 if (currentPage == XMEN.length) {
@@ -52,6 +65,16 @@ public class PoHBaseActivity extends MainActivity {
                 mPager.setCurrentItem(currentPage++, true);
             }
         };
+
+        final Runnable Update2 = new Runnable() {
+            public void run() {
+                if (currentPage == XMEN2.length) {
+                    currentPage = 1;
+                }
+                mPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
         Timer swipeTimer = new Timer();
         swipeTimer.schedule(new TimerTask() {
             @Override
@@ -59,6 +82,14 @@ public class PoHBaseActivity extends MainActivity {
                 handler.post(Update);
             }
         }, 0, 5000);
+
+        Timer swipeTimer2 = new Timer();
+        swipeTimer2.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler2.post(Update2);
+            }
+        }, 5000000, 50000000);
     }
 
     @Override
