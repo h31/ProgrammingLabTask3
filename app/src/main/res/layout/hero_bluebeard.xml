@@ -13,9 +13,9 @@
         android:src="@drawable/bbluebeard" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/backBtn"
-        android:text="Back to the Gallery"
-        android:onClick="backBtnClick"/>
+        android:id="@+id/backBtn1"
+        android:layout_width="34dp"
+        android:layout_height="26dp"
+        android:background="@drawable/back"
+        android:onClick="backBtnClick" />
 </FrameLayout>
