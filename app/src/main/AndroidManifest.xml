@@ -46,8 +46,7 @@
         <activity
             android:name=".TournamentsActivity"
             android:screenOrientation="portrait" />
-
-        //                                             Heroes Page
+        // Heroes Page
         <activity
             android:name=".Hero_BlueBeard"
             android:screenOrientation="portrait"
@@ -75,8 +74,11 @@
         <activity
             android:name=".Hero_Iffir"
             android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".MapExplorePage"
+            android:screenOrientation="portrait"
             android:theme="@style/IntroTheme">
-
         </activity>
     </application>
 

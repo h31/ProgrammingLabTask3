@@ -26,7 +26,7 @@ import java.util.TimerTask;
 import me.relex.circleindicator.CircleIndicator;
 
 public class PoHBaseActivity extends MainActivity {
-    ImageView backButton;
+    ImageView imageButton;
 
     private static ViewPager mPager;
     private static int currentPage = 0;
@@ -40,11 +40,11 @@ public class PoHBaseActivity extends MainActivity {
         setContentView(R.layout.activity_po_hbase);
         init();
 
-        backButton = (ImageView) findViewById(R.id.maps);
+        imageButton = (ImageView) findViewById(R.id.maps);
     }
 
     public void backBtnClick(View v){
-        Intent intent = new Intent(PoHBaseActivity.this, HeroesActivity.class);
+        Intent intent = new Intent(PoHBaseActivity.this, MapExplorePage.class);
         startActivity(intent);
     }
 

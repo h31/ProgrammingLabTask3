@@ -10,10 +10,10 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/background" />
+        android:src="@drawable/introimage" />
 
     <Button
-        android:id="@+id/backBtn1"
+        android:id="@+id/backBtn2"
         android:layout_width="60dp"
         android:layout_height="24dp"
         android:background="@drawable/arrowback"
