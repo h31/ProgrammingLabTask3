@@ -22,7 +22,7 @@ class RussianBoard : Board {
             for (col in 0..(boardSize - 1)) {
                 if (((row == 0 || row == 2) && col % 2 == 1) || row == 1 && col % 2 == 0)
                     board[row][col] = Checker(BLACK)
-                if (((row == 5 || row == 7) && col % 2 == 0) || row == 6 && col % 2 == 1)
+                else if (((row == 5 || row == 7) && col % 2 == 0) || row == 6 && col % 2 == 1)
                     board[row][col] = Checker(WHITE)
             }
         }
