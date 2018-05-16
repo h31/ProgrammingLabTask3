@@ -20,8 +20,7 @@ public class MapExplorePage extends AppCompatActivity {
         backButton = (Button) findViewById(R.id.backBtn2);
     }
     public void backBtnClick(View v){
-        Intent intent = new Intent(MapExplorePage.this, PoHBaseActivity.class);
-        startActivity(intent);
+        this.finish();
     }
 
     @Override
@@ -36,13 +35,4 @@ public class MapExplorePage extends AppCompatActivity {
         }, 0);
     }
 
-    @Override                              //masha - back button - to the main act
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent intent = new Intent(MapExplorePage.this, PoHBaseActivity.class);
-            startActivity(intent);
-            this.finish();
-        }
-        return false;
-    }
 }
