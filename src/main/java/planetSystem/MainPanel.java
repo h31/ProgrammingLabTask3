@@ -5,26 +5,22 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
-@SuppressWarnings("WeakerAccess")
 public class MainPanel extends JPanel {
 
-    public PlanetSystem pS = new PlanetSystem(new Star("Solar", 50),
+    PlanetSystem pS = new PlanetSystem(new Star("Solar", 50),
             Arrays.asList(new Planet("Earth",400, 200, 10), new Planet("Mars",200, 150, 5),
             new Planet("Venera",100, 80, 5), new Planet("Titan",600, 400, 20),
             new Planet("Europe",500, 300, 15) ));
 
 
-    public MainPanel() {
-        if (!pS.planets.isEmpty()) {
+    MainPanel() {
             ActionListener timerListener = e -> {
-                for (Planet planet : pS.planets) {
-                    planet.step();
-                }
+                pS.step();
                 repaint();
             };
             Timer timer = new Timer(10, timerListener);
             timer.start();
-        }
+
     }
 
     @Override
@@ -55,7 +51,7 @@ public class MainPanel extends JPanel {
         g.fillOval(p.x - radius, p.y - radius, 2 * radius, 2 * radius);
         g.setColor(new Color(0, 128, 0));
         g.setFont(new Font("Serif", Font.ITALIC, 20));
-        g.drawString("Day " + p.t, 20, 20);
+        g.drawString("Day " + pS.t, 20, 20);
         g.setFont(new Font("Serif", Font.ITALIC, 20));
         g.drawString(p.name, p.x + radius / 2, p.y - radius);
     }

@@ -8,7 +8,6 @@ public class MainFrame extends JFrame {
         setSize(800, 600);
         setContentPane(new MainPanel());
         setVisible(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public static void main(String[] args) {

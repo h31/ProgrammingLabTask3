@@ -2,36 +2,46 @@ package planetSystem;
 
 import java.util.List;
 
-public class PlanetSystem {
+class PlanetSystem {
 
     Star star;
 
     List<Planet> planets;
 
-    public void setStar(Star star) {
+    int t = 0;
+
+    private int dt = 1;
+
+    void setStar(Star star) {
         this.star = star;
     }
 
-    public PlanetSystem(Star star, List<Planet> planets) {
+    void step() {
+        for (Planet p : planets) {
+            p.x = (int) (400 + p.a / 2 * Math.cos(2 * Math.PI / p.period * t));
+            p.y = (int) (300 + p.b / 2 * Math.sin(2 * Math.PI / p.period * t));
+        }
+        t = t + dt;
+    }
+
+    void step(int dt) {
+        t = t + dt;
+    }
+
+    PlanetSystem(Star star, List<Planet> planets) {
         this.star = star;
         this.planets = planets;
     }
 
-    public void pause() {
-        for (Planet p:planets) {
-            p.pause();
-        }
+    void pause() {
+        dt = 0;
     }
 
-    public void play() {
-        for (Planet p:planets) {
-            p.play();
-        }
+    void play() {
+        dt = 1;
     }
 
-    public void forward(int dt) {
-        for (Planet p:planets) {
-            p.step(dt);
-        }
+    void forward(int dt) {
+        step(dt);
     }
 }
