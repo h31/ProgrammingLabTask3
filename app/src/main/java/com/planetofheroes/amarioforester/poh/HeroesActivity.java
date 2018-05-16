@@ -2,9 +2,11 @@ package com.planetofheroes.amarioforester.poh;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -76,4 +78,13 @@ public class HeroesActivity extends MainActivity {
         });
     }
 
+    @Override                              //masha - back button - to the main act
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(HeroesActivity.this, PoHBaseActivity.class);
+            startActivity(intent);
+            this.finish();
+        }
+        return false;
+    }
 }

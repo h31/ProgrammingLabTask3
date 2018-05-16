@@ -1,9 +1,11 @@
 package com.planetofheroes.amarioforester.poh;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -30,8 +32,7 @@ public class Hero_BlueBeard extends AppCompatActivity {
         }
 
     public void backBtnClick(View v){
-        Intent intent = new Intent(Hero_BlueBeard.this, HeroesActivity.class);
-        startActivity(intent);
+        this.finish();
     }
 
     @Override
