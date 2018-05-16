@@ -27,16 +27,14 @@ class RussianCheckers : Checkers {
 
     fun selectChecker(x: Int, y: Int) = selectChecker(Position(x, y))
 
-    /**
-     * @param move must be a Move recieved from selectChecker method
-     */
-    override fun moveChecker(move: Move) {
-        board.moveChecker(selectedChecker, move)
+    override fun moveChecker(move: Move): Position? {
+        val capturedPosition = board.moveChecker(selectedChecker, move)
         if (move.moveType == CAPTURE) {
             if (turn == WHITE) playerBlack.lostCheckers++
             else playerWhite.lostCheckers++
-            if (!board.isCaptureNeed(turn)) changeTurn()
+            if (board.possibleCaptures(move.position).isEmpty()) changeTurn()
         } else changeTurn()
+        return capturedPosition
     }
 
     fun moveChecker(x: Int, y: Int, moveType: MoveType) = moveChecker(Move(x, y, moveType))

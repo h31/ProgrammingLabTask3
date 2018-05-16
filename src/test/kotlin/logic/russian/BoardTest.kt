@@ -1,10 +1,12 @@
 package logic.russian
 
-import logic.Board.*
-import logic.MoveType.*
+import logic.Board.Move
+import logic.Board.Position
+import logic.MoveType.CAPTURE
+import logic.MoveType.MOVE
 import logic.Side
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class BoardTest {
     val board = RussianBoard()
@@ -16,20 +18,20 @@ class BoardTest {
     @Test
     fun createBoard() {
         printBoard()
-        assertFalse(board.canCapture(Position(2, 3)))
+        assertEquals(setOf<Move>(), board.possibleCaptures(Position(2, 3)))
 
         board.moveChecker(Position(1, 6), Move(Position(2, 5), MOVE))
         printBoard()
-        assertFalse(board.canCapture(Position(2, 3)))
+        assertEquals(setOf<Move>(), board.possibleCaptures(Position(2, 3)))
 
         board.moveChecker(Position(2, 5), Move(Position(3, 4), MOVE))
         printBoard()
-        assertTrue(board.canCapture(Position(2, 3)))
-        assertFalse(board.canCapture(Position(3, 4)))
+        assertEquals(setOf(Move(Position(4, 5), CAPTURE, Position(3, 4))), board.possibleCaptures(Position(2, 3)))
+        assertEquals(setOf<Move>(), board.possibleCaptures(Position(3, 4)))
 
-        board.moveChecker(Position(2, 3), Move(Position(4, 5), CAPTURE))
+        board.moveChecker(Position(2, 3), board.possibleCaptures(Position(2, 3)).first())
         printBoard()
-        assertTrue(board.canCapture(Position(5, 6)))
+        assertEquals(setOf(Move(Position(3, 4), CAPTURE, Position(4, 5))), board.possibleCaptures(Position(5, 6)))
 
         assertTrue(board.isCaptureNeed(Side.WHITE))
         assertFalse(board.isCaptureNeed(Side.BLACK))

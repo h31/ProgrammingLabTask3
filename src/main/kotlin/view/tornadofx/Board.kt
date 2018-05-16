@@ -112,6 +112,7 @@ class Board : View() {
 
     fun moveChecker(move: Board.Move) {
         val nextCell = getNodeByRowColumnIndex(move.position.y - 1, move.position.x - 1) as StackPane
+        val capturedPosition = checkers.moveChecker(move)
 
         for (node in selectedCell!!.children) {
             if (node is ImageView) {
@@ -121,15 +122,22 @@ class Board : View() {
 
         for (node in nextCell.children) {
             if (node is ImageView) {
-                node.image = if (checkers.turn == Side.WHITE) resources.image("/white.png")
+                val checker = checkers.board.checkChecker(move.position)!!
+                node.image = if (checker.side == Side.WHITE) if (checker.isKing) resources.image("/white_king.png")
+                else resources.image("/white.png")
+                else if (checker.isKing) resources.image("/black_king.png")
                 else resources.image("/black.png")
             }
         }
 
-        checkers.moveChecker(move)
 
         if (move.moveType == MoveType.CAPTURE) {
-            TODO()
+            val capturedCell = getNodeByRowColumnIndex(capturedPosition!!.y - 1, capturedPosition.x - 1) as StackPane
+            for (node in capturedCell.children) {
+                if (node is ImageView) {
+                    node.image = null
+                }
+            }
         }
 
         selectedRectangle?.strokeWidth = 0.0

@@ -1,9 +1,11 @@
 package logic.russian
 
-import logic.Board.*
-import logic.MoveType.*
+import logic.Board.Move
+import logic.Board.Position
+import logic.MoveType.CAPTURE
+import logic.MoveType.MOVE
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 class CheckersTest {
     val checkers = RussianCheckers()
@@ -24,9 +26,10 @@ class CheckersTest {
         checkers.moveChecker(3, 4, MOVE)
 
         printBoard()
-        assertEquals(setOf(Move(2, 3, CAPTURE)), checkers.selectChecker(4, 5))
+        val moves = checkers.selectChecker(4, 5)
+        assertEquals(setOf(Move(Position(2, 3), CAPTURE, Position(3, 4))), moves)
 
-        checkers.moveChecker(2, 3, CAPTURE)
+        checkers.moveChecker(moves.first())
         printBoard()
     }
 
@@ -43,13 +46,13 @@ class CheckersTest {
         checkers.moveChecker(2, 3, MOVE)
         checkers.selectChecker(4, 7)
         checkers.moveChecker(5, 6, MOVE)
-        checkers.selectChecker(3,4)
+        checkers.selectChecker(3, 4)
         checkers.moveChecker(4, 5, MOVE)
         printBoard()
-        checkers.selectChecker(5, 6)
-        checkers.moveChecker(3, 4, CAPTURE)
-        checkers.selectChecker(3, 4)
-        checkers.moveChecker(1, 2, CAPTURE)
+        val move1 = checkers.selectChecker(5, 6).first()
+        checkers.moveChecker(move1)
+        val move2 = checkers.selectChecker(3, 4).first()
+        checkers.moveChecker(move2)
         printBoard()
     }
 }

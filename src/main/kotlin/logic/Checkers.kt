@@ -8,6 +8,11 @@ interface Checkers {
     val playerBlack: Player
 
     fun selectChecker(position: Position): Set<Move>
-    fun moveChecker(move: Move)
+    /**
+     * @param move must be a Move recieved from selectChecker method
+     * @return Position of captured checker or null if it's move without capturing
+     */
+    fun moveChecker(move: Move): Position?
+
     fun checkWinner(): Player?
 }

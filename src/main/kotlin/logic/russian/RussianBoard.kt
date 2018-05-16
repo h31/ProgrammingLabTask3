@@ -31,31 +31,44 @@ class RussianBoard : Board {
     override fun checkChecker(position: Position): Checker? =
             board[position.y - 1][position.x - 1]
 
-    override fun canCapture(position: Position): Boolean {
-        val side = checkChecker(position)?.side
+    override fun possibleCaptures(position: Position): Set<Move> {
+        val checker: Checker = checkChecker(position)
                 ?: throw IllegalArgumentException("It must be checker on position")
+        val result = mutableSetOf<Move>()
 
-        for (direction in if (side == WHITE) whiteDirections else blackDirections) {
-            val nextPosition = position + direction
+        for (direction in whiteDirections + blackDirections) {
+            var nextPosition = position
 
-            if (isPositionOnBoard(nextPosition)) {
-                val nextChecker = checkChecker(nextPosition) ?: continue
-                if (nextChecker.side != side) {
-                    val endPosition = nextPosition + direction
-                    if (isPositionOnBoard(endPosition) && checkChecker(endPosition) == null) return true
-                }
+            while (true) {
+                nextPosition += direction
+                if (isPositionOnBoard(nextPosition)) {
+                    val nextChecker = checkChecker(nextPosition)
+                    if (nextChecker == null) {
+                        if (checker.isKing) continue
+                    } else if (nextChecker.side != checker.side) {
+                        var nextCapture = nextPosition + direction
+                        while (true) {
+                            if (isPositionOnBoard(nextCapture) && checkChecker(nextCapture) == null)
+                                result.add(Move(nextCapture, CAPTURE, nextPosition))
+                            else break
+                            if (!checker.isKing) break
+                            nextCapture += direction
+                        }
+                    }
+                    break
+                } else break
             }
 
         }
 
-        return false
+        return result
     }
 
     override fun isCaptureNeed(side: Side): Boolean {
         for (row in 0..(boardSize - 1)) {
             for (col in 0..(boardSize - 1)) {
                 if (board[row][col]?.side == side)
-                    if (canCapture(Position(col + 1, row + 1))) return true
+                    if (!possibleCaptures(Position(col + 1, row + 1)).isEmpty()) return true
             }
         }
         return false
@@ -69,6 +82,7 @@ class RussianBoard : Board {
         for (direction in if (checker.isKing) whiteDirections + blackDirections
         else if (side == WHITE) whiteDirections else blackDirections) {
             var nextPosition = position
+
             while (true) {
                 nextPosition += direction
                 if (isPositionOnBoard(nextPosition)) {
@@ -76,24 +90,26 @@ class RussianBoard : Board {
                     if (nextChecker == null) {
                         result.add(Move(nextPosition, MOVE))
                         if (checker.isKing) continue
-                    } else if (nextChecker.side != side) {
-                        val nextCapture = nextPosition + direction
-                        if (isPositionOnBoard(nextCapture) && checkChecker(nextCapture) == null)
-                            result.add(Move(nextCapture, CAPTURE))
                     }
                     break
                 } else break
             }
         }
-        return result.toSet()
+        return (result + possibleCaptures(position)).toSet()
     }
 
-    override fun moveChecker(position: Position, move: Move): MoveType {
-        board[move.position.y - 1][move.position.x - 1] = board[position.y - 1][position.x - 1]
-        if (move.moveType != MOVE)
-            board[(position.y + move.position.y) / 2 - 1][(position.x + move.position.x) / 2 - 1] = null
+    override fun moveChecker(position: Position, move: Move): Position? {
+        val checker = board[position.y - 1][position.x - 1]!!
+        if (move.position.y == 1 && checker.side == WHITE || move.position.y == 8 && checker.side == BLACK)
+            checker.isKing = true
+        board[move.position.y - 1][move.position.x - 1] = checker
+
+        if (move.moveType == CAPTURE) {
+            board[move.capturedPosition!!.y - 1][move.capturedPosition!!.x - 1] = null
+        }
+
         board[position.y - 1][position.x - 1] = null
-        return move.moveType
+        return move.capturedPosition
     }
 
     override fun randomMove(side: Side): MoveType {
@@ -110,7 +126,9 @@ class RussianBoard : Board {
             result.append("|")
             for (col in 0..(boardSize - 1)) {
                 val currentChecker = board[row][col]
-                result.append(if (currentChecker == null) " " else if (currentChecker.side == WHITE) "W" else "B")
+                result.append(if (currentChecker == null) " " else if (currentChecker.side == WHITE)
+                    if (currentChecker.isKing) "̃W" else "W"
+                else if (currentChecker.isKing) "̃B" else "B")
                 result.append("|")
             }
             result.appendln()
