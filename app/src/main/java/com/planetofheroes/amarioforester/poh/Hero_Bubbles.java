@@ -14,11 +14,21 @@ public class Hero_Bubbles extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_bubbles);
-        backButton = (Button) findViewById(R.id.backBtn2);
+
+        View overlay = findViewById(R.id.bubble);
+
+        overlay.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Bubbles");
+        }
+
+        backButton = (Button) findViewById(R.id.backBtnBubbles);
     }
 
     public void backBtnClick(View v){
-        Intent intent = new Intent(Hero_Bubbles.this, HeroesActivity.class);
-        startActivity(intent);
+        this.finish();
     }
 }

@@ -14,11 +14,21 @@ public class Hero_Timmy extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_timmy);
-        backButton = (Button) findViewById(R.id.backBtn7);
+
+        View overlay = findViewById(R.id.timmy);
+
+        overlay.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Timmy");
+        }
+
+        backButton = (Button) findViewById(R.id.backBtnTimmy);
     }
 
     public void backBtnClick(View v){
-        Intent intent = new Intent(Hero_Timmy.this, HeroesActivity.class);
-        startActivity(intent);
+        this.finish();
     }
 }

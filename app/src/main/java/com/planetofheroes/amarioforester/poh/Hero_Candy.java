@@ -14,11 +14,21 @@ public class Hero_Candy extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_candy);
-        backButton = (Button) findViewById(R.id.backBtn3);
+
+        View overlay = findViewById(R.id.candy);
+
+        overlay.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Candy");
+        }
+
+        backButton = (Button) findViewById(R.id.backBtnCandy);
     }
 
     public void backBtnClick(View v){
-        Intent intent = new Intent(Hero_Candy.this, HeroesActivity.class);
-        startActivity(intent);
+        this.finish();
     }
 }

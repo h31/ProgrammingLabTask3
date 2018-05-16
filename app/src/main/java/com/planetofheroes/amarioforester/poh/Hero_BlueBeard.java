@@ -28,7 +28,7 @@ public class Hero_BlueBeard extends AppCompatActivity {
             getSupportActionBar().setTitle("BlueBeard");
         }
 
-        backButton = (Button) findViewById(R.id.backBtn1);
+        backButton = (Button) findViewById(R.id.backBtnBluebeard);
         }
 
     public void backBtnClick(View v){

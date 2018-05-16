@@ -14,11 +14,21 @@ public class Hero_Iffir extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_iffir);
-        backButton = (Button) findViewById(R.id.backBtn5);
+
+        View overlay = findViewById(R.id.iffir);
+
+        overlay.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Iffir");
+        }
+
+        backButton = (Button) findViewById(R.id.backBtnIffir);
     }
 
     public void backBtnClick(View v){
-        Intent intent = new Intent(Hero_Iffir.this, HeroesActivity.class);
-        startActivity(intent);
+        this.finish();
     }
 }

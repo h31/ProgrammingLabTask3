@@ -13,7 +13,7 @@
         android:src="@drawable/background" />
 
     <Button
-        android:id="@+id/backBtn1"
+        android:id="@+id/backBtnBluebeard"
         android:layout_width="60dp"
         android:layout_height="24dp"
         android:background="@drawable/arrowback"

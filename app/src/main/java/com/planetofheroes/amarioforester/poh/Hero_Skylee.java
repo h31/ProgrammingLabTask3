@@ -14,11 +14,21 @@ public class Hero_Skylee extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_skylee);
-        backButton = (Button) findViewById(R.id.backBtn6);
+
+        View overlay = findViewById(R.id.skylee);
+
+        overlay.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Skylee");
+        }
+
+        backButton = (Button) findViewById(R.id.backBtnSkylee);
     }
 
     public void backBtnClick(View v){
-        Intent intent = new Intent(Hero_Skylee.this, HeroesActivity.class);
-        startActivity(intent);
+        this.finish();
     }
 }
