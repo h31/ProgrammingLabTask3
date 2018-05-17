@@ -24,17 +24,23 @@ public class HeroesActivity extends MainActivity {
 
         listView = (ListView) findViewById(R.id.heroes_list);
         ArrayList<Hero> heroesList = new ArrayList<>();
-        heroesList.add(new Hero(R.drawable.skyyy));
-        heroesList.add(new Hero(R.drawable.skyyy));
-        heroesList.add(new Hero(R.drawable.skyyy));
-        heroesList.add(new Hero(R.drawable.skyyy));
-        heroesList.add(new Hero(R.drawable.skyyy));
-        heroesList.add(new Hero(R.drawable.skyyy));
-        heroesList.add(new Hero(R.drawable.skyyy));
-        heroesList.add(new Hero(R.drawable.skyyy));
-        heroesList.add(new Hero(R.drawable.skyyy));
-        heroesList.add(new Hero(R.drawable.skyyy));
-        heroesList.add(new Hero(R.drawable.skyyy));
+        heroesList.add(new Hero(R.drawable.blueb));
+        heroesList.add(new Hero(R.drawable.bubb));
+        heroesList.add(new Hero(R.drawable.dun));
+        heroesList.add(new Hero(R.drawable.cand));
+        heroesList.add(new Hero(R.drawable.sky));
+        heroesList.add(new Hero(R.drawable.timm));
+        heroesList.add(new Hero(R.drawable.iff));
+        heroesList.add(new Hero(R.drawable.timm));
+        heroesList.add(new Hero(R.drawable.dun));
+        heroesList.add(new Hero(R.drawable.sky));
+        heroesList.add(new Hero(R.drawable.cand));
+        heroesList.add(new Hero(R.drawable.timm));
+        heroesList.add(new Hero(R.drawable.iff));
+        heroesList.add(new Hero(R.drawable.timm));
+        heroesList.add(new Hero(R.drawable.dun));
+        heroesList.add(new Hero(R.drawable.sky));
+        heroesList.add(new Hero(R.drawable.cand));
 
 
         mAdapter = new HeroAdapter(this, heroesList);
