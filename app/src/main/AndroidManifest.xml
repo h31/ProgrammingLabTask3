@@ -80,6 +80,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/IntroTheme">
         </activity>
+        <activity
+            android:name=".NewGuide"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
     </application>
 
 </manifest>
