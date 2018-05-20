@@ -1,20 +1,17 @@
 package com.planetofheroes.amarioforester.poh;
 //Masha
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class GuidesActivity extends MainActivity {
     GridView simpleGrid;//Masha - GridView
-    int logos[] = {R.drawable.square, R.drawable.square, R.drawable.square,
-            R.drawable.square, R.drawable.square, R.drawable.square, R.drawable.square
-            , R.drawable.square, R.drawable.square, R.drawable.square};
+    int logos[] = {R.drawable.skysqr, R.drawable.duncsqr, R.drawable.candsqr,
+            R.drawable.bluesq, R.drawable.bubbsqr, R.drawable.candsqr, R.drawable.duncsqr
+            , R.drawable.bubbsqr, R.drawable.bluesq, R.drawable.skysqr};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +20,13 @@ public class GuidesActivity extends MainActivity {
 
         simpleGrid = (GridView) findViewById(R.id.guidesGridView);
 
-        ImageAdapter customAdapter = new ImageAdapter(getApplicationContext(), logos);
+        Grid_adapter customAdapter = new Grid_adapter(getApplicationContext(), logos);
         simpleGrid.setAdapter(customAdapter);
 
         simpleGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(GuidesActivity.this, NewGuide.class);
+                Intent intent = new Intent(GuidesActivity.this, Grid_newPage.class);
                 intent.putExtra("image", logos[position]);
                 startActivity(intent);
             }

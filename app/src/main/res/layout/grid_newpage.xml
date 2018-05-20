@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background"
+    tools:context=".Grid_newPage">
+    <ImageView
+        android:id="@+id/selectedImage"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:adjustViewBounds="true"
+        />
+    <Button
+        android:id="@+id/backBtn2"
+        android:layout_width="60dp"
+        android:layout_height="24dp"
+        android:background="@drawable/arrowback"
+        android:onClick="backBtnClick"
+        android:longClickable="true"/>
+</RelativeLayout>

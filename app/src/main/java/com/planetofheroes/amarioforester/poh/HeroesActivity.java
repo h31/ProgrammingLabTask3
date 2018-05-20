@@ -6,44 +6,43 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class HeroesActivity extends MainActivity {
 
     private ListView listView;
-    private HeroAdapter mAdapter;
+    private List_heroAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heroes);
 
-        // List on Heroes page // Masha
+        // List on HeroesFragment page // Masha
 
         listView = (ListView) findViewById(R.id.heroes_list);
-        ArrayList<Hero> heroesList = new ArrayList<>();
-        heroesList.add(new Hero(R.drawable.blueb));
-        heroesList.add(new Hero(R.drawable.bubb));
-        heroesList.add(new Hero(R.drawable.dun));
-        heroesList.add(new Hero(R.drawable.cand));
-        heroesList.add(new Hero(R.drawable.sky));
-        heroesList.add(new Hero(R.drawable.timm));
-        heroesList.add(new Hero(R.drawable.iff));
-        heroesList.add(new Hero(R.drawable.timm));
-        heroesList.add(new Hero(R.drawable.dun));
-        heroesList.add(new Hero(R.drawable.sky));
-        heroesList.add(new Hero(R.drawable.cand));
-        heroesList.add(new Hero(R.drawable.timm));
-        heroesList.add(new Hero(R.drawable.iff));
-        heroesList.add(new Hero(R.drawable.timm));
-        heroesList.add(new Hero(R.drawable.dun));
-        heroesList.add(new Hero(R.drawable.sky));
-        heroesList.add(new Hero(R.drawable.cand));
+        ArrayList<List_heroImage> heroesList = new ArrayList<>();
+        heroesList.add(new List_heroImage(R.drawable.blueb));
+        heroesList.add(new List_heroImage(R.drawable.bubb));
+        heroesList.add(new List_heroImage(R.drawable.dun));
+        heroesList.add(new List_heroImage(R.drawable.cand));
+        heroesList.add(new List_heroImage(R.drawable.sky));
+        heroesList.add(new List_heroImage(R.drawable.timm));
+        heroesList.add(new List_heroImage(R.drawable.iff));
+        heroesList.add(new List_heroImage(R.drawable.timm));
+        heroesList.add(new List_heroImage(R.drawable.dun));
+        heroesList.add(new List_heroImage(R.drawable.sky));
+        heroesList.add(new List_heroImage(R.drawable.cand));
+        heroesList.add(new List_heroImage(R.drawable.timm));
+        heroesList.add(new List_heroImage(R.drawable.iff));
+        heroesList.add(new List_heroImage(R.drawable.timm));
+        heroesList.add(new List_heroImage(R.drawable.dun));
+        heroesList.add(new List_heroImage(R.drawable.sky));
+        heroesList.add(new List_heroImage(R.drawable.cand));
 
 
-        mAdapter = new HeroAdapter(this, heroesList);
+        mAdapter = new List_heroAdapter(this, heroesList);
         listView.setAdapter(mAdapter);
 
         // Clickable list buttons on heroes // Masha + Dany

@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="ExtraText">
         <activity
-            android:name=".Splash"
+            android:name=".Splash_intro"
             android:theme="@style/IntroTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -76,14 +76,17 @@
             android:screenOrientation="portrait"
             android:theme="@style/IntroTheme" />
         <activity
-            android:name=".MapExplorePage"
-            android:screenOrientation="portrait"
-            android:theme="@style/IntroTheme">
-        </activity>
-        <activity
-            android:name=".NewGuide"
+            android:name=".MapExplorePage_MainScreen"
             android:screenOrientation="portrait"
             android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Grid_newPage"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".PopUp_screen"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
     </application>
 
 </manifest>

@@ -1,23 +1,13 @@
 package com.planetofheroes.amarioforester.poh;
 
-import android.appwidget.AppWidgetProviderInfo;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.YuvImage;
-import android.media.ExifInterface;
 import android.os.Handler;
-import android.support.annotation.DrawableRes;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -30,10 +20,10 @@ public class PoHBaseActivity extends MainActivity {
 
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private static final Integer[] XMEN= {R.drawable.introimage};
-    private static final Integer[] XMEN2= {R.drawable.icons,R.drawable.icons};
-    private ArrayList<Integer> XMENArray = new ArrayList<>();
-    private ArrayList<Integer> XMENArray2 = new ArrayList<>();
+    private static final Integer[] slideImages= {R.drawable.introimage};
+    private static final Integer[] slideImages2= {R.drawable.icons,R.drawable.icons};
+    private ArrayList<Integer> slideArray = new ArrayList<>();
+    private ArrayList<Integer> slideArray2 = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,24 +34,24 @@ public class PoHBaseActivity extends MainActivity {
     }
 
     public void backBtnClick(View v){
-        Intent intent = new Intent(PoHBaseActivity.this, MapExplorePage.class);
+        Intent intent = new Intent(PoHBaseActivity.this, MapExplorePage_MainScreen.class);
         startActivity(intent);
     }
 
     private void init() {
-        for(int i=0;i<XMEN.length;i++)
-            XMENArray.add(XMEN[i]);
+        for(int i=0;i<slideImages.length;i++)
+            slideArray.add(slideImages[i]);
 
-        for(int i=0;i<XMEN2.length;i++)
-            XMENArray2.add(XMEN2[i]);
+        for(int i=0;i<slideImages2.length;i++)
+            slideArray2.add(slideImages2[i]);
 
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new MyAdapter(PoHBaseActivity.this,XMENArray));
+        mPager.setAdapter(new Slide_adapter(PoHBaseActivity.this,slideArray));
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 
         mPager = (ViewPager) findViewById(R.id.bestpicks);
-        mPager.setAdapter(new MyAdapter(PoHBaseActivity.this,XMENArray2));
+        mPager.setAdapter(new Slide_adapter(PoHBaseActivity.this,slideArray2));
         indicator = (CircleIndicator) findViewById(R.id.bestpicks2);
         indicator.setViewPager(mPager);
 
@@ -71,7 +61,7 @@ public class PoHBaseActivity extends MainActivity {
         final Handler handler2 = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == XMEN.length) {
+                if (currentPage == slideImages.length) {
                     currentPage = 0;
                 }
                 mPager.setCurrentItem(currentPage++, true);
@@ -80,8 +70,8 @@ public class PoHBaseActivity extends MainActivity {
 
         final Runnable Update2 = new Runnable() {
             public void run() {
-                if (currentPage == XMEN2.length) {
-                    currentPage = 1;
+                if (currentPage == slideImages2.length) {
+                    currentPage = 0;
                 }
                 mPager.setCurrentItem(currentPage++, true);
             }
@@ -101,7 +91,7 @@ public class PoHBaseActivity extends MainActivity {
             public void run() {
                 handler2.post(Update2);
             }
-        }, 5000000, 50000000);
+        }, 5000, 5000);
     }
 
     @Override
