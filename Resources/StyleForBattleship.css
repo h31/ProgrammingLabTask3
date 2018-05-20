@@ -1,3 +1,24 @@
-.button {
-   -fx-background-color: white;
+.empty {
+   -fx-background-color: rgba(104, 104, 226, 0.6);
+   -fx-border-color: rgba(104, 104, 226, 0.8);
+}
+
+.user_ship {
+   -fx-background-color: rgba(43, 43, 43, 0.6);
+   -fx-border-color: rgba(104, 104, 226, 0.8);
+}
+
+.hidden_ship {
+   -fx-background-color: rgba(104, 104, 226, 0.6);
+   -fx-border-color: rgba(104, 104, 226, 0.8);
+}
+
+.injured_ship {
+   -fx-background-color: rgba(226, 34, 50, 0.6);
+   -fx-border-color: rgba(104, 104, 226, 0.8);
+}
+
+.miss {
+   -fx-background-color: rgba(107, 107, 227, 0.6);
+   -fx-border-color: rgba(104, 104, 226, 0.8);
 }
