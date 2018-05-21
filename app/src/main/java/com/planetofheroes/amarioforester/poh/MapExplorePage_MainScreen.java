@@ -8,6 +8,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class MapExplorePage_MainScreen extends AppCompatActivity {
 
@@ -18,6 +20,14 @@ public class MapExplorePage_MainScreen extends AppCompatActivity {
         setContentView(R.layout.activity_map_explore_page);
 
         backButton = (Button) findViewById(R.id.backBtn2);
+
+        ImageView b = (ImageView) findViewById(R.id.nana);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapExplorePage_MainScreen.this, PopUp_screen_gliphs.class));
+            }
+        });
     }
     public void backBtnClick(View v){
         this.finish();

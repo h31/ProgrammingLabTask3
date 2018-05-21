@@ -7,12 +7,12 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 
-public class PopUp_screen extends Activity {
+public class PopUp_screen_gliphs extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.popup_window);
+        setContentView(R.layout.popup_window2);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -22,11 +22,11 @@ public class PopUp_screen extends Activity {
 
         getWindow().setLayout((int) (width*2), (int) (height*2));
 
-        Button b = (Button) findViewById(R.id.button2);
+        Button b = (Button) findViewById(R.id.button3);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PopUp_screen.this, GuidesActivity.class));
+                startActivity(new Intent(PopUp_screen_gliphs.this, PoHBaseActivity.class));
             }
         });
 

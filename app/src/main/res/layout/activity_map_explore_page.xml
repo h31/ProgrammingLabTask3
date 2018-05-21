@@ -1,22 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Hero_BlueBeard"
+    android:id="@+id/blue"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@+id/blue">
+    tools:context=".Hero_BlueBeard"
+    android:orientation="vertical">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/introimage" />
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.1675925926"
+            android:scaleType="centerCrop"
+            android:src="@drawable/exploremaps_01"
+            android:id="@+id/nana"
+            >
+        </ImageView>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.2546296296"
+            android:scaleType="centerCrop"
+            android:src="@drawable/exploremaps_02">
+        </ImageView>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.1143518519"
+            android:scaleType="centerCrop"
+            android:src="@drawable/exploremaps_03">
+        </ImageView>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.1944444444"
+            android:scaleType="centerCrop"
+            android:src="@drawable/exploremaps_04">
+        </ImageView>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.2689814815"
+            android:scaleType="centerCrop"
+            android:src="@drawable/exploremaps_05">
+        </ImageView>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/backBtn2"
         android:layout_width="60dp"
         android:layout_height="24dp"
         android:background="@drawable/arrowback"
-        android:onClick="backBtnClick"
-        android:longClickable="true"/>
-</FrameLayout>
+        android:onClick="backBtnClick" />
+
+</RelativeLayout>

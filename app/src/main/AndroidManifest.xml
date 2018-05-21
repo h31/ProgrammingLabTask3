@@ -85,6 +85,9 @@
             android:theme="@style/IntroTheme" />
         <activity
             android:name=".PopUp_screen"
+            android:theme="@style/AppTheme.CustomTheme"/>
+        <activity
+            android:name=".PopUp_screen_gliphs"
             android:theme="@style/AppTheme.CustomTheme">
         </activity>
     </application>
