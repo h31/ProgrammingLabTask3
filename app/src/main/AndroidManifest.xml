@@ -12,6 +12,7 @@
         tools:ignore="ExtraText">
         <activity
             android:name=".Splash_intro"
+            android:screenOrientation="portrait"
             android:theme="@style/IntroTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -85,11 +86,16 @@
             android:theme="@style/IntroTheme" />
         <activity
             android:name=".PopUp_screen"
-            android:theme="@style/AppTheme.CustomTheme"/>
+            android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".PopUp_screen_gliphs"
-            android:theme="@style/AppTheme.CustomTheme">
-        </activity>
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity android:name=".SparksOne"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme"/>
+        <activity android:name=".SparksTwo"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme"/>
     </application>
 
 </manifest>

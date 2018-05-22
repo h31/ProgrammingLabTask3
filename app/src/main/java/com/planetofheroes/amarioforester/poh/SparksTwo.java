@@ -5,28 +5,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Hero_Timmy extends AppCompatActivity {
+public class SparksTwo extends AppCompatActivity {
     Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hero_timmy);
+        setContentView(R.layout.activity_sparks_two);
 
-        View overlay = findViewById(R.id.timmy);
+        View overlay = findViewById(R.id.sparkstwo);
 
         overlay.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Timmy");
+            getSupportActionBar().setTitle("BlueBeard");
         }
 
-        backButton = (Button) findViewById(R.id.backBtnTimmy);
+
+        backButton = (Button) findViewById(R.id.backBtnSparksTwo);
     }
 
     public void backBtnClick(View v){
         this.finish();
     }
+
 }

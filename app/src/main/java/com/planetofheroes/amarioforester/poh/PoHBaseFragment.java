@@ -3,7 +3,6 @@ package com.planetofheroes.amarioforester.poh;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 
 public class PoHBaseFragment extends Fragment {
     @Override
