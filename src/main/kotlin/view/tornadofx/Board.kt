@@ -1,6 +1,7 @@
 package view.tornadofx
 
 import javafx.event.EventHandler
+import javafx.geometry.Pos
 import javafx.scene.Node
 import javafx.scene.image.ImageView
 import javafx.scene.layout.GridPane
@@ -20,40 +21,60 @@ class Board : View() {
     var selectedCell: StackPane? = null
     var selectedRectangle: Rectangle? = null
     var moves: Set<Board.Move> = setOf()
-    override val root = gridpane {
+    var grid: GridPane? = null
 
-        for (row in 0..7) {
-            row {
+    override val root = stackpane {
+        alignment = Pos.CENTER
 
-                for (col in 0..7) {
-                    val color = if (row % 2 == 1 && col % 2 == 1
-                            || row % 2 == 0 && col % 2 == 0) Color.WHITE
-                    else Color.BLACK
+        grid = gridpane {
+            maxHeightProperty().bind(this@stackpane.widthProperty())
+            maxWidthProperty().bind(this@stackpane.heightProperty())
 
-                    stackpane {
+            prefHeightProperty().bind(this@stackpane.heightProperty())
+            prefWidthProperty().bind(this@stackpane.widthProperty())
 
-                        onMouseClicked = EventHandler {
-                            selectCell(row, col)
-                        }
+            for (row in 0..7) {
+                row {
+                    // 1/8%
+                    for (col in 0..7) {
+                        val color = if (row % 2 == 1 && col % 2 == 1
+                                || row % 2 == 0 && col % 2 == 0) Color.WHITE
+                        else Color.BLACK
 
-                        rectangle {
-                            fill = color
-                            height = 100.0
-                            width = 100.0
+                        stackpane {
+                            fitToParentSize()
 
-                            stroke = Color.GREEN
-                            strokeType = StrokeType.INSIDE
-                            strokeWidth = 0.0
-                        }
+                            onMouseClicked = EventHandler {
+                                selectCell(row, col)
+                            }
 
-                        imageview {
-                            if (((row == 0 || row == 2) && col % 2 == 1) || row == 1 && col % 2 == 0)
-                                image = resources.image("/black.png")
-                            else if (((row == 5 || row == 7) && col % 2 == 0) || row == 6 && col % 2 == 1)
-                                image = resources.image("/white.png")
+                            rectangle {
+                                heightProperty().bind(this@stackpane.heightProperty())
+                                widthProperty().bind(this@stackpane.widthProperty())
+
+                                fill = color
+                                stroke = Color.GREEN
+                                strokeType = StrokeType.INSIDE
+                                strokeWidth = 0.0
+                            }
+
+                            imageview {
+                                fitHeightProperty().bind(this@stackpane.heightProperty().multiply(0.8))
+                                fitWidthProperty().bind(this@stackpane.widthProperty().multiply(0.8))
+
+                                if (((row == 0 || row == 2) && col % 2 == 1) || row == 1 && col % 2 == 0)
+                                    image = resources.image("/black.png")
+                                else if (((row == 5 || row == 7) && col % 2 == 0) || row == 6 && col % 2 == 1)
+                                    image = resources.image("/white.png")
+                            }
                         }
                     }
                 }
+            }
+
+            for (i in 0..7) {
+                constraintsForRow(i).percentHeight = 12.5
+                constraintsForColumn(i).percentWidth = 12.5
             }
         }
     }
@@ -148,7 +169,7 @@ class Board : View() {
 
     fun getNodeByRowColumnIndex(row: Int, column: Int): Node? {
         var result: Node? = null
-        val childrens = root.children
+        val childrens = grid!!.children
 
         for (node in childrens) {
             if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
