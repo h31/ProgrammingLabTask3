@@ -1,4 +1,8 @@
-package planetSystem;
+package GUI;
+
+import Logic.Planet;
+import Logic.PlanetSystem;
+import Logic.Star;
 
 import javax.swing.*;
 import java.util.Arrays;

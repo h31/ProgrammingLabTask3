@@ -1,4 +1,4 @@
-package planetSystem;
+package GUI;
 
 import javax.swing.*;
 

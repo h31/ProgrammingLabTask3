@@ -1,10 +1,10 @@
-package planetSystem;
+package Logic;
 
 public class Star {
 
-    String name;
+    public String name;
 
-    int r, x, y;
+    public int r, x, y;
 
     public Star(String name, int r) {
         this.name = name;

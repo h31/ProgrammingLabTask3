@@ -1,7 +1,11 @@
-package planetSystem;
+package GUI;
 
-import java.awt.*;
+import Logic.Planet;
+import Logic.PlanetSystem;
+import Logic.Star;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
@@ -13,14 +17,13 @@ public class MainPanel extends JPanel {
             new Planet("Europe",500, 300, 15) ));
 
 
-    MainPanel() {
+    public MainPanel() {
             ActionListener timerListener = e -> {
                 pS.step();
                 repaint();
             };
             Timer timer = new Timer(10, timerListener);
             timer.start();
-
     }
 
     @Override
@@ -35,12 +38,12 @@ public class MainPanel extends JPanel {
         if (!pS.planets.isEmpty()) {
             for (Planet p : pS.planets) {
                 paintPlanet(g, p);
-                paintOrbite(g, p);
+                paintOrbites(g, p);
             }
         }
     }
 
-    private void paintOrbite(Graphics g, Planet p) {
+    private void paintOrbites(Graphics g, Planet p) {
         g.setColor(new Color(0x2AE2FF));
         g.drawOval(400 - p.a / 2, 300 - p.b / 2, p.a, p.b);
     }
@@ -55,5 +58,4 @@ public class MainPanel extends JPanel {
         g.setFont(new Font("Serif", Font.ITALIC, 20));
         g.drawString(p.name, p.x + radius / 2, p.y - radius);
     }
-
 }

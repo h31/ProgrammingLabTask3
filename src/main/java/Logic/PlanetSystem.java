@@ -1,22 +1,18 @@
-package planetSystem;
+package Logic;
 
 import java.util.List;
 
-class PlanetSystem {
+public class PlanetSystem {
 
-    Star star;
+    public Star star;
 
-    List<Planet> planets;
+    public List<Planet> planets;
 
-    int t = 0;
+    public int t = 0;
 
     private int dt = 1;
 
-    void setStar(Star star) {
-        this.star = star;
-    }
-
-    void step() {
+    public void step() {
         for (Planet p : planets) {
             p.x = (int) (400 + p.a / 2 * Math.cos(2 * Math.PI / p.period * t));
             p.y = (int) (300 + p.b / 2 * Math.sin(2 * Math.PI / p.period * t));
@@ -24,24 +20,24 @@ class PlanetSystem {
         t = t + dt;
     }
 
-    void step(int dt) {
+    public void step(int dt) {
         t = t + dt;
     }
 
-    PlanetSystem(Star star, List<Planet> planets) {
+    public PlanetSystem(Star star, List<Planet> planets) {
         this.star = star;
         this.planets = planets;
     }
 
-    void pause() {
+    public void pause() {
         dt = 0;
     }
 
-    void play() {
+    public void play() {
         dt = 1;
     }
 
-    void forward(int dt) {
+    public void forward(int dt) {
         step(dt);
     }
 }

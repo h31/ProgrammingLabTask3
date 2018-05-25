@@ -1,9 +1,9 @@
-package planetSystem;
+package GUI;
 
-import java.awt.*;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MetaFrame extends JFrame {
 
@@ -26,6 +26,7 @@ public class MetaFrame extends JFrame {
         toolbar.add(forwardButton);
         toolbar.addSeparator();
         this.add(toolbar, BorderLayout.NORTH);
+
     }
 
     private void initMainPanel() {
@@ -46,14 +47,6 @@ public class MetaFrame extends JFrame {
         pauseListener = e -> pause();
         playListener = e -> play();
         forwardListener = e -> forward();
-    }
-
-    private void addSomething() {
-            GetInformationBox gIP = new GetInformationBox();
-            gIP.setPreferredSize(new Dimension(200, 500));
-            gIP.setMinimumSize(new Dimension(150, 500));
-            setVisible(true);
-            planetSystemPanel.pS.setStar(new Star(gIP.name, gIP.radius));
     }
 
     void pause() {
