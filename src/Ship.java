@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class Ship {
@@ -79,5 +80,25 @@ public class Ship {
         }
         allShips.clear();
         return ships;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if ((o == null) || (getClass() != o.getClass())) {
+            return false;
+        }
+        Ship ship = (Ship) o;
+        return size == ship.size &&
+                Objects.equals(points, ship.points) &&
+                Objects.equals(start, ship.start) &&
+                course == ship.course;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(points, start, size, course);
     }
 }

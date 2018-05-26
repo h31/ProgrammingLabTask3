@@ -1,7 +1,12 @@
 import javafx.scene.control.Button;
 
-
 public class Cell extends Button {
+
+    private static Battleship battleship = null;
+
+    public static void setBattleship(Battleship battleship) {
+        Cell.battleship = battleship;
+    }
 
     private CellType cellType;
 
@@ -55,6 +60,7 @@ public class Cell extends Button {
 
     public Cell(int x, int y, int cellType, int size) {
         this.setMinSize(size, size);
+        this.setOnMouseClicked(event -> battleship.handlerHint(this));
         setCellType(cellType);
     }
 
