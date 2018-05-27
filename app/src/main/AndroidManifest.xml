@@ -24,12 +24,6 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AboutUsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".CalculatorActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ArtsActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -88,14 +82,34 @@
             android:name=".PopUp_screen"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
-            android:name=".PopUp_screen_gliphs"
-            android:theme="@style/AppTheme.CustomTheme" />
-        <activity android:name=".SparksOne"
+            android:name=".SparksOne"
             android:screenOrientation="portrait"
-            android:theme="@style/IntroTheme"/>
-        <activity android:name=".SparksTwo"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".SparksTwo"
             android:screenOrientation="portrait"
-            android:theme="@style/IntroTheme"/>
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Explore_Archon"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Explore_Queen"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Explore_Gliphs"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Explore_Towers"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Explore_Monsters"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme">
+        </activity>
     </application>
 
 </manifest>

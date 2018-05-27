@@ -129,17 +129,11 @@ public abstract class Left_menu extends AppCompatActivity implements MenuItem.On
             case R.id.guides:
                 fragmentClass = GuidesFragment.class;
                 break;
-            case R.id.calculator:
-                fragmentClass = CalculatorFragment.class;
-                break;
             case R.id.tournaments:
                 fragmentClass = TournamentsFragment.class;
                 break;
             case R.id.arts:
                 fragmentClass = ArtsFragment.class;
-                break;
-            case R.id.about:
-                fragmentClass = AboutUsFragment.class;
                 break;
             default:
                 fragmentClass = PoHBaseFragment.class;

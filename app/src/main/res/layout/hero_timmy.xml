@@ -7,16 +7,22 @@
     android:id="@+id/timmy">
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/explore_background"
         android:scaleType="centerCrop"
-        android:src="@drawable/background" />
-
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Coming Soon"
+        android:textSize="30dp"
+        android:fontFamily="@font/extrabold"
+        android:textColor="@color/menuButtons"/>
     <Button
-        android:id="@+id/backBtnTimmy"
         android:layout_width="60dp"
         android:layout_height="24dp"
         android:background="@drawable/arrowback"
-        android:onClick="backBtnClick"
-        android:longClickable="true"/>
+        android:onClick="backBtnClick" />
 </FrameLayout>

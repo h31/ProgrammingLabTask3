@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SparksActivity"
+    android:id="@+id/spoke"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
     android:background="@color/colorPrimary"
-    android:id="@+id/spoke">
+    tools:context=".SparksActivity">
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="your lvl"
-        android:ems="10"
         android:id="@+id/hui"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:ems="200"
         android:imeOptions="actionNext"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:textColor="@color/colorPrimary"
-        android:background="@color/colorAccent"
-        android:textSize="36dp"
-        />
-
-</RelativeLayout>
+        android:inputType="number"
+        android:hint="type"
+        android:textCursorDrawable="@color/menuButtons"
+        android:textColorHighlight="@color/menuButtons"
+        android:textDirection="firstStrong"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/extrabold"
+        android:textColorHint="@color/menuButtons"
+        android:textColor="@color/menuButtons"
+        android:editable="true"
+        android:autofillHints="100"
+        android:background="@drawable/sparksbar"
+            />
+</LinearLayout>

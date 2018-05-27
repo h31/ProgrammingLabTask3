@@ -20,7 +20,7 @@
             android:layout_weight="0.1675925926"
             android:scaleType="centerCrop"
             android:src="@drawable/exploremaps_01"
-            android:id="@+id/nana"
+            android:id="@+id/gliphs"
             >
         </ImageView>
 
@@ -30,7 +30,8 @@
             android:layout_gravity="center"
             android:layout_weight="0.2546296296"
             android:scaleType="centerCrop"
-            android:src="@drawable/exploremaps_02">
+            android:src="@drawable/exploremaps_02"
+            android:id="@+id/archon">
         </ImageView>
 
         <ImageView
@@ -39,7 +40,8 @@
             android:layout_gravity="center"
             android:layout_weight="0.1143518519"
             android:scaleType="centerCrop"
-            android:src="@drawable/exploremaps_03">
+            android:src="@drawable/exploremaps_03"
+            android:id="@+id/queen">
         </ImageView>
 
         <ImageView
@@ -48,7 +50,8 @@
             android:layout_gravity="center"
             android:layout_weight="0.1944444444"
             android:scaleType="centerCrop"
-            android:src="@drawable/exploremaps_04">
+            android:src="@drawable/exploremaps_04"
+            android:id="@+id/towers">
         </ImageView>
 
         <ImageView
@@ -57,13 +60,13 @@
             android:layout_gravity="center"
             android:layout_weight="0.2689814815"
             android:scaleType="centerCrop"
-            android:src="@drawable/exploremaps_05">
+            android:src="@drawable/exploremaps_05"
+            android:id="@+id/monsters">
         </ImageView>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/backBtn2"
         android:layout_width="60dp"
         android:layout_height="24dp"
         android:background="@drawable/arrowback"

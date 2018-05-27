@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 
 public class Hero_Candy extends AppCompatActivity {
-    Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,6 @@ public class Hero_Candy extends AppCompatActivity {
             getSupportActionBar().setTitle("Candy");
         }
 
-        backButton = (Button) findViewById(R.id.backBtnCandy);
     }
 
     public void backBtnClick(View v){

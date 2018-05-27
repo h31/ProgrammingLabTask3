@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 
 public class Hero_Skylee extends AppCompatActivity {
-    Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +21,6 @@ public class Hero_Skylee extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Skylee");
         }
-
-        backButton = (Button) findViewById(R.id.backBtnSkylee);
     }
 
     public void backBtnClick(View v){

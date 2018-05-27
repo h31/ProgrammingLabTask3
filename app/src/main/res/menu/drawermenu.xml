@@ -17,10 +17,6 @@
         android:title="Guides"
         android:icon="@drawable/ic_view_list_black_24dp"/>
     <item
-        android:id="@+id/calculator"
-        android:title="Calculator"
-        android:icon="@drawable/ic_settings_black_24dp" />
-    <item
         android:id="@+id/tournaments"
         android:title="Tournaments"
         android:icon="@drawable/ic_grade_black_24dp"/>
@@ -28,8 +24,4 @@
         android:id="@+id/arts"
         android:title="Arts"
         android:icon="@drawable/ic_palette_black_24dp"/>
-    <item
-        android:id="@+id/about"
-        android:title="About us"
-        android:icon="@drawable/ic_person_black_24dp"/>
 </menu>

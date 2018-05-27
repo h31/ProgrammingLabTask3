@@ -11,19 +11,44 @@ import android.widget.ImageView;
 
 public class MapExplorePage_MainScreen extends AppCompatActivity {
 
-    Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_explore_page);
 
-        backButton = (Button) findViewById(R.id.backBtn2);
-
-        ImageView b = (ImageView) findViewById(R.id.nana);
-        b.setOnClickListener(new View.OnClickListener() {
+        ImageView gliphs = (ImageView) findViewById(R.id.gliphs);
+        gliphs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MapExplorePage_MainScreen.this, PopUp_screen_gliphs.class));
+                startActivity(new Intent(MapExplorePage_MainScreen.this, Explore_Gliphs.class));
+            }
+        });
+        ImageView archon = (ImageView) findViewById(R.id.archon);
+        archon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapExplorePage_MainScreen.this, Explore_Archon.class));
+            }
+        });
+        ImageView queen = (ImageView) findViewById(R.id.queen);
+        queen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapExplorePage_MainScreen.this, Explore_Queen.class));
+            }
+        });
+        ImageView towers = (ImageView) findViewById(R.id.towers);
+        towers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapExplorePage_MainScreen.this, Explore_Towers.class));
+            }
+        });
+        ImageView monsters = (ImageView) findViewById(R.id.monsters);
+        monsters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapExplorePage_MainScreen.this, Explore_Monsters.class));
             }
         });
     }
