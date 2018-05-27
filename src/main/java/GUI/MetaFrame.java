@@ -1,16 +1,53 @@
 package GUI;
 
+import Logic.Planet;
+import Logic.PlanetSystem;
+import Logic.Star;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class MetaFrame extends JFrame {
 
     private MainPanel planetSystemPanel;
+
     private InfoPanel infoPanel;
 
     private ActionListener pauseListener, playListener, forwardListener;
+
+    PlanetSystem pS = readPlanetSystem();
+
+    private PlanetSystem readPlanetSystem() {
+        List<String> list = new ArrayList<>();
+        try {
+            File f = new File("files/data");
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) list.add(sc.next());
+        } catch (FileNotFoundException e) {
+            System.out.print("fdfs");
+        }
+        PlanetSystem pS = new PlanetSystem(new Star(list.get(0), Integer.parseInt(list.get(1)), Integer.parseInt(list.get(2))));
+        int countOfPlanets = Integer.parseInt(list.get(3));
+        System.out.println(list);
+        list = list.subList(4, list.size());
+        for (int i = 1; i <= countOfPlanets; i++) {
+            System.out.println(list);
+            Planet p = new Planet(list.get(0), Integer.parseInt(list.get(1)),
+                    Integer.parseInt(list.get(2)),Integer.parseInt(list.get(3)), Integer.parseInt(list.get(4)));
+            pS.addPlanet(p);
+            list = list.subList(5, list.size());
+        }
+        return pS;
+    }
 
     private void initToolBar() {
         JToolBar toolbar = new JToolBar();
@@ -30,14 +67,14 @@ public class MetaFrame extends JFrame {
     }
 
     private void initMainPanel() {
-        planetSystemPanel = new MainPanel();
+        planetSystemPanel = new MainPanel(pS);
         planetSystemPanel.setBackground(Color.BLACK);
         planetSystemPanel.setPreferredSize(new Dimension(1000, 1000));
         planetSystemPanel.setBorder(new BevelBorder(BevelBorder.LOWERED));
     }
 
     private void initInfoPanel() {
-        infoPanel = new InfoPanel();
+        infoPanel = new InfoPanel(pS);
         infoPanel.setPreferredSize(new Dimension(200, 500));
         infoPanel.setMinimumSize(new Dimension(150, 500));
         infoPanel.setBorder(new BevelBorder(BevelBorder.RAISED));

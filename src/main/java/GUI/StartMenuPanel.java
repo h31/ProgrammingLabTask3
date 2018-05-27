@@ -1,15 +1,19 @@
 package GUI;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 public class StartMenuPanel extends JPanel {
 
 
     public StartMenuPanel() {
-        super();
-        setBackground(Color.BLUE);
+        repaint();
         setSize(800, 600);
+
         setVisible(true);
         JLabel welcomeText = new JLabel("Добро пожаловать в Planet System Simulation");
         JButton newGame = new JButton("Новая игра");
@@ -36,5 +40,16 @@ public class StartMenuPanel extends JPanel {
 
     public void onExit() {
         System.exit(0);
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        try {
+            Image image = ImageIO.read(new File("files/space.png"));
+            g.drawImage(image,0, 0, 800, 600, null);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

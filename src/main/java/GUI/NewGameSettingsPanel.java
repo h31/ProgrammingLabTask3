@@ -12,6 +12,10 @@ public class NewGameSettingsPanel extends JPanel {
 
     private JButton ok;
 
+    private JRadioButton but1, but2, but3;
+
+    int numberOfImage;
+
     private boolean isInputCorrect;
 
     public NewGameSettingsPanel() {
@@ -19,8 +23,19 @@ public class NewGameSettingsPanel extends JPanel {
         setBackground(Color.BLUE);
         setSize(400, 600);
         setVisible(true);
+        ImageIcon icon1 = new ImageIcon("files/stars/1icon.png");
+        ImageIcon icon2 = new ImageIcon("files/stars/2icon.png");
+        ImageIcon icon3 = new ImageIcon("files/stars/3icon.png");
+        but1 = new JRadioButton();
+        but2 = new JRadioButton();
+        but3 = new JRadioButton();
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(but1);
+        bg.add(but2);
+        bg.add(but3);
         JLabel starName = new JLabel("Введите имя звезды");
         JLabel starRadius = new JLabel("Введите радиус звезды");
+        JLabel starImage = new JLabel("Выберите картинку для звезды");
         JLabel countOfPlanets = new JLabel("Введите кол-во планет");
         starNameField = new JTextField(100);
         starRadiusField = new JTextField(100);
@@ -31,6 +46,10 @@ public class NewGameSettingsPanel extends JPanel {
         add(starNameField);
         add(starRadius);
         add(starRadiusField);
+        add(starImage);
+        add(but1);
+        add(but2);
+        add(but3);
         add(countOfPlanets);
         add(countOfPlanetsField);
         add(ok);
@@ -55,10 +74,13 @@ public class NewGameSettingsPanel extends JPanel {
         if (isInputCorrect) {
             File f = new File("files/data");
             try {
+                if (but1.isSelected()) numberOfImage = 1;
+                if (but2.isSelected()) numberOfImage = 2;
+                if (but3.isSelected()) numberOfImage = 3;
                 PrintWriter pw = new PrintWriter(f);
                 pw.close();
                 FileWriter fr = new FileWriter(f);
-                fr.write(starName + " " + starRadius + " " + countOfPlanets);
+                fr.write(starName + " " + starRadius + " " + numberOfImage + " " + countOfPlanets);
                 fr.close();
             } catch (Exception e) {
                 System.out.print("FILENOTFOUND");

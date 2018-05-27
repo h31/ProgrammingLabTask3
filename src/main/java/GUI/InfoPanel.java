@@ -9,13 +9,12 @@ import java.util.Arrays;
 
 class InfoPanel extends JPanel {
 
-    PlanetSystem pS = new PlanetSystem(new Star("Solar", 50),
-            Arrays.asList(new Planet("Earth", 400, 200, 10), new Planet("Mars", 200, 150, 5),
-                    new Planet("Venera", 100, 80, 5), new Planet("Titan", 600, 400, 20),
-                    new Planet("Europe", 500, 300, 15)));
+    PlanetSystem pS;
 
-    InfoPanel() {
+
+    InfoPanel(PlanetSystem inputPS) {
         super();
+        pS = inputPS;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JLabel s = new JLabel("Star:");
         add(s);

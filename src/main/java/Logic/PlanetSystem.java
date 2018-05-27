@@ -1,5 +1,6 @@
 package Logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlanetSystem {
@@ -12,6 +13,10 @@ public class PlanetSystem {
 
     private int dt = 1;
 
+    public void addPlanet(Planet p) {
+        planets.add(p);
+    }
+
     public void step() {
         for (Planet p : planets) {
             p.x = (int) (400 + p.a / 2 * Math.cos(2 * Math.PI / p.period * t));
@@ -22,6 +27,11 @@ public class PlanetSystem {
 
     public void step(int dt) {
         t = t + dt;
+    }
+
+    public PlanetSystem(Star star) {
+        this.star = star;
+        planets = new ArrayList<>();
     }
 
     public PlanetSystem(Star star, List<Planet> planets) {

@@ -1,6 +1,7 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class StartMenuFrame extends JFrame {
     public StartMenuFrame(String s) {
@@ -13,4 +14,5 @@ public class StartMenuFrame extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new StartMenuFrame("Planet System Simulation Settings"));
     }
+
 }
