@@ -3,19 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SparksOne"
+    tools:context=".SparksOneFive"
     android:background="@drawable/background"
-    android:id="@+id/sparksone">
+    android:id="@+id/sparksonefive">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="72dp"
+        android:textSize="30dp"
         android:textColor="@color/colorAccent"
-        android:text="Your level is lower than 10"/>
+        android:fontFamily="@font/magneto"
+        android:text="Your level is in range from 1 to 5. It means that..."/>
 
     <Button
-        android:id="@+id/backBtnSparksOne"
+        android:id="@+id/backBtnSparksOneFive"
         android:layout_width="60dp"
         android:layout_height="24dp"
         android:background="@drawable/arrowback"

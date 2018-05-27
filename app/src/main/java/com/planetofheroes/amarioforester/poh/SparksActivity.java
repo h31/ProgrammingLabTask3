@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SparksActivity extends MainActivity {
 
@@ -21,12 +22,26 @@ public class SparksActivity extends MainActivity {
                 boolean handled = false;
                 if (i == EditorInfo.IME_ACTION_NEXT) {
                     String inputString = textView.getText().toString();
-                   if (Integer.parseInt(inputString)< 10) {
-                       Intent intent = new Intent(SparksActivity.this, SparksOne.class);
+                   if (Integer.parseInt(inputString) < 6) {
+                       Intent intent = new Intent(SparksActivity.this, SparksOneFive.class);
                        startActivity(intent);
-                   } else {
-                       Intent intent = new Intent(SparksActivity.this, SparksTwo.class);
-                       startActivity(intent);
+                   } if (Integer.parseInt(inputString) > 5 && Integer.parseInt(inputString) < 11) {
+                        Intent intent = new Intent(SparksActivity.this, SparksSixTen.class);
+                        startActivity(intent);
+                    } if (Integer.parseInt(inputString) > 10 && Integer.parseInt(inputString) < 16) {
+                        Intent intent = new Intent(SparksActivity.this, SparksElevenFifteen.class);
+                        startActivity(intent);
+                    } if (Integer.parseInt(inputString) > 15 && Integer.parseInt(inputString) < 21) {
+                        Intent intent = new Intent(SparksActivity.this, SparksSixteenTwenty.class);
+                        startActivity(intent);
+                    } if (Integer.parseInt(inputString) > 20 && Integer.parseInt(inputString) < 26) {
+                        Intent intent = new Intent(SparksActivity.this, SparksTwentyoneFive.class);
+                        startActivity(intent);
+                    } if (Integer.parseInt(inputString) > 25 && Integer.parseInt(inputString) < 31) {
+                        Intent intent = new Intent(SparksActivity.this, SparksTwentysixThirty.class);
+                        startActivity(intent);
+                    } if (Integer.parseInt(inputString) < 1 || Integer.parseInt(inputString) > 30) {
+                       Toast.makeText(getApplicationContext(), "Put your real level in", Toast.LENGTH_SHORT).show();
                    }
                 }
                 return handled;

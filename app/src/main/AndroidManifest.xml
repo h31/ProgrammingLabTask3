@@ -82,11 +82,11 @@
             android:name=".PopUp_screen"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
-            android:name=".SparksOne"
+            android:name=".SparksOneFive"
             android:screenOrientation="portrait"
             android:theme="@style/IntroTheme" />
         <activity
-            android:name=".SparksTwo"
+            android:name=".SparksSixTen"
             android:screenOrientation="portrait"
             android:theme="@style/IntroTheme" />
         <activity
@@ -108,8 +108,11 @@
         <activity
             android:name=".Explore_Monsters"
             android:screenOrientation="portrait"
-            android:theme="@style/IntroTheme">
-        </activity>
+            android:theme="@style/IntroTheme" />
+        <activity android:name=".SparksElevenFifteen" />
+        <activity android:name=".SparksSixteenTwenty" />
+        <activity android:name=".SparksTwentyoneFive" />
+        <activity android:name=".SparksTwentysixThirty"></activity>
     </application>
 
 </manifest>
