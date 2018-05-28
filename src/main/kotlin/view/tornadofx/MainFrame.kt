@@ -3,18 +3,17 @@ package view.tornadofx
 import tornadofx.*
 
 class MainFrame : View() {
+    val board = Board()
     override val root = borderpane {
         top = menubar {
             menu("Game") {
                 item("New Game") {
-                    setOnMouseClicked {
-                        TODO()
-                    }
+                    setOnAction { board.newBoard() }
                 }
             }
         }
 
-        center = Board().root
+        center = board.root
     }
 
     init {

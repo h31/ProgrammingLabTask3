@@ -17,6 +17,8 @@ class RussianBoard : Board {
     val whiteDirections = setOf(Position(1, -1), Position(-1, -1))
     val blackDirections = setOf(Position(1, 1), Position(-1, 1))
 
+    operator fun get(row: Int): Array<Checker?> = board[row]
+
     init {
         for (row in 0..(boardSize - 1)) {
             for (col in 0..(boardSize - 1)) {
@@ -105,7 +107,7 @@ class RussianBoard : Board {
         board[move.position.y - 1][move.position.x - 1] = checker
 
         if (move.moveType == CAPTURE) {
-            board[move.capturedPosition!!.y - 1][move.capturedPosition!!.x - 1] = null
+            board[move.capturedPosition!!.y - 1][move.capturedPosition.x - 1] = null
         }
 
         board[position.y - 1][position.x - 1] = null

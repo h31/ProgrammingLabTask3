@@ -17,7 +17,8 @@ import tornadofx.*
 
 
 class Board : View() {
-    val checkers = RussianCheckers()
+    var checkers = RussianCheckers()
+    val boardSize = checkers.board.boardSize - 1
     var selectedCell: StackPane? = null
     var selectedRectangle: Rectangle? = null
     var moves: Set<Board.Move> = setOf()
@@ -33,10 +34,9 @@ class Board : View() {
             prefHeightProperty().bind(this@stackpane.heightProperty())
             prefWidthProperty().bind(this@stackpane.widthProperty())
 
-            for (row in 0..7) {
+            for (row in 0..boardSize) {
                 row {
-                    // 1/8%
-                    for (col in 0..7) {
+                    for (col in 0..boardSize) {
                         val color = if (row % 2 == 1 && col % 2 == 1
                                 || row % 2 == 0 && col % 2 == 0) Color.WHITE
                         else Color.BLACK
@@ -61,22 +61,47 @@ class Board : View() {
                             imageview {
                                 fitHeightProperty().bind(this@stackpane.heightProperty().multiply(0.8))
                                 fitWidthProperty().bind(this@stackpane.widthProperty().multiply(0.8))
-
-                                if (((row == 0 || row == 2) && col % 2 == 1) || row == 1 && col % 2 == 0)
-                                    image = resources.image("/black.png")
-                                else if (((row == 5 || row == 7) && col % 2 == 0) || row == 6 && col % 2 == 1)
-                                    image = resources.image("/white.png")
                             }
                         }
                     }
                 }
             }
 
-            for (i in 0..7) {
+            for (i in 0..boardSize) {
                 constraintsForRow(i).percentHeight = 12.5
                 constraintsForColumn(i).percentWidth = 12.5
             }
         }
+    }
+
+    init {
+        newBoard()
+    }
+
+    fun newBoard() {
+        checkers = RussianCheckers()
+
+        for (row in 0..boardSize) {
+            for (col in 0..boardSize) {
+                val node = getNodeByRowColumnIndex(row, col)
+                if (node is StackPane) {
+                    for (children in node.children) {
+                        if (children is ImageView) {
+                            when (checkers.board[row][col]?.side) {
+                                Side.WHITE -> children.image = resources.image("/white.png")
+                                Side.BLACK -> children.image = resources.image("/black.png")
+                                else -> children.image = null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        selectedRectangle?.strokeWidth = 0.0
+        selectedRectangle = null
+        selectedCell = null
+        moves = setOf()
     }
 
     fun selectCell(row: Int, col: Int) {
