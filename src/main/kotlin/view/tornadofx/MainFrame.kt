@@ -3,7 +3,7 @@ package view.tornadofx
 import tornadofx.*
 
 class MainFrame : View() {
-    val board = Board()
+    private val board = Board()
     override val root = borderpane {
         top = menubar {
             menu("Game") {

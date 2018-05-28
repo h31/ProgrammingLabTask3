@@ -17,12 +17,12 @@ import tornadofx.*
 
 
 class Board : View() {
-    var checkers = RussianCheckers()
-    val boardSize = checkers.board.boardSize - 1
-    var selectedCell: StackPane? = null
-    var selectedRectangle: Rectangle? = null
-    var moves: Set<Board.Move> = setOf()
-    var grid: GridPane? = null
+    private var checkers = RussianCheckers()
+    private val boardSize = checkers.board.boardSize - 1
+    private var selectedCell: StackPane? = null
+    private var selectedRectangle: Rectangle? = null
+    private var moves: Set<Board.Move> = setOf()
+    private var grid: GridPane? = null
 
     override val root = stackpane {
         alignment = Pos.CENTER
@@ -104,7 +104,7 @@ class Board : View() {
         moves = setOf()
     }
 
-    fun selectCell(row: Int, col: Int) {
+    private fun selectCell(row: Int, col: Int) {
 
         for (move in moves) {
             val cell = getNodeByRowColumnIndex(move.position.y - 1, move.position.x - 1) as StackPane
@@ -156,7 +156,7 @@ class Board : View() {
         }
     }
 
-    fun moveChecker(move: Board.Move) {
+    private fun moveChecker(move: Board.Move) {
         val nextCell = getNodeByRowColumnIndex(move.position.y - 1, move.position.x - 1) as StackPane
         val capturedPosition = checkers.moveChecker(move)
 
@@ -190,9 +190,14 @@ class Board : View() {
         selectedRectangle = null
         selectedCell = null
         moves = setOf()
+
+        val winner = checkers.checkWinner()
+        if (winner != null)
+            find<WinnerWindow>(mapOf(WinnerWindow::side to Side.BLACK, WinnerWindow::board to this@Board))
+                    .openModal(resizable = false)
     }
 
-    fun getNodeByRowColumnIndex(row: Int, column: Int): Node? {
+    private fun getNodeByRowColumnIndex(row: Int, column: Int): Node? {
         var result: Node? = null
         val childrens = grid!!.children
 
