@@ -20,10 +20,11 @@ public class PoHBaseActivity extends Left_menu {
 
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private static final Integer[] slideImages= {R.drawable.introimage};
-    private static final Integer[] slideImages2= {R.drawable.icons,R.drawable.icons};
+    private static final Integer[] slideImages = {R.drawable.introimage};
+    private static final Integer[] slideImages2 = {R.drawable.icons, R.drawable.icons};
     private ArrayList<Integer> slideArray = new ArrayList<>();
     private ArrayList<Integer> slideArray2 = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,44 +33,33 @@ public class PoHBaseActivity extends Left_menu {
         imageButton = (ImageView) findViewById(R.id.maps);
     }
 
-    public void backBtnClick(View v){
+    public void backBtnClick(View v) {
         Intent intent = new Intent(PoHBaseActivity.this, MapExplorePage_MainScreen.class);
         startActivity(intent);
     }
 
     private void init() {
-        for(int i=0;i<slideImages.length;i++)
+        for (int i = 0; i < slideImages.length; i++)
             slideArray.add(slideImages[i]);
 
-        for(int i=0;i<slideImages2.length;i++)
+        for (int i = 0; i < slideImages2.length; i++)
             slideArray2.add(slideImages2[i]);
 
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new Slide_adapter(PoHBaseActivity.this,slideArray));
+        mPager.setAdapter(new Slide_adapter(PoHBaseActivity.this, slideArray));
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 
         mPager = (ViewPager) findViewById(R.id.bestpicks);
-        mPager.setAdapter(new Slide_adapter(PoHBaseActivity.this,slideArray2));
+        mPager.setAdapter(new Slide_adapter(PoHBaseActivity.this, slideArray2));
         indicator = (CircleIndicator) findViewById(R.id.bestpicks2);
         indicator.setViewPager(mPager);
 
 
-        // Auto start of viewpager
         final Handler handler = new Handler();
-        final Handler handler2 = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
                 if (currentPage == slideImages.length) {
-                    currentPage = 0;
-                }
-                mPager.setCurrentItem(currentPage++, true);
-            }
-        };
-
-        final Runnable Update2 = new Runnable() {
-            public void run() {
-                if (currentPage == slideImages2.length) {
                     currentPage = 0;
                 }
                 mPager.setCurrentItem(currentPage++, true);
@@ -83,14 +73,6 @@ public class PoHBaseActivity extends Left_menu {
                 handler.post(Update);
             }
         }, 0, 5000);
-
-        Timer swipeTimer2 = new Timer();
-        swipeTimer2.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler2.post(Update2);
-            }
-        }, 5000, 5000);
     }
 
     @Override
