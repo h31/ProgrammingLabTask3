@@ -1,5 +1,6 @@
 package com.planetofheroes.amarioforester.poh;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -114,37 +115,36 @@ public abstract class Left_menu extends AppCompatActivity implements MenuItem.On
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        android.support.v4.app.Fragment myFragment = null;
-        Class fragmentClass;
         switch (item.getItemId()) {
             case R.id.pohbase:
-                fragmentClass = PoHBaseFragment.class;
+                Intent myintent = new Intent(getBaseContext(), PoHBaseActivity.class);
+                startActivityForResult(myintent, 0);
                 break;
             case R.id.heroes:
-                fragmentClass = HeroesFragment.class;
+                Intent myintent1 = new Intent(getBaseContext(), HeroesActivity.class);
+                startActivityForResult(myintent1, 1);
                 break;
             case R.id.sparks:
-                fragmentClass = SparksFragment.class;
+                Intent myintent2 = new Intent(getBaseContext(), SparksActivity.class);
+                startActivityForResult(myintent2, 2);
                 break;
             case R.id.guides:
-                fragmentClass = GuidesFragment.class;
+                Intent myintent3 = new Intent(getBaseContext(), GuidesActivity.class);
+                startActivityForResult(myintent3, 3);
                 break;
             case R.id.tournaments:
-                fragmentClass = TournamentsFragment.class;
+                Intent myintent4 = new Intent(getBaseContext(), TournamentsActivity.class);
+                startActivityForResult(myintent4, 4);
                 break;
             case R.id.arts:
-                fragmentClass = ArtsFragment.class;
+                Intent myintent5 = new Intent(getBaseContext(), ArtsActivity.class);
+                startActivityForResult(myintent5, 5);
                 break;
             default:
-                fragmentClass = PoHBaseFragment.class;
+                Intent myintent6 = new Intent(getBaseContext(), PoHBaseActivity.class);
+                startActivityForResult(myintent6, 6);
+                break;
         }
-        try {
-            myFragment = (android.support.v4.app.Fragment) fragmentClass.newInstance();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flcontent, myFragment).commit();
         item.setChecked(true);
         setTitle(item.getTitle());
         mDrawerLayout.closeDrawers();

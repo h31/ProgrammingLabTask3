@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 public class PopUp_screen extends Activity {
@@ -17,10 +19,17 @@ public class PopUp_screen extends Activity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        int width = dm.densityDpi;
-        int height = dm.densityDpi;
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width*2), (int) (height*2));
+        getWindow().setLayout((int) (width*.6), (int) (height*.5));
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.gravity = Gravity.CENTER;
+        params.x = 0;
+        params.y = -20;
+
+        getWindow().setAttributes(params);
 
         Button b = (Button) findViewById(R.id.button2);
         b.setOnClickListener(new View.OnClickListener() {

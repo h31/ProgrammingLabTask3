@@ -10,7 +10,7 @@
     tools:context=".SparksActivity">
 
     <EditText
-        android:id="@+id/hui"
+        android:id="@+id/type_spark"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -27,8 +27,13 @@
         android:fontFamily="@font/extrabold"
         android:textColorHint="@color/menuButtons"
         android:textColor="@color/menuButtons"
-        android:editable="true"
         android:autofillHints="100"
         android:background="@drawable/sparksbar"
             />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="BtnClick"
+        android:text="nana"
+        android:id="@+id/button"/>
 </LinearLayout>
