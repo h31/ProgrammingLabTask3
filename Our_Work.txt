@@ -1,0 +1,40 @@
+
+Кто чем занимался в создании нашего приложения для Android
+
+Мария Лесничая:
+
+- Заставка. Class Splash_intro + res/anim/mytransition
+- Левое меню. Class Left_menu + res/menu/drawermenu
+- GridView & ListView. Классы Grid_adapter, Grid_newPage, ArtsActivity, List_heroAdapter,
+List_heroImage, HeroesActivity
+- 6 Классов Sparks_X_X
+- метод onBackPressed (выход из приложения) в классе PoHBaseActivity
+- метод onKeyDown в классах ArtsActivity, GuidesActivity, SparksActivity, TournamentActivity,
+HeroesActivity. Он возвращает на главный экран PoHBaseActivity
+- В классе SparksActivity в методе onCreate - EditText
+- метод backBtnClick во всех классах,
+кроме ArtsActivity, GuidesActivity, PoHBaseActivity, SparksActivity, TournamentActivity, HeroesActivity
+
+Юнес Даниэль:
+
+- Дизайн приложения (изображения в res/drawable, res/mipmap + размеры, местоположение материалов и т.д.)
+- практически все xml файлы в res/layout
+- Класс Slide_adapter и класс PoHBaseActivity
+- Класс MapExplorePage_MainScreen
+- Классы Explore_Archon, Explore_Gliphs, Explore_Monsters, Explore_Queen, Explore_Towers
+- метод onResume (полный экран. Не сбивается во время возобновления страницы) во всех классах,
+кроме ArtsActivity, GuidesActivity, PoHBaseActivity, SparksActivity, TournamentActivity, HeroesActivity,
+т.к. в них находится ActionBar
+- Класс PopUp_screen (Разрезанный Activity, работает, как PopUp window)
+- Класс TournamentActivity
+- В классе SparksActivity в методе onCreate - popupMenu + res/menu/sparks_lvl
+
+Вместе:
+
+- manifests
+- шрифты res/font
+- styles
+- colors
+- различные изменения в xml файлах
+- мини-изменения в классах от каждого лица
+- Вместе обсуждали способы и идеи реализации нашего приложения :)

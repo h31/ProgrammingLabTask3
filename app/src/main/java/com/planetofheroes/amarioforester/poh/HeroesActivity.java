@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class HeroesActivity extends MainActivity {
+public class HeroesActivity extends Left_menu {
 
     private ListView listView;
     private List_heroAdapter mAdapter;

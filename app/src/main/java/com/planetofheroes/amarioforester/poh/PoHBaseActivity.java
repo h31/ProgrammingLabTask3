@@ -15,7 +15,7 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
-public class PoHBaseActivity extends MainActivity {
+public class PoHBaseActivity extends Left_menu {
     ImageView imageButton;
 
     private static ViewPager mPager;
@@ -29,7 +29,6 @@ public class PoHBaseActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_po_hbase);
         init();
-
         imageButton = (ImageView) findViewById(R.id.maps);
     }
 

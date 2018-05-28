@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
-public class TournamentsActivity extends MainActivity {
+public class TournamentsActivity extends Left_menu {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

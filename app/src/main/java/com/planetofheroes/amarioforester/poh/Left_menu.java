@@ -28,7 +28,9 @@ public abstract class Left_menu extends AppCompatActivity implements MenuItem.On
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.left_menu);// The base layout that contains your navigation drawer.
 
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("PoHBase");
+        }
 
         view_stub = (FrameLayout) findViewById(R.id.view_stub);
         navigation_view = (NavigationView) findViewById(R.id.navigation_view);
@@ -146,7 +148,6 @@ public abstract class Left_menu extends AppCompatActivity implements MenuItem.On
                 break;
         }
         item.setChecked(true);
-        setTitle(item.getTitle());
         mDrawerLayout.closeDrawers();
         return false;
     }

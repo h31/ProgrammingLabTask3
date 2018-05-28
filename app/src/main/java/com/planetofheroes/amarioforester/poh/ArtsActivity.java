@@ -2,12 +2,14 @@ package com.planetofheroes.amarioforester.poh;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ActionMenuView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-public class ArtsActivity extends MainActivity {
+public class ArtsActivity extends Left_menu {
 
     GridView simpleGrid;//Masha - GridView
     int logos[] = {R.drawable.background, R.drawable.introimage, R.drawable.exploremaps,

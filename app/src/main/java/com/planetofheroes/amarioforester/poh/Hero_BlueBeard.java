@@ -13,11 +13,6 @@ public class Hero_BlueBeard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_bluebeard);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("BlueBeard");
-        }
-
         }
 
     public void backBtnClick(View v){

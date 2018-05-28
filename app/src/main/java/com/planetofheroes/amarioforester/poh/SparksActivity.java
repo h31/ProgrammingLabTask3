@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SparksActivity extends MainActivity {
+public class SparksActivity extends Left_menu {
     Button button;
 
     @Override
@@ -102,8 +102,4 @@ public class SparksActivity extends MainActivity {
         }
         return false;
     }
-    public void BtnClick(View v){
-        startActivity(new Intent(this, PopUp_screen.class));
-    }
-
 }

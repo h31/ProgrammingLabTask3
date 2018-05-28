@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-public class GuidesActivity extends MainActivity {
+public class GuidesActivity extends Left_menu {
     GridView simpleGrid;//Masha - GridView
     int logos[] = {R.drawable.skysqr, R.drawable.duncsqr, R.drawable.candsqr,
             R.drawable.bluesq, R.drawable.bubbsqr, R.drawable.candsqr, R.drawable.duncsqr
