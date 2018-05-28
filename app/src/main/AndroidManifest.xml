@@ -121,6 +121,26 @@
         <activity
             android:name=".Sparks_26_30"
             android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Guide_1"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Guide_2"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Guide_3"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Guide_4"
+            android:screenOrientation="portrait"
+            android:theme="@style/IntroTheme" />
+        <activity
+            android:name=".Guide_5"
+            android:screenOrientation="portrait"
             android:theme="@style/IntroTheme">
 
         </activity>

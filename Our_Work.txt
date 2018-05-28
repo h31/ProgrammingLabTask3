@@ -7,6 +7,7 @@
 - Левое меню. Class Left_menu + res/menu/drawermenu
 - GridView & ListView. Классы Grid_adapter, Grid_newPage, ArtsActivity, List_heroAdapter,
 List_heroImage, HeroesActivity
+- Классы Guide_X
 - 6 Классов Sparks_X_X
 - метод onBackPressed (выход из приложения) в классе PoHBaseActivity
 - метод onKeyDown в классах ArtsActivity, GuidesActivity, SparksActivity, TournamentActivity,
