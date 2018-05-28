@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="ProgrammingLabTask3_main:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProgrammingLabTask3_main_jar</output-path>
+    <root id="root">
+      <element id="module-output" name="ProgrammingLabTask3_main" />
+      <element id="archive" name="archive.jar" />
+    </root>
+  </artifact>
+</component>

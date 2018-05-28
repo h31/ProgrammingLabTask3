@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ProgrammingLabTask3.iml" filepath="$PROJECT_DIR$/ProgrammingLabTask3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProgrammingLabTask3_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ProgrammingLabTask3_main.iml" group="ProgrammingLabTask3" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProgrammingLabTask3_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ProgrammingLabTask3_test.iml" group="ProgrammingLabTask3" />
+    </modules>
+  </component>
+</project>
