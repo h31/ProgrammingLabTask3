@@ -1,55 +1,52 @@
 package GUI;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
 public class StartMenuPanel extends JPanel {
 
-
     public StartMenuPanel() {
-        repaint();
+        this.setLayout(null);
         setSize(800, 600);
-
         setVisible(true);
-        JLabel welcomeText = new JLabel("Добро пожаловать в Planet System Simulation");
-        JButton newGame = new JButton("Новая игра");
+        JLabel welcomeText = new JLabel("Добро пожаловать в Planet System Simulator");
+        welcomeText.setForeground(new Color(0x3A1BFB));
+        welcomeText.setFont(new Font("Serif", Font.ITALIC, 40));
+        welcomeText.setLocation(20, 20);
+        welcomeText.setSize(800, 100);
+        JButton newGame = new JButton(new ImageIcon("files/buttons/newgame.png"));
+        newGame.setBorderPainted(false);
+        newGame.setFocusPainted(false);
+        newGame.setContentAreaFilled(false);
+        newGame.setSize(newGame.getIcon().getIconWidth(), newGame.getIcon().getIconHeight());
+        newGame.setLocation(400 - newGame.getWidth() / 2, 220 - newGame.getHeight() / 2);
         newGame.addActionListener(e -> onNewGame());
-        JButton load = new JButton("Загрузить");
-        load.addActionListener(e -> onLoad());
-        JButton exit = new JButton("Выход");
+        JButton exit = new JButton(new ImageIcon("files/buttons/exit.png"));
+        exit.setBorderPainted(false);
+        exit.setFocusPainted(false);
+        exit.setContentAreaFilled(false);
+        exit.setSize(exit.getIcon().getIconWidth(), exit.getIcon().getIconHeight());
+        exit.setLocation(400 - exit.getWidth() / 2, 350 - exit.getHeight() / 2);
         exit.addActionListener(e -> onExit());
         add(welcomeText);
         add(newGame);
-        add(load);
         add(exit);
     }
 
-    public void onNewGame() {
+    private void onNewGame() {
         NewGameSettingsFrame.main(new String[]{});
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
     }
 
-    public void onLoad() {
-
-    }
-
-    public void onExit() {
+    private void onExit() {
         System.exit(0);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        try {
-            Image image = ImageIO.read(new File("files/space.png"));
-            g.drawImage(image,0, 0, 800, 600, null);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        Image image = new ImageIcon("files/backgrounds/space.png").getImage();
+        g.drawImage(image, 0, 0, 800, 600, null);
     }
 }

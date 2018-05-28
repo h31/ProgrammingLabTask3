@@ -1,8 +1,7 @@
 package Logic;
 
-import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 public class Planet {
 
@@ -20,12 +19,6 @@ public class Planet {
         this.b = b;
         this.r = r;
         period = Math.sqrt(Math.pow(a, 3.0));
-        try {
-            image = ImageIO.read(new File("files/planets/" + imageNumber + ".png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
+        image = new ImageIcon("files/planets/" + imageNumber + ".png").getImage();
     }
 }

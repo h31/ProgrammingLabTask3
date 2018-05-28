@@ -13,6 +13,11 @@ public class PlanetSystem {
 
     private int dt = 1;
 
+    public PlanetSystem(Star star) {
+        this.star = star;
+        planets = new ArrayList<>();
+    }
+
     public void addPlanet(Planet p) {
         planets.add(p);
     }
@@ -25,20 +30,6 @@ public class PlanetSystem {
         t = t + dt;
     }
 
-    public void step(int dt) {
-        t = t + dt;
-    }
-
-    public PlanetSystem(Star star) {
-        this.star = star;
-        planets = new ArrayList<>();
-    }
-
-    public PlanetSystem(Star star, List<Planet> planets) {
-        this.star = star;
-        this.planets = planets;
-    }
-
     public void pause() {
         dt = 0;
     }
@@ -48,6 +39,7 @@ public class PlanetSystem {
     }
 
     public void forward(int dt) {
-        step(dt);
+        t = t + dt;
+        step();
     }
 }
