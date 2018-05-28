@@ -97,8 +97,8 @@ public class PoHBaseActivity extends MainActivity {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Exit?").setIcon(R.drawable.dun);
-        alertDialogBuilder.setMessage("").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setTitle("Are you sure you want to exit?");
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 moveTaskToBack(true);
                 android.os.Process.killProcess(android.os.Process.myPid());
