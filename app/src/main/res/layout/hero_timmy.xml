@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Hero_Timmy"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/timmy">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/explore_background"
+        android:scaleType="centerCrop"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Coming Soon"
+        android:textSize="30dp"
+        android:fontFamily="@font/extrabold"
+        android:textColor="@color/menuButtons"/>
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="24dp"
+        android:background="@drawable/arrowback"
+        android:onClick="backBtnClick" />
+</FrameLayout>
