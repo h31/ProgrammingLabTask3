@@ -50,34 +50,6 @@ public class Battleship {
         }
     }
 
-    /*public void handlerHint(Cell cell) {
-        if (computerScreen.getCells().contains(cell) && cell.isDisable()) return;
-        if (userScreen.getCells().contains(cell)) {
-            boolean isShip = cell.getId().equals("user_ship");
-            computerScreen.blockingScreen(isShip);
-            String classAndId = isShip ? "injured_ship" : "miss";
-            cell.getStyleClass().add(classAndId);
-            cell.setId(classAndId);
-            if (isShip) {
-                checkWin();
-                computerHint();
-            }
-        }
-        else {
-            boolean isShip = cell.getId().equals("hidden_ship");
-            String classAndId = isShip ? "injured_ship" : "miss";
-            cell.getStyleClass().add(classAndId);
-            cell.setId(classAndId);
-            cell.setDisable(false);
-            if (isShip) {
-                checkWin();
-            }
-            else {
-                computerScreen.blockingScreen(true);
-                computerHint();
-            }
-        }
-    }*/
 
     private void computerHint() {
         Random random = new Random();

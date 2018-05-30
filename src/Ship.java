@@ -62,6 +62,16 @@ public class Ship {
         return false;
     }
 
+    private static boolean isNormalPos(Ship ship) {
+        Point head = ship.getPoints().get(0);
+        Point tail = ship.getPoints().get(ship.getPoints().size() - 1);
+        return (isNormalPos(head) && isNormalPos(tail));
+    }
+
+    private static boolean isNormalPos (Point point) {
+        return ((point.x >= 0) && (point.x <= 9) && (point.y >= 0) && (point.y <= 9));
+    }
+
     public static List<Ship> randomGenerateShips() {
         List<Ship> ships = new ArrayList<>();
         for (int size = 4; size >= 1; size--) {
@@ -74,7 +84,7 @@ public class Ship {
                     int course = random.nextInt(2);
                     ship = new Ship(x, y, size, course);
                 }
-                while (shipsIntersect(ship));
+                while (shipsIntersect(ship) || !isNormalPos(ship));
                 ships.add(ship);
             }
         }
