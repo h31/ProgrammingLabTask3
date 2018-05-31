@@ -8,7 +8,7 @@
 }
 
 .user_ship {
-   -fx-background-color: rgba(43, 43, 43, 0.6);
+   -fx-background-color: pink;
    -fx-border-color: rgba(104, 104, 226, 0.8);
 }
 
