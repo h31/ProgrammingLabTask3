@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/blue"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".Hero_BlueBeard"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.1675925926"
+            android:scaleType="centerCrop"
+            android:src="@drawable/exploremaps_01"
+            android:id="@+id/gliphs"
+            >
+        </ImageView>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.2546296296"
+            android:scaleType="centerCrop"
+            android:src="@drawable/exploremaps_02"
+            android:id="@+id/archon">
+        </ImageView>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.1143518519"
+            android:scaleType="centerCrop"
+            android:src="@drawable/exploremaps_03"
+            android:id="@+id/queen">
+        </ImageView>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.1944444444"
+            android:scaleType="centerCrop"
+            android:src="@drawable/exploremaps_04"
+            android:id="@+id/towers">
+        </ImageView>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.2689814815"
+            android:scaleType="centerCrop"
+            android:src="@drawable/exploremaps_05"
+            android:id="@+id/monsters">
+        </ImageView>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="24dp"
+        android:background="@drawable/arrowback"
+        android:onClick="backBtnClick" />
+
+</RelativeLayout>

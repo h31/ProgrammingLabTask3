@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/spoke"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:background="@color/colorPrimary"
+    tools:context=".SparksActivity">
+
+    <EditText
+        android:id="@+id/type_spark"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:ems="200"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:hint="type"
+        android:textCursorDrawable="@color/menuButtons"
+        android:textColorHighlight="@color/menuButtons"
+        android:textDirection="firstStrong"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/extrabold"
+        android:textColorHint="@color/menuButtons"
+        android:textColor="@color/menuButtons"
+        android:autofillHints="100"
+        android:background="@drawable/sparksbar"
+            />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="BtnClick"
+        android:text="nana"
+        android:id="@+id/button"/>
+</LinearLayout>

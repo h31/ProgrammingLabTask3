@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sparks_1_5"
+    android:background="@drawable/background"
+    android:id="@+id/sparksonefive">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/magneto"
+        android:text="Your level is in range from 1 to 5. It means that..."/>
+
+    <Button
+        android:id="@+id/backBtnSparksOneFive"
+        android:layout_width="60dp"
+        android:layout_height="24dp"
+        android:background="@drawable/arrowback"
+        android:onClick="backBtnClick"
+        android:longClickable="true"/>
+
+</android.support.constraint.ConstraintLayout>
