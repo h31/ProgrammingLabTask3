@@ -24,6 +24,7 @@ public class Battleship {
     }
 
     public void handlerHint(Cell cell) {
+        if (cell.isDamage()) return;
         if (computerScreen.getCells().contains(cell) && cell.isDisable()) return;
         if (userScreen.getCells().contains(cell)) {
             boolean isShip = cell.getId().equals("user_ship");
@@ -31,6 +32,7 @@ public class Battleship {
             String classAndId = isShip ? "injured_ship" : "miss";
             cell.getStyleClass().add(classAndId);
             cell.setId(classAndId);
+            cell.setDamage(true);
             if (isShip) {
                 checkWin();
                 computerHint();
@@ -41,6 +43,7 @@ public class Battleship {
             cell.getStyleClass().add(classAndId);
             cell.setId(classAndId);
             cell.setDisable(false);
+            cell.setDamage(true);
             if (isShip) {
                 checkWin();
             } else {
@@ -49,7 +52,6 @@ public class Battleship {
             }
         }
     }
-
 
     private void computerHint() {
         Random random = new Random();

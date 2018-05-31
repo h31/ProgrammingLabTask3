@@ -4,6 +4,16 @@ public class Cell extends Button {
 
     private static Battleship battleship = null;
 
+    public boolean isDamage() {
+        return damage;
+    }
+
+    public void setDamage(boolean damage) {
+        this.damage = damage;
+    }
+
+    private boolean damage = false;
+
     public static void setBattleship(Battleship battleship) {
         Cell.battleship = battleship;
     }
@@ -17,7 +27,6 @@ public class Cell extends Button {
             case 1:
                 this.getStyleClass().add("user_ship");
                 this.setId("user_ship");
-                //this.setDisable(false);
                 break;
             case 2:
                 this.getStyleClass().add("injured_ship");
@@ -33,7 +42,6 @@ public class Cell extends Button {
                 break;
         }
     }
-
 
     public Cell(int x, int y, int cellType, int size) {
         this.setMinSize(size, size);
