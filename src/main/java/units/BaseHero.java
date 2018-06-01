@@ -9,14 +9,20 @@ public class BaseHero implements Hero {
     private int healHit;
     private double kritical;
     private int radiusAttack;
+    private int moves;
 
-    public BaseHero(int hp, int hit, int heal, int healHit, double kritical, int radiusAttack) {
+    public BaseHero(int hp, int hit, int heal, int healHit, double kritical, int radiusAttack, int moves) {
         this.hp = hp;
         this.hit = hit;
         this.heal = heal;
         this.healHit = healHit;
         this.kritical = kritical;
         this.radiusAttack = radiusAttack;
+        this.moves = moves;
+    }
+
+    public int getMoves() {
+        return moves;
     }
 
     public int getRadiusAttack() {
@@ -26,7 +32,7 @@ public class BaseHero implements Hero {
     @Override
     public void heal(Hero friend) {
         if (heal > 0) {
-            friend.heal(friend);
+            friend.healHit(this.healHit);
             heal--;
         }
     }

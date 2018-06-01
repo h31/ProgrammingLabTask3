@@ -1,11 +1,14 @@
+import units.Hero;
+import units.Team;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.*;
 
 public class Game extends Canvas implements Runnable {
-
-
+    private Team first;
+    private Team second;
     private boolean running = false;
 
     public int xOffset, yOffset;

@@ -12,9 +12,10 @@ public class Sectoid implements Hero{
     private int healHit = 7;
     private double kritical = 0.2;
     private int radiusAttack = 1;
+    private int moves = 6;
 
     public Sectoid() {
-        this.hero = new BaseHero(hp, hit, heal, healHit, kritical, radiusAttack);
+        this.hero = new BaseHero(hp, hit, heal, healHit, kritical, radiusAttack, moves);
     }
 
     public int getRadiusAttack() {

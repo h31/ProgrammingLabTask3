@@ -11,9 +11,14 @@ public class Knight implements Hero{
     private int healHit = 10;
     private double kritical = 0.6;
     private int radiusAttack = 1;
+    private int moves = 8;
 
     public Knight() {
-        this.hero = new BaseHero(hp,hit,heal,healHit,kritical,radiusAttack);
+        this.hero = new BaseHero(hp,hit,heal,healHit,kritical,radiusAttack, moves);
+    }
+
+    public int getMoves() {
+        return moves;
     }
 
     public int getRadiusAttack() {

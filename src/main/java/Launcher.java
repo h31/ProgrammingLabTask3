@@ -13,7 +13,7 @@ public class Launcher extends JFrame{
 
     public Launcher() {
         super("Launcher");
-        this.setBounds(0,0,340,400);
+        this.setBounds(0,0,500,500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container container = this.getContentPane();
