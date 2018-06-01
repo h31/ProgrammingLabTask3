@@ -1,4 +1,7 @@
+package UI;
+
 import javafx.scene.control.Button;
+import logic.Battleship;
 
 public class Cell extends Button {
 

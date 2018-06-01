@@ -1,3 +1,8 @@
+package logic;
+
+import UI.Cell;
+import UI.Point;
+import UI.Ship;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
@@ -19,7 +24,7 @@ public class Screen {
                 for (Ship ship: ships) {
                     for (Point point : ship.getPoints()) {
                         if ((point.x == x) && (point.y == y)) {
-                            cell = new Cell (point.x, point.y, shipType, cellSize);
+                            cell = new Cell(point.x, point.y, shipType, cellSize);
                         }
                     }
                 }

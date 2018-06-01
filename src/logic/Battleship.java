@@ -1,3 +1,8 @@
+package logic;
+
+import UI.Cell;
+import UI.Main;
+import UI.Ship;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -112,7 +117,7 @@ public class Battleship {
         String whoseIsShip = isUser ? "Our" : "Computer";
         GridPane gridPane = new GridPane();
         Scene scene = new Scene(gridPane, sceneSize, sceneSize);
-        scene.getStylesheets().add(Main.class.getResource("StyleForBattleship.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("/StyleForBattleship.css").toExternalForm());
         List<Ship> ships = Ship.randomGenerateShips();
         Screen screen = new Screen(gridPane);
         screen.shipScreen(ships, shipType);
