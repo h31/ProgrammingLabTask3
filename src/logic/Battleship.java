@@ -1,8 +1,9 @@
 package logic;
 
-import UI.Cell;
+import logic.Cell;
 import UI.Main;
-import UI.Ship;
+import UI.Screen;
+import logic.Ship;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

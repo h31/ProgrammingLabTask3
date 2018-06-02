@@ -1,4 +1,4 @@
-package UI;
+package logic;
 
 import javafx.scene.control.Button;
 import logic.Battleship;

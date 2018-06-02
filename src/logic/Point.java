@@ -1,4 +1,4 @@
-package UI;
+package logic;
 
 import java.util.Objects;
 

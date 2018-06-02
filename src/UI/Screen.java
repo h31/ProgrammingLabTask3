@@ -1,8 +1,8 @@
-package logic;
+package UI;
 
-import UI.Cell;
-import UI.Point;
-import UI.Ship;
+import logic.Cell;
+import logic.Point;
+import logic.Ship;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
