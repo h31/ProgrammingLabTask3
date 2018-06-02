@@ -4,14 +4,14 @@ package app.popov.gohookah.logic;
  * Created by Ferrero on 16.05.2018.
  */
 
-public class Address {
+public class HookahAddress {
     private String city;
     private String metro;
     private String street;
     private String houseNumber;
 
 
-    public Address(String city, String metro, String street, String houseNumber) {
+    public HookahAddress(String city, String metro, String street, String houseNumber) {
         this.city = city;
         this.metro = metro;
         this.street = street;

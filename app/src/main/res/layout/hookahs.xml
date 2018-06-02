@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:id="@+id/linearHookahsAdapter"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:text="На высоте"
+        android:id="@+id/hookahClubName"
+        android:textSize="25sp" />
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/rateIndicator"
+        android:layout_width="80dp"
+        android:layout_height="25dp"
+        android:layout_margin="15dp"
+        android:layout_marginEnd="5dp"
+        android:rating="4"
+        style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
+        app:mrb_progressBackgroundTint="@color/purple"
+        app:mrb_progressTint="@color/purple"
+        app:mrb_secondaryProgressTint="@color/purple"/>
+</LinearLayout>

@@ -10,5 +10,4 @@ public class Rating {
 
     HashMap<Long, Integer> rates_map;
 
-
 }

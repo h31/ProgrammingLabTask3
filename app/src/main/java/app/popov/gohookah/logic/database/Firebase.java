@@ -1,135 +1,107 @@
 package app.popov.gohookah.logic.database;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.NetworkOnMainThreadException;
-import android.support.annotation.NonNull;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
+import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.support.v7.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApiNotAvailableException;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.popov.gohookah.AddHookahActivity;
+
 import app.popov.gohookah.HookahPage;
 import app.popov.gohookah.MainActivity;
+import app.popov.gohookah.adapters.HookahsAdapterForRecyclerView;
+
 import app.popov.gohookah.logic.Hookah;
+import app.popov.gohookah.logic.HookahAddress;
 
 public class Firebase {
-    public List<DocumentSnapshot> getDocumentSnapshots() {
-        return documentSnapshots;
+    //private static ArrayList<Drawable> images = new ArrayList<>();
+    private static Map<String, Hookah> hookahs = new LinkedHashMap<>();
+    private static ArrayList<Hookah> hookahsForAdapter = new ArrayList<>();
+
+    public static Map<String, Hookah> getHookahs() {
+        return hookahs;
     }
 
-    public void setDocumentSnapshots(List<DocumentSnapshot> documentSnapshots) {
-        this.documentSnapshots = documentSnapshots;
-    }
+    public static void getHookahsFromFireBase(Location location) {
+        FirebaseFirestore.getInstance().collection("hookahclubs").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                    Hookah current = new Hookah(ds);
+                    current.setDistance(location);
+                    hookahs.put(ds.getId(), current);
 
-    static List<DocumentSnapshot> documentSnapshots = new ArrayList<>();
-    static String id;
-
-    public static void setAdapterFromFireBase(final Context context) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("hookahclubs").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    int size = task.getResult().getDocuments().size();
-                    setDocumentSnapshotList(task.getResult().getDocuments());
-        setID(String.valueOf(Integer.valueOf(task.getResult().getDocuments().get(size - 1).getId()) + 1));
-                    ArrayList<String> names = new ArrayList<>();
-                    for (DocumentSnapshot ds : getDocumentSnaphots()) {
-                        Object toAdd = ds.get("Имя клуба");
-                        if (toAdd != null) {
-                            names.add(toAdd.toString());
-                        }
-                    }
-                    MainActivity.setHookahListAdapter(names, context);
                 }
+                setHookahsForAdapter(new ArrayList<>(hookahs.values()));
             }
+        });
+
+    }
+
+    public static Hookah getHookahForAdapter(int i) {
+        return hookahsForAdapter.get(i);
+    }
+
+    public static void setHookahsForAdapter(ArrayList<Hookah> listOfHookah) {
+        hookahsForAdapter = listOfHookah;
+        MainActivity.setHookahListAdapter(hookahsForAdapter);
+    }
+
+    public static void downloadMainImage(HookahsAdapterForRecyclerView.ViewHolder viewHolder, String name, String id){
+
+        FirebaseStorage.getInstance().getReference().child("HookahsImages/" + id + "/" + name)
+                .getBytes(1024 * 1024).addOnSuccessListener(bytes -> {
+                    viewHolder.setGeneralImage(Drawable.createFromStream(new ByteArrayInputStream(bytes), name));
         });
     }
 
-    public static void setID(String forSet) {
-        id = forSet;
-    }
 
-    public static void getID() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("hookahclubs").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    int size = task.getResult().getDocuments().size();
-                    setID(task.getResult().getDocuments().get(size - 1).getId());
-                }
-            }
-        });
-    }
-
-    public static void setDocumentSnapshotList(List<DocumentSnapshot> documentSnapshotsToSet) {
-        documentSnapshots = documentSnapshotsToSet;
-    }
-
-    public static List<DocumentSnapshot> getDocumentSnaphots() {
-        return documentSnapshots;
-    }
-
-    public static void getFromFireBase(final String document) {
-        FirebaseFirestore.getInstance().collection("hookahclubs").document(document).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                HookahPage.setText(task.getResult().getData().get("Адрес").toString());
-            }
-        });
-    }
-
-    public static void addToFireBase(Hookah h) {
-        getID();
-        HashMap<String, Object> toAdd = new HashMap<>();
-        toAdd.put("Имя клуба", h.getName());
-        HashMap<String, Object> addr = new HashMap<>();
-        addr.put("Страна", "Россия");
-        addr.put("Город", h.getAddress().getCity());
-        addr.put("Улица", h.getAddress().getStreet());
-        addr.put("Метро", h.getAddress().getMetro());
-        addr.put("Номер здания", h.getAddress().getHouseNumber());
-        toAdd.put("Адрес", addr);
-        FirebaseFirestore.getInstance().collection("hookahclubs").document(id)
-                .set(toAdd)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        System.out.println("succesfull");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        System.out.println("fail!");
-                    }
-                });
-    }
-
-    class AsyncDataAdder extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            return null;
+    public static void getImagesForHookah(Hookah hookah) {
+        if (hookah.getImagesNames().size() != 0) {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            storageReference.child("HookahsImages/" + hookah.getId() + "/" + hookah.getImagesNames().get(0)).getBytes(1024 * 1024).addOnSuccessListener(bytes -> {
+                HookahPage.setImage(new ByteArrayInputStream(bytes));
+            });
         }
+    }
+
+    public static void addToFireBase(Hookah h, Context context) {
+
+        Geocoder geocoder = new Geocoder(context);
+        List<Address> coordinates = new ArrayList<>();
+        try {
+            coordinates = geocoder.getFromLocationName(h.getCity() + " " + h.getStreet() + " " + h.getHouseNumber(), 1);
+        } catch (IOException ex) {
+        }
+        HashMap<String, Object> toAdd = new HashMap<>();
+        toAdd.put("Name", h.getName());
+        toAdd.put("Longtiude", coordinates.get(0).getLongitude());
+        toAdd.put("Latitude", coordinates.get(0).getLatitude());
+        toAdd.put("Country", "Россия");
+        toAdd.put("City", h.getCity());
+        toAdd.put("Street", h.getStreet());
+        toAdd.put("Metro", h.getMetro());
+        toAdd.put("HouseNumber", h.getHouseNumber());
+        ArrayList<String> imagesNames = new ArrayList<>();
+        toAdd.put("ImagesNames", imagesNames);
+        FirebaseFirestore.getInstance().collection("hookahclubs").document()
+                .set(toAdd)
+                .addOnSuccessListener(aVoid -> System.out.println("succesfull"))
+                .addOnFailureListener(e -> System.out.println("fail!"));
     }
 }

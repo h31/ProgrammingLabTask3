@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import app.popov.gohookah.logic.Address;
 import app.popov.gohookah.logic.Hookah;
+import app.popov.gohookah.logic.HookahAddress;
 import app.popov.gohookah.logic.database.Firebase;
 
 public class AddHookahActivity extends AppCompatActivity {
@@ -42,41 +42,39 @@ public class AddHookahActivity extends AppCompatActivity {
         final Button button = (Button) findViewById(R.id.DoneButton);
         final TextView result = (TextView) findViewById(R.id.result);
 
-        List<String> lines;
+        List lines;
         try {
             lines = org.apache.commons.io.IOUtils.readLines(getAssets().open("cities.txt"));
         } catch (IOException ex) {
             lines = null;
         }
 
-        ArrayAdapter<String> citiesList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lines);
+        ArrayAdapter citiesList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lines);
         autoCompleteTextView.setAdapter(citiesList);
-        autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<String> lines = null;
-                try {
-                    lines = IOUtils.readLines(getAssets().open("spbmetro.txt"));
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddHookahActivity.super.getApplicationContext(), android.R.layout.simple_list_item_1, lines);
-                    editMetro.setAdapter(arrayAdapter);
-                } catch (IOException ex) {
-                }
+        autoCompleteTextView.setOnClickListener(v -> {
+            List lines1;
+            try {
+                lines1 = IOUtils.readLines(getAssets().open("spbmetro.txt"));
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddHookahActivity.super.getApplicationContext(), android.R.layout.simple_list_item_1, lines1);
+                editMetro.setAdapter(arrayAdapter);
+            } catch (IOException ex) {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Hookah hookah = new Hookah(editClubName.getText().toString(), new Address( autoCompleteTextView.getText().toString(),
-                        editMetro.getText().toString(), editStreet.getText().toString(), editHouseNumber.getText().toString()));
-                Firebase.addToFireBase(hookah);
-                autoCompleteTextView.setText("");
-                editStreet.setText("");
-                editHouseNumber.setText("");
-                editClubName.setText("");
-                editMetro.setText("");
-                result.setText("Кальянный клуб добавлен");
-            }
+        button.setOnClickListener(v -> {
+            Hookah hookah = new Hookah();
+            hookah.setName(editClubName.getText().toString());
+            hookah.setMetro(editMetro.getText().toString());
+            hookah.setCountry("Россия");
+            hookah.setStreet(editStreet.getText().toString());
+            hookah.setHouseNumber(editHouseNumber.getText().toString());
+            hookah.setCity(autoCompleteTextView.getText().toString());
+            Firebase.addToFireBase(hookah, getApplicationContext());
+            autoCompleteTextView.setText("");
+            editStreet.setText("");
+            editHouseNumber.setText("");
+            editClubName.setText("");
+            editMetro.setText("");
         });
     }
 

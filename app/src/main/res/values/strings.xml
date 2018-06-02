@@ -103,4 +103,8 @@
     <string name="title_section3">Section 3</string>
 
     <string name="action_example">Example action</string>
+    <string name="thinking">ДУМОЮ</string>
+    <string name="goTo">Перейти</string>
+    <string name="your_rate">Ваша оценка</string>
+    <string name="publicRate">Общая оценка</string>
 </resources>

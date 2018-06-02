@@ -1,29 +1,18 @@
-package app.popov.gohookah.logic;
+package app.popov.gohookah.listeners;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 
-import java.io.IOException;
-import java.util.List;
-
-import app.popov.gohookah.AddHookahActivity;
-import app.popov.gohookah.MainActivity;
-
-import static android.support.v4.app.ActivityCompat.requestPermissions;
 import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 
 public class MyLocationListener implements LocationListener {
-    public static Location current;
+    public Location current;
 
     public void SetUpLocationListener(Context context) {
         LocationManager locationManager = (LocationManager)
@@ -44,6 +33,10 @@ public class MyLocationListener implements LocationListener {
     public void onLocationChanged(Location loc) {
         current = loc;
 
+    }
+
+    public Location getCurrent() {
+        return current;
     }
 
     public boolean hasPermission(String perm, Context context) {
