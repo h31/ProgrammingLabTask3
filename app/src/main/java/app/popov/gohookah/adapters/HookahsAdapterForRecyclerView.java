@@ -30,14 +30,18 @@ public class HookahsAdapterForRecyclerView extends RecyclerView.Adapter<HookahsA
         public TextView distance;
         ImageView generalImage;
         public ImageView geoIcon;
+        public TextView metroDescription;
+        public ImageView metroIcon;
         public ViewHolder(View itemView){
             super(itemView);
+            metroDescription = (TextView) itemView.findViewById(R.id.metroDescription);
             geoIcon = (ImageView) itemView.findViewById(R.id.geoIcon);
             cardView = ((CardView) itemView.findViewById(R.id.cardHookah));
             hookahClubName = (TextView) itemView.findViewById(R.id.hookahClubName);
             materialRatingBar = (MaterialRatingBar) itemView.findViewById(R.id.rateIndicator);
             distance = (TextView) itemView.findViewById(R.id.distanceDescription);
             generalImage = (ImageView) itemView.findViewById(R.id.imageInCard);
+            metroIcon = (ImageView) itemView.findViewById(R.id.metroIcon);
         }
 
         public void setGeneralImage(Drawable generalImage) {
@@ -70,22 +74,20 @@ public class HookahsAdapterForRecyclerView extends RecyclerView.Adapter<HookahsA
       ViewHolder hv = new ViewHolder(v);
       return hv;
     }
-    public static void asyncSetImages(ViewHolder viewHolder, InputStream inputStream, String id){
 
-        try {
-            viewHolder.generalImage.setImageDrawable(Drawable.createFromStream(inputStream, id));
-        } catch (NullPointerException ex){
-            ex.getMessage();
-        }
-    }
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Hookah h = hookahs.get(i);
         viewHolder.hookahClubName.setText(h.getName());
-        viewHolder.materialRatingBar.setRating(4);
+        viewHolder.materialRatingBar.setRating(4F);
+        viewHolder.metroDescription.setText(h.getMetro() != null ? h.getMetro() : "");
+        if (viewHolder.metroDescription.getText() == ""){
+            viewHolder.metroIcon.setVisibility(View.INVISIBLE);
+        }
+        if (h.getImagesNames().size() != 0) {
+           viewHolder.generalImage.setImageDrawable(Firebase.getFromId(h.getId()));
+        }
         h.setDistance(viewHolder);
-
-       Firebase.downloadMainImage(viewHolder, h.getImagesNames().get(0), h.getId());
     }
 
 

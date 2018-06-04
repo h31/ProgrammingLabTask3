@@ -3,6 +3,7 @@ package app.popov.gohookah;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.location.Geocoder;
@@ -23,6 +24,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,35 +38,37 @@ import app.popov.gohookah.logic.Hookah;
 import app.popov.gohookah.listeners.MyLocationListener;
 import app.popov.gohookah.logic.database.Firebase;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     static RecyclerView hookahList;
-    static HookahsAdapterForRecyclerView adapter;
-    private static final String[] INITIAL_PERMS = {
-            Manifest.permission.ACCESS_FINE_LOCATION,
-    };
+
     static AssetManager asset;
     static Context context;
     static TextView description;
-    static MyLocationListener myLocationListener;
+    static Location current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myLocationListener = new MyLocationListener();
         context = getApplicationContext();
-        ActivityCompat.requestPermissions(this, INITIAL_PERMS, 1337);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        myLocationListener.SetUpLocationListener(context);
+        Intent intentWithCoordinates = getIntent();
+        current = new Location("passive");
+        current.setLatitude(intentWithCoordinates.getDoubleExtra("latitude", 0.0));
+        current.setLongitude(intentWithCoordinates.getDoubleExtra("longitude", 0.0));
         description = (TextView) findViewById(R.id.mainActivityDescription);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         hookahList = (RecyclerView) findViewById(R.id.recyclerViewHookahs);
         hookahList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(context);
         hookahList.setLayoutManager(llm);
 
-
+        setHookahListAdapter(Firebase.getHookahsForAdapter());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -74,8 +81,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         hookahList.addOnItemTouchListener(new GeneralHookahsClickListener(context, hookahList, new GeneralHookahsClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                System.out.println(view.getId());
-                System.out.println(position);
                 startActivity(new Intent(context, HookahPage.class).putExtra("position", position));
 
             }
@@ -87,8 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }));
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        myLocationListener.SetUpLocationListener(context);
-        Firebase.getHookahsFromFireBase(myLocationListener.getCurrent());
+
         asset = getAssets();
     }
 
@@ -146,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static void setHookahListAdapter(ArrayList<Hookah> hookahs) {
         if (hookahs.size() == 0) {
             try {
-                Location current = myLocationListener.current;
                 String city = new Geocoder(context).getFromLocation(current.getLatitude(), current.getLongitude(),1).get(0).getLocality();
                 description.setText("Нам очень жаль, но мы не знаем ни одного кальянного клуба в городе " + city);
             } catch (IOException ex) {
@@ -157,7 +160,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             hookahList.setAdapter(new HookahsAdapterForRecyclerView(hookahs));
         }
     }
-
 
 }
 

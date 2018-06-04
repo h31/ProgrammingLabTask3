@@ -18,6 +18,7 @@ public class MyLocationListener implements LocationListener {
         LocationManager locationManager = (LocationManager)
                 context.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new MyLocationListener();
+        System.out.println(ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION));
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_DENIED) {
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER,

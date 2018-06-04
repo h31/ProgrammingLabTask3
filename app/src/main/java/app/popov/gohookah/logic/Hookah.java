@@ -23,7 +23,7 @@ public class Hookah {
         this.name = ds.get("Name").toString();
         this.country = ds.get("Country").toString();
         this.street = ds.get("Street").toString();
-        this.street = ds.get("Metro").toString();
+        this.metro = ds.get("Metro").toString();
         this.houseNumber = ds.get("HouseNumber").toString();
         if ((Double) ds.get("Longtiude") + (Double) ds.get("Latitude") != 0.0){
             this.locationOfClub = new Location("passive");
@@ -132,10 +132,8 @@ public class Hookah {
 
     public void setLocationOfClub(String latitude, String longtiude){
         locationOfClub = new Location("passive");
-
         locationOfClub.setLatitude(Double.parseDouble(latitude));
         locationOfClub.setLongitude(Double.parseDouble(longtiude));
-        System.out.println(locationOfClub);
     }
 
     public void setDistance(HookahsAdapterForRecyclerView.ViewHolder viewHolder){
@@ -146,12 +144,12 @@ public class Hookah {
     }
 
     public String getKilometers(Float distance){
-        System.out.println("Distance "+ distance);
-        return "fuck";
+        Integer km = Math.round(distance / 1000);
+        return new StringBuilder().append("~").append(km).append("km ").append("от Вас").toString();
     }
 
     public void setDistance(Location location) {
-        if (location != null && getLatitude() != null && getLongtiude() != null) {
+        if (location != null && getLocationOfClub() != null) {
             distance = locationOfClub.distanceTo(location);
         } else {distance = 10000F;}
     }
