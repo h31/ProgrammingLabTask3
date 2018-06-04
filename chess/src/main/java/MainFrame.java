@@ -1,3 +1,5 @@
+import javafx.scene.layout.Background;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,7 +20,7 @@ public class MainFrame extends JFrame {
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         frame.add(frame.panel);
-
+        frame.startJPanel(true);
 
         //frame.add(desk.restart());
         //frame.add(frame.revertBtn);
@@ -32,21 +34,21 @@ public class MainFrame extends JFrame {
         this.blackHeaven.setPreferredSize(new Dimension(100, 100));
         this.whiteHeaven.setVisible(true);
         this.blackHeaven.setVisible(true);
-        this.add(this.whiteHeaven);
-        this.add(this.blackHeaven);
+        //this.add(this.whiteHeaven);
+        //this.add(this.blackHeaven);
         JButton revertBtn = new JButton("повернуть");
         JButton restartBtn = new JButton("начать заново");
         revertBtn.setPreferredSize(new Dimension(100, 50));
         revertBtn.addActionListener(e -> {
             desk.revertDesk();
             //startJPanel(false);
-            //desk.turn = !desk.turn;
+            desk.turn = !desk.turn;
         });
 
         restartBtn.setPreferredSize(new Dimension(100, 50));
 
         restartBtn.addActionListener(e -> {
-            //desk.setInitialLocation();
+            desk.setInitialLocation();
 
             startJPanel(true);
             desk.revertDesk();
@@ -67,7 +69,7 @@ public class MainFrame extends JFrame {
         } else {
             desk.revertDesk();
         }
-        //panel.removeAll();
+        panel.removeAll();
         panel.setLayout(new FlowLayout());
         panel.setPreferredSize(new Dimension(720, 720));
         for (int i = 0; i < 8; i++) {
@@ -78,35 +80,28 @@ public class MainFrame extends JFrame {
                 if (Math.floorMod(i, 2) == 0) {
                     if (Math.floorMod(j, 2) == 0) {
                         btn.setBackground(Color.WHITE);
+                        desk.field[i][j].color = Color.WHITE;
                     } else {
                         btn.setBackground(Color.BLACK);
+                        desk.field[i][j].color = Color.BLACK;
                     }
                 } else {
                     if (Math.floorMod(j, 2) == 0) {
                         btn.setBackground(Color.BLACK);
+                        desk.field[i][j].color = Color.BLACK;
                     } else {
                         btn.setBackground(Color.WHITE);
+                        desk.field[i][j].color = Color.WHITE;
                     }
                 }
                 desk.field[i][j].button.addActionListener(e -> {
-                    if (!desk.equipped) {
-                        desk.currentX = desk.field[finalI][finalJ].cX;
-                        desk.currentY = desk.field[finalI][finalJ].cY;
-                        //cellColor[0] = btn.getBackground();
-                        //btn.setBackground(Color.RED);
-                        desk.field[finalI][finalJ].equip();
-                    } else {
-                        desk.endX = desk.field[finalI][finalJ].cX;
-                        desk.endY = desk.field[finalI][finalJ].cY;
-                        //btn.setBackground(cellColor[0]);
-                        desk.field[finalI][finalJ].put();
-                    }
+                    desk.move(finalI, finalJ);
                 });
                 panel.setVisible(true);
                 panel.add(desk.field[i][j].button);
             }
         }
-        //return panel;
+
     }
 
     JButton btn;
