@@ -49,6 +49,17 @@ public class HookahsAdapterForRecyclerView extends RecyclerView.Adapter<HookahsA
         }
     }
 
+    public int getPositionFromHookahID(String id){
+        int position = 0;
+        for(Hookah hookah : hookahs){
+            if (hookah.getId().equals(id)) {
+                return position;
+            }
+            position++;
+        }
+        return -1;
+    }
+
 
     public Hookah getHookahFromAdapter(int position){
         return hookahs.get(position);
@@ -85,9 +96,28 @@ public class HookahsAdapterForRecyclerView extends RecyclerView.Adapter<HookahsA
             viewHolder.metroIcon.setVisibility(View.INVISIBLE);
         }
         if (h.getImagesNames().size() != 0) {
-           viewHolder.generalImage.setImageDrawable(Firebase.getFromId(h.getId()));
+           viewHolder.generalImage.setImageDrawable(Firebase.getImage(h, h.getImagesNames().get(0)));
         }
         h.setDistance(viewHolder);
+    }
+
+    public void update(ArrayList<Hookah> hookahArrayList){
+        hookahs.clear();
+        System.out.println(hookahArrayList);
+        hookahs.addAll(hookahArrayList);
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(int position, RecyclerView rv){
+        rv.removeViewAt(position);
+        hookahs.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, hookahs.size());
+    }
+
+    public void addHookah(Hookah hookah, RecyclerView rv){
+        hookahs.add(hookah);
+        notifyDataSetChanged();
     }
 
 

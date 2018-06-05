@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static Context context;
     static TextView description;
     static Location current;
+    static HookahsAdapterForRecyclerView adapter;
+    static int refreshAdapterAmount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,18 +150,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public static void setHookahListAdapter(ArrayList<Hookah> hookahs) {
-        if (hookahs.size() == 0) {
-            try {
-                String city = new Geocoder(context).getFromLocation(current.getLatitude(), current.getLongitude(),1).get(0).getLocality();
-                description.setText("Нам очень жаль, но мы не знаем ни одного кальянного клуба в городе " + city);
-            } catch (IOException ex) {
-                ex.getMessage();
+            if (hookahs.size() == 0) {
+                try {
+                    String city = new Geocoder(context).getFromLocation(current.getLatitude(), current.getLongitude(), 1).get(0).getLocality();
+                    description.setText("Нам очень жаль, но мы не знаем ни одного кальянного клуба в городе " + city);
+                } catch (IOException ex) {
+                    ex.getMessage();
+                }
+            } else {
+                description.setVisibility(View.INVISIBLE);
+                adapter = new HookahsAdapterForRecyclerView(hookahs);
+                hookahList.setAdapter(adapter);
             }
-        } else {
-            description.setVisibility(View.INVISIBLE);
-            hookahList.setAdapter(new HookahsAdapterForRecyclerView(hookahs));
-        }
+    }
+    public static int positionOfHookahFromID(String id){
+        return adapter.getPositionFromHookahID(id);
     }
 
+    public static void removeFromAdapter(int position){
+        adapter.removeItem(position, hookahList);
+    }
+
+    public static void addNewHookahToAdapter(Hookah h){
+        adapter.addHookah(h, hookahList);
+    }
+
+    public static void updateAdapter(){
+        adapter.update(Firebase.getHookahsForAdapter());
+    }
 }
 
