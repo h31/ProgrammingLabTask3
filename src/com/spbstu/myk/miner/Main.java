@@ -29,9 +29,8 @@ public class Main extends Application {
         Controller c = new Controller(size);
         r.setController(c);
         Parent root = r.load();
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, (size + 2) * 38 - 12, size * 43 - 22));
-        primaryStage.getProperties().put("size", size);
+        primaryStage.setScene(new Scene(root, 48 * ++size - 24, size * 36));
+        primaryStage.getProperties().put("size", --size);
         primaryStage.show();
     }
 }
