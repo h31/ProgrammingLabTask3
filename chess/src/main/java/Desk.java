@@ -7,7 +7,7 @@ import java.util.Map;
 public class Desk {
     Map<Figure, ImageIcon> whiteFigures = new HashMap<>();
     Map<Figure, ImageIcon> blackFigures = new HashMap<>();
-    MoveRules moveRules = new MoveRules();
+
 
     boolean equipped = false;
     boolean turn = true;
@@ -17,9 +17,10 @@ public class Desk {
     int endY;
     Icon currentIcon = null;
 
-    private enum Color {
+    public enum Team {
         BLACK,
-        WHITE
+        WHITE,
+        NULL
     }
 
     enum Figure {
@@ -46,12 +47,12 @@ public class Desk {
         whiteFigures.put(Figure.queen, new ImageIcon("img/Queen.png"));
         whiteFigures.put(Figure.king, new ImageIcon("img/King.png"));
         whiteFigures.put(Figure.pawn, new ImageIcon("img/Pawn.png"));
-        blackFigures.put(Figure.rook, new ImageIcon("img/BlackRook.jpg"));
-        blackFigures.put(Figure.knight, new ImageIcon("img/BlackKnight.jpg"));
-        blackFigures.put(Figure.bishop, new ImageIcon("img/BlackBishop.jpg"));
-        blackFigures.put(Figure.queen, new ImageIcon("img/BlackQueen.jpg"));
-        blackFigures.put(Figure.king, new ImageIcon("img/BlackKing.jpg"));
-        blackFigures.put(Figure.pawn, new ImageIcon("img/BlackPawn.jpg"));
+        blackFigures.put(Figure.rook, new ImageIcon("img/BlackRook.png"));
+        blackFigures.put(Figure.knight, new ImageIcon("img/BlackKnight.png"));
+        blackFigures.put(Figure.bishop, new ImageIcon("img/BlackBishop.png"));
+        blackFigures.put(Figure.queen, new ImageIcon("img/BlackQueen.png"));
+        blackFigures.put(Figure.king, new ImageIcon("img/BlackKing.png"));
+        blackFigures.put(Figure.pawn, new ImageIcon("img/BlackPawn.png"));
 
         field[7][0] = new Cell(0, 7, whiteFigures.get(Figure.rook));
         field[7][7] = new Cell(7, 7, whiteFigures.get(Figure.rook));
@@ -82,161 +83,142 @@ public class Desk {
                 field[j][i] = new Cell(i, j, null);
             }
         }
+        // moveRules = new MoveRules(field);
     }
-    public class Cell {
-        protected JButton button;
-        protected java.awt.Color color;
+
+    //MoveRules moveRules;
+    public class Cell extends JButton {
+        //protected JButton button;
+        protected java.awt.Color cellColor;
         protected int cX;
         protected int cY;
-        protected Color figureColor;
+        protected Team figureColor;
+
         Cell(final int x, final int y, final Icon icon) {
-            this.button = new JButton();
-            this.color = null;
-            this.button.setPreferredSize(new Dimension(80, 80));
-            this.button.setIcon(icon);
+
+            this.cellColor = null;
+            this.setPreferredSize(new Dimension(80, 80));
+            this.setIcon(icon);
             this.cX = x;
             this.cY = y;
-            if (whiteFigures.containsValue(icon)) this.figureColor = Color.WHITE;
-            else if (blackFigures.containsValue(icon)) this.figureColor = Color.BLACK;
+            if (whiteFigures.containsValue(icon)) this.figureColor = Team.WHITE;
+            else if (blackFigures.containsValue(icon)) this.figureColor = Team.BLACK;
+            else this.figureColor = Team.NULL;
 
         }
 
 
         void equip() {
             if ((this.getIcon() != null) &&
-                    (figureColor == Color.WHITE && turn)
-                            || (figureColor == Color.BLACK && !turn)){
+                    ((this.figureColor.equals(Team.WHITE) && turn) ||
+                            (this.figureColor.equals(Team.BLACK) && !turn))) {
 
                 currentIcon = this.getIcon();
-                this.button.setBackground(java.awt.Color.GRAY);
+                this.setBackground(java.awt.Color.GRAY);
                 equipped = true;
                 showMoves(false, currentX, currentY);
             }
         }
+
         void put() {
             boolean stay = currentX == endX && currentY == endY;
+            MoveRules moveRules = new MoveRules(field);
             if (moveRules.moveIsRight(currentX, currentY, endX, endY,
-                    currentIcon, field, whiteFigures, blackFigures) || stay) {
+                    currentIcon, whiteFigures, blackFigures) || stay) {
                 showMoves(true, currentX, currentY);
-                field[currentY][currentX].button.setBackground(field[currentY][currentX].color);
-                field[currentY][currentX].button.setIcon(null);
-                this.setImageIcon(currentIcon);
-                cursor = Cursor.getDefaultCursor();
+                field[currentY][currentX].setBackground(field[currentY][currentX].cellColor);
+                field[currentY][currentX].setIcon(null);
+                Team endFColor = field[currentY][currentX].figureColor;
+                field[currentY][currentX].setFigureColor(Team.NULL);
+               /* if (this.getIcon().equals(whiteFigures.get(Figure.king))){
+                    whiteWin = true;
+                }
+                if (this.getIcon().equals(blackFigures.get(Figure.king))){
+                    blackWin = true;
+                }
+                */
+                this.setIcon(currentIcon);
+                this.setFigureColor(endFColor);
+                //cursor = Cursor.getDefaultCursor();
                 if (!stay) {
                     turn = !turn;
                 }
+                /*
                 if (blackFigures.containsValue(currentIcon) && endY == 7) {
                     changeFigure(endX, endY, endX, endY, currentColor, blackFigures.get(Figure.rook));
                 } else if (whiteFigures.containsValue(currentIcon) && endY == 0) {
                     changeFigure(endX, endY, endX, endY, currentColor, whiteFigures.get(Figure.rook));
                 }
+                */
                 equipped = false;
-                //if (!stay) revertDesk();
-            }
-            else {
-                //field[currentY][currentX].setImageIcon(currentIcon);
+                if (!stay) revertDesk();
+
+            } else {
+                field[currentY][currentX].setIcon(currentIcon);
                 equipped = false;
-                //showMoves(true, currentX, currentY);
+                showMoves(true, currentX, currentY);
             }
         }
 
-        JButton getButton() {
-            return this.button;
-        }
-
-        void setImageIcon(Icon icon) {
-            this.button.setIcon(icon);
-        }
-
-        Icon getIcon() {
-            return this.button.getIcon();
+        public void setFigureColor(Team figureColor1) {
+            this.figureColor = figureColor1;
         }
     }
+
+    public boolean whiteWin = false;
+
+    public boolean blackWin = false;
+
 
     void revertDesk() {
         int toI = 8;
         for (int i = 0; i < 4; i++) {
             toI--;
             int toJ = 8;
-            for (int j = 0; j < 4; j++) {
+            /*for (int j = 0; j < 4; j++) {
                 toJ--;
-                Icon icon = field[j][i].getIcon();
-                //Color color = field[j][i].endColor;
-                //if (field[j][i].endColor == null) color = null;
-                int x = field[j][i].cX;
-                int y = field[j][i].cY;
-                //JButton btn = field[j][i].button;
-                //Color endColor = field[toJ][toI].endColor;
-                //if (field[toJ][toI].endColor == null) endColor = null;
-                //changeFigure(i, j, toI, toJ, endColor, field[toJ][toI].getIcon());
-                field[j][i].setImageIcon(field[toJ][toI].getIcon());
-                //field[j][i].setColor(endColor);
-                field[j][i].cX = field[toJ][toI].cX;
-                field[j][i].cY = field[toJ][toI].cY;
-                //field[j][i].button = field[toJ][toI].button;
-                field[toJ][toI].setImageIcon(icon);
-                //field[toJ][toI].setColor(color);
-                field[toJ][toI].cX = x;
-                field[toJ][toI].cY = y;
-                //field[j][i].button = btn;
+                changeFigure(i,j,toI,toJ);
             }
-
-            for (int j = 4; j < 8; j++) {
+*/
+            for (int j = 0; j < 8; j++) {
                 toJ--;
-                Icon icon = field[j][i].getIcon();
-                //Color color = field[j][i].endColor;
-                //if (field[j][i].endColor == null) color = null;
-                int x = field[j][i].cX;
-                int y = field[j][i].cY;
-                JButton btn = field[j][i].button;
-                //Color endColor = field[toJ][toI].endColor;
-                //if (field[toJ][toI].endColor == null) endColor = null;
-                //changeFigure(i, j, toI, toJ, endColor, field[toJ][toI].getIcon());
-                field[j][i].setImageIcon(field[toJ][toI].getIcon());
-                //field[j][i].setColor(endColor);
-                field[j][i].cX = field[toJ][toI].cX;
-                field[j][i].cY = field[toJ][toI].cY;
-                field[j][i].button = field[toJ][toI].button;
-                field[toJ][toI].setImageIcon(icon);
-                //field[toJ][toI].setColor(color);
-                field[toJ][toI].cX = x;
-                field[toJ][toI].cY = y;
-                field[j][i].button = btn;
+                changeFigure(i, j, toI, toJ);
             }
 
         }
     }
 
-    public void changeFigure(int x, int y, int toX, int toY, Color color, Icon icon) {
-        field[y][x].setImageIcon(icon);
-        field[y][x].cX = field[toY][toX].cX;
-        field[y][x].cY = field[toY][toX].cY;
+    public void changeFigure(int i, int j, int toI, int toJ) {
+        Icon icon = field[j][i].getIcon();
+        Team fColor = field[j][i].figureColor;
+        field[j][i].setIcon(field[toJ][toI].getIcon());
+        field[j][i].setFigureColor(field[toJ][toI].figureColor);
+        field[toJ][toI].setIcon(icon);
+        field[toJ][toI].setFigureColor(fColor);
     }
 
-    public void showMoves(boolean cancel, int x, int y){
-
-        java.awt.Color darkBlue = new java.awt.Color(0, 119,128);
+    public void showMoves(boolean cancel, int x, int y) {
+        MoveRules moveRules = new MoveRules(field);
+        java.awt.Color darkBlue = new java.awt.Color(38, 139, 153);
         java.awt.Color lightBlue = new java.awt.Color(128, 246, 255);
-        for (int i = 0; i < 8; i++){
-            for (int j = 0; j < 8; j++){
-                boolean stay =  currentX == j && currentY == i;
-                if (moveRules.moveIsRight(x, y, i, j, currentIcon, field, whiteFigures, blackFigures) && !cancel && !stay){
-                    if (field[j][i].color == java.awt.Color.BLACK) {
-                        field[j][i].button.setBackground(darkBlue);
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (moveRules.moveIsRight(x, y, i, j, currentIcon, whiteFigures, blackFigures) && !cancel) {
+                    if (field[j][i].cellColor.equals(new java.awt.Color(75, 22, 50))) {
+                        field[j][i].setBackground(darkBlue);
+                    } else if (field[j][i].cellColor == java.awt.Color.WHITE) {
+                        field[j][i].setBackground(lightBlue);
                     }
-                    else if (field[j][i].color == java.awt.Color.WHITE){
-                        field[j][i].button.setBackground(lightBlue);
-                    }
-                }
-                else if (cancel){
-                    field[j][i].button.setBackground(field[j][i].color);
+                } else if (cancel) {
+                    field[j][i].setBackground(field[j][i].cellColor);
 
                 }
             }
         }
     }
 
-    public void move(int x, int y){
+    public void move(int x, int y) {
+        //moveRules = new MoveRules(field);
         if (!equipped) {
             currentX = field[x][y].cX;
             currentY = field[x][y].cY;
@@ -258,7 +240,6 @@ public class Desk {
             }
         }
     */
-
 
 
 }
