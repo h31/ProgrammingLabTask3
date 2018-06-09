@@ -15,11 +15,8 @@ public class MainActivity extends Activity {
 
     private SoundPool soundPool;
     private AudioManager audioManager;
-
     private static final int MAX_STREAMS = 5;
-
     private static final int streamType = AudioManager.STREAM_MUSIC;
-
     private boolean loaded;
 
     private int soundIdSplash;
