@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Drums</string>
+    <string name="button">Button</string>
+    <string name="splash">Splash</string>
+    <string name="top_hat">Top_Hat</string>
+    <string name="high_hat">High_Hat</string>
+    <string name="tom_tom">Tom_tom</string>
+    <string name="bass_drum">Bass_drum</string>
+    <string name="snare_drum">Snare_drum</string>
+    <string name="hi_hat" />
+    <string name="ride">ride</string>
+    <string name="china">china</string>
+    <string name="floor_tom">floor_tom</string>
+</resources>
