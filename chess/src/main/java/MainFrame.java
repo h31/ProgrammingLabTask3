@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainFrame extends JFrame {
     private Desk desk = new Desk();
@@ -8,61 +10,60 @@ public class MainFrame extends JFrame {
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
         frame.setTitle("Chess");
-        frame.startJPanel(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        //frame.setLayout(new FlowLayout());
-        frame.setPreferredSize(new Dimension(950, 730));
+        frame.setPreferredSize(new Dimension(730, 730));
         frame.pack();
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
-        //frame.add(frame.panel, FlowLayout.CENTER);
-        //frame.add(frame)
-        frame.startJPanel(true);
+        frame.startJPanel();
         frame.setVisible(true);
+        frame.requestFocus();
     }
+
 
     MainFrame() {
-        JMenuItem revertBtn = new JMenuItem("повернуть");
-        JMenuItem restartBtn = new JMenuItem("начать заново");
-        JPanel infoPanel = new JPanel();
-        revertBtn.setPreferredSize(new Dimension(100, 50));
-        revertBtn.addActionListener(e -> {
+        JMenuItem revertItm = new JMenuItem("повернуть");
+        JMenuItem restartItm = new JMenuItem("начать заново");
+        revertItm.addActionListener(e -> {
             desk.revertDesk();
-            //startJPanel(false);
-            //desk.revertDesk();
             desk.turn = !desk.turn;
         });
-        JMenuBar menu = new JMenuBar();
-        restartBtn.setPreferredSize(new Dimension(100, 25));
-        restartBtn.addActionListener(e -> {
-            desk.setInitialLocation();
-            startJPanel(true);
-            desk.revertDesk();
-            desk.revertDesk();
-            desk.turn = true;
+        JMenu menu = new JMenu("settings");
+        restartItm.addActionListener(e -> {
+            restart();
         });
-        menu.add(restartBtn);
-        menu.add(revertBtn);
-        //restartBtn.setLayout(new SpringLayout());
-        //add(restartItem);
-        infoPanel.add(menu);
+        menu.setPopupMenuVisible(true);
+        menu.add(restartItm);
+        menu.add(revertItm);
+        moveCheckBox.setSelected(true);
+        revertCheckBox.setSelected(true);
+        menu.add(moveCheckBox);
+        menu.add(revertCheckBox);
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(menu);
+        setJMenuBar(menuBar);
+        add(panel, BorderLayout.CENTER);
+        addKeyListener(
+                new KeyAdapter() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        super.keyPressed(e);
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            desk.revertDesk();
+                        }
+                    }
+                }
+        );
 
-        //add(menu);
-        //restartBtn.setLocation(0,0);
-        add(infoPanel, SpringLayout.WEST);
-        add(panel, SpringLayout.EAST);
-        //add(restartBtn, SpringLayout.WEST);
+
     }
 
-    public void startJPanel(boolean restart) {
-
-        if (restart) {
-            desk.setInitialLocation();
-        } else {
-            desk.revertDesk();
-        }
+    private JCheckBox moveCheckBox = new JCheckBox("показывать ходы");
+    private JCheckBox revertCheckBox = new JCheckBox("автоповорот");
+    public void startJPanel() {
+        desk.setInitialLocation();
         panel.removeAll();
-        panel.setLayout(new FlowLayout());
+        panel.setLayout(new GridLayout(8,8));
         panel.setPreferredSize(new Dimension(720, 720));
         Color dark = new Color(75, 22, 50);
         for (int i = 0; i < 8; i++) {
@@ -88,24 +89,10 @@ public class MainFrame extends JFrame {
                     }
                 }
                 desk.field[i][j].addActionListener(e -> {
-                    JFrame winFrame = new JFrame();
-                    winFrame.setLocation(100, 0);
-                    winFrame.setVisible(false);
-                    winFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                    winFrame.setLayout(new FlowLayout());
-                    winFrame.setPreferredSize(new Dimension(200, 200));
-                    winFrame.pack();
-                    desk.move(finalI, finalJ);
-                    desk.whiteWin = true; // for test
-                    /*
-                    if (desk.whiteWin) {
-                        winFrame.setVisible(true);
-                        ImageIcon img = new ImageIcon("img/WhiteWin.png");
-                        JLabel pnl = new JLabel();
-                        pnl.setIcon(img);
-                        winFrame.add(pnl);
-                    }
-                    */
+                    desk.move(finalI, finalJ, moveCheckBox.isSelected(), revertCheckBox.isSelected());
+                    showWinFrame();
+                    desk.whiteWin = false;
+                    desk.blackWin = false;
                 });
                 panel.setVisible(true);
                 panel.add(desk.field[i][j]);
@@ -114,5 +101,37 @@ public class MainFrame extends JFrame {
 
     }
 
+    private void restart() {
+        desk.setInitialLocation();
+        startJPanel();
+        desk.revertDesk();
+        desk.revertDesk();
+        desk.turn = true;
+    }
+
+    private void showWinFrame() {
+        JDialog winFrame = new JDialog();
+        winFrame.setLocation(600, 180);
+        winFrame.setVisible(false);
+        winFrame.setLayout(new BorderLayout());
+        winFrame.setPreferredSize(new Dimension(400, 410));
+        winFrame.pack();
+        if (desk.whiteWin || desk.blackWin) {
+            winFrame.setVisible(true);
+            ImageIcon img = new ImageIcon("img/WhiteWin.png");
+            if (desk.blackWin && !desk.whiteWin) img = new ImageIcon("img/BlackWin.png");
+            JLabel pnl = new JLabel();
+            pnl.setLayout(new BorderLayout());
+            JButton winBtn = new JButton();
+            winBtn.setIcon(img);
+            winBtn.addActionListener(r -> {
+                winFrame.dispose();
+                restart();
+            });
+            pnl.add(winBtn);
+            winFrame.add(pnl);
+        }
+
+    }
 }
 

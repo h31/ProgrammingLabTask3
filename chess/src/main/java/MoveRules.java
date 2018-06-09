@@ -1,20 +1,13 @@
 import javax.swing.*;
-import java.awt.*;
-import java.util.HashMap;
 import java.util.Map;
 
-public class MoveRules {
-
+class MoveRules {
     private Desk.Cell[][] field;
-
     MoveRules(Desk.Cell[][] field) {
         this.field = field;
     }
-
-
-    public boolean moveIsRight(int x, int y, int toX, int toY, Icon currentIcon,
-                               Map<Desk.Figure, ImageIcon> whiteFigures, Map<Desk.Figure, ImageIcon> blackFigures) {
-
+    boolean moveIsRight(int x, int y, int toX, int toY, Icon currentIcon,
+                        Map<Desk.Figure, ImageIcon> whiteFigures, Map<Desk.Figure, ImageIcon> blackFigures, boolean revertCheckBoxOn) {
         boolean result = false;
         boolean rookStyle = ((x != toX && y == toY) || (y != toY && x == toX));
         boolean bishopStyle = Math.abs(x - toX) == Math.abs(y - toY);
@@ -25,6 +18,9 @@ public class MoveRules {
         boolean pawnStyle = (Math.abs(toX - x) == 0 && field[toY][toX].getIcon() == null && (toY == 4 && y > toY &&
                 field[y - 1][x].getIcon() == null || (toY - y) == -1)) || (Math.abs(toX - x) == 1 &&
                 (!yourFigure && field[toY][toX].getIcon() != null) && (toY - y) == -1);
+        boolean pawnStyle2 = (Math.abs(toX - x) == 0 && field[toY][toX].getIcon() == null && (toY == 3 && y < toY &&
+                field[y + 1][x].getIcon() == null || (toY - y) == 1)) || (Math.abs(toX - x) == 1 &&
+                (!yourFigure && field[toY][toX].getIcon() != null) && (toY - y) == 1);
 
         if (currentIcon.equals(whiteFigures.get(Desk.Figure.rook)) || currentIcon.equals(blackFigures.get(Desk.Figure.rook))) {
             result = rookWayIsFree(x, y, toX, toY) && rookStyle && !yourFigure;
@@ -32,22 +28,18 @@ public class MoveRules {
         if (currentIcon.equals(whiteFigures.get(Desk.Figure.bishop)) || currentIcon.equals(blackFigures.get(Desk.Figure.bishop))) {
             result = bishopStyle && bishopWayIsFree(x, y, toX, toY) && !yourFigure;
         }
-        /*
-         if (currentIcon.equals(blackFigures.get(Desk.Figure.pawn))) {
-            result = (Math.abs(toX - x) == 0 && field[toY][toX].getIcon() == null && (toY == 3 && toY > y || (toY - y) == 1)) ||
-                    (Math.abs(toX - x) == 1 && whiteFigures.containsValue(field[toY][toX].getIcon()) && (toY - y) == 1);
 
-        }
-        */
-        if (currentIcon.equals(whiteFigures.get(Desk.Figure.pawn)) || currentIcon.equals(blackFigures.get(Desk.Figure.pawn))) {
+        if ((currentIcon.equals(whiteFigures.get(Desk.Figure.pawn)) || (currentIcon.equals(blackFigures.get(Desk.Figure.pawn))) && revertCheckBoxOn)) {
             result = pawnStyle;
+        }
+        if (currentIcon.equals(blackFigures.get(Desk.Figure.pawn)) && !revertCheckBoxOn) {
+            result = pawnStyle2;
         }
         if (currentIcon.equals(whiteFigures.get(Desk.Figure.knight)) || currentIcon.equals(blackFigures.get(Desk.Figure.knight))) {
             result = knightStyle;
         }
         if (currentIcon.equals(whiteFigures.get(Desk.Figure.queen)) || currentIcon.equals(blackFigures.get(Desk.Figure.queen))) {
             result = !yourFigure && (bishopStyle && bishopWayIsFree(x, y, toX, toY) || rookStyle && rookWayIsFree(x, y, toX, toY));
-
         }
         if (currentIcon.equals(whiteFigures.get(Desk.Figure.king)) || currentIcon.equals(blackFigures.get(Desk.Figure.king))) {
             result = kingStyle;
