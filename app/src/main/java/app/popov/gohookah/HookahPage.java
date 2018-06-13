@@ -62,7 +62,9 @@ public class HookahPage extends AppCompatActivity {
     private AppCompatImageButton addPhoto;
     SetImageCallback callback;
     Snackbar downloadingSnackbar;
+    CoordinatorLayout coordinatorLayout;
     int position = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,7 @@ public class HookahPage extends AppCompatActivity {
             position = intent.getIntExtra("position", 0);
         }
         setContentView(R.layout.hookahpagewithcoordinator);
-        CoordinatorLayout coordinatorLayout = (CoordinatorLayout)findViewById(R.id.hookahPageCoordinator);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.hookahPageCoordinator);
         context = getApplicationContext();
         imageView = (ImageView) findViewById(R.id.main_backdrop);
         thisHookah = Firebase.getHookahsList().get(position);
@@ -109,7 +111,9 @@ public class HookahPage extends AppCompatActivity {
             photoPickerIntent.setType("image/*");
             startActivityForResult(photoPickerIntent, 1);
         });
+
         callback = new SetImageCallback();
+
         viewPager = (ViewPager) findViewById(R.id.htab_viewpager);
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -128,13 +132,13 @@ public class HookahPage extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-    if (thisHookah.getImages().size() != 0) {
-        Storage.getImage(thisHookah, imageView);
-    }
-    downloadingSnackbar = Snackbar.make(coordinatorLayout, "Выполняется загрузка...", Snackbar.LENGTH_LONG);
-    toolbar.setTitle(thisHookah.getClubName());
+        if (thisHookah.getImages().size() != 0) {
+            Storage.getImage(thisHookah, imageView);
+        }
+        downloadingSnackbar = Snackbar.make(coordinatorLayout, "Выполняется загрузка...", Snackbar.LENGTH_LONG);
+        toolbar.setTitle(thisHookah.getClubName());
 
-        if (thisHookah.getImages().size() != 0){
+        if (thisHookah.getImages().size() != 0) {
             addPhoto.setVisibility(View.INVISIBLE);
         }
     }
@@ -168,7 +172,7 @@ public class HookahPage extends AppCompatActivity {
                         final Uri imageUri = imageReturnedIntent.getData();
                         final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                         byte[] data = IOUtils.toByteArray(imageStream);
-                        Firebase.uploadImage(thisHookah.getId(), data, callback);
+                        Storage.uploadImage(thisHookah.getId(), data, callback);
                     } catch (IOException ex) {
                         System.out.println(ex.getMessage());
                     }
@@ -177,23 +181,9 @@ public class HookahPage extends AppCompatActivity {
     }
 
 
-    public void setImage() {
-        File imagesDirectory = new File(context.getFilesDir() + "/HookahsImages/");
-        if (thisHookah.getImages().size() != 0) {
-            System.out.println(imagesDirectory + "/" + thisHookah.getImages().get(0));
-            imageView.setImageDrawable(Drawable.createFromPath(imagesDirectory + "/" + thisHookah.getImages().get(0)));
-            addPhoto.setVisibility(View.INVISIBLE);
-        }
-        setHeader(thisHookah.getClubName());
-    }
-
-    public static void setHeader(String header) {
-        toolbar.setTitle(header);
-    }
-
     private void callHookah() {
         Uri uri = Uri.parse("tel:" + thisHookah.getPhoneNumber());
-        Intent intent = new Intent(Intent.ACTION_CALL, uri);
+        Intent intent = new Intent(Intent.ACTION_DIAL, uri);
         startActivity(intent);
     }
 
@@ -201,12 +191,12 @@ public class HookahPage extends AppCompatActivity {
         Snackbar.make(view, "Скопировано в буфер обмена", Snackbar.LENGTH_SHORT).show();
     }
 
-    public class SetImageCallback implements MyCallback{
+    public class SetImageCallback implements MyCallback {
         @Override
-        public void call(){
+        public void call() {
             downloadingSnackbar.setText("Загрузка завершена").show();
             thisHookah = Firebase.getHookahs().get(thisHookah.getId());
-          Storage.getImage(thisHookah, imageView);
+            Storage.getImage(thisHookah, imageView);
         }
     }
 

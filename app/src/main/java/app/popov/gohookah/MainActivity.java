@@ -149,6 +149,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, AddHookahActivity.class);
             startActivity(intent);
         } else if (id == R.id.show_hookah_list) {
+        } else if (id == R.id.loginitem){
+            Intent intent = new Intent(context, SignInActivity.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

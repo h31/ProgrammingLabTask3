@@ -26,5 +26,9 @@
                 android:title="Отправить" />
         </menu>
     </item> !-->
+    <item
+        android:title="Логин"
+        android:id="@+id/loginitem">
+    </item>
 
 </menu>

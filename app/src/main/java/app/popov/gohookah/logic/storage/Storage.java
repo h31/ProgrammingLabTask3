@@ -3,14 +3,19 @@ package app.popov.gohookah.logic.storage;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import app.popov.gohookah.HookahPage;
 import app.popov.gohookah.adapters.HookahsAdapterForRecyclerView;
+import app.popov.gohookah.logic.RandomString;
 import app.popov.gohookah.logic.database.Firebase;
 import app.popov.gohookah.logic.database.FirebaseHookah;
 
@@ -45,4 +50,20 @@ public class Storage {
             });
         }
     }
+
+    public static void uploadImage(String hookahID, byte[] data, HookahPage.SetImageCallback callback) {
+        String fileName = RandomString.get(10) + ".jpg";
+        UploadTask uploadTask = FirebaseStorage.getInstance().getReference().child("HookahsImages/" + hookahID + "/" + fileName).putBytes(data);
+        FirebaseHookah hookah = Firebase.getHookahs().get(hookahID);
+        hookah.getImages().add(fileName);
+
+        uploadTask.addOnSuccessListener(taskSnapshot -> FirebaseFirestore.getInstance().collection(hookah.getCity()).document(hookahID).set(hookah).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                callback.call();
+            }
+        }));
+    }
+
+
 }

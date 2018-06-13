@@ -86,70 +86,22 @@ public class Firebase {
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder().setTimestampsInSnapshotsEnabled(true).setPersistenceEnabled(false).build();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.setFirestoreSettings(settings);
-        db.collection(city).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    hookahs.clear();
-                    for (DocumentSnapshot snapshot : task.getResult().getDocuments()) {
-                        FirebaseHookah firebaseHookah = snapshot.toObject(FirebaseHookah.class);
-                        hookahs.put(snapshot.getId(), firebaseHookah);
-                    }
-                    hookahsList = new ArrayList<>(hookahs.values());
-                    myCallback.call();
-                    addMarkersCallBack.call();
+        db.collection(city).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                hookahs.clear();
+                for (DocumentSnapshot snapshot : task.getResult().getDocuments()) {
+                    FirebaseHookah firebaseHookah = snapshot.toObject(FirebaseHookah.class);
+                    hookahs.put(snapshot.getId(), firebaseHookah);
                 }
+                hookahsList = new ArrayList<>(hookahs.values());
+                myCallback.call();
+                addMarkersCallBack.call();
             }
         });
     }
 
-    public static void getImage(FirebaseHookah h, String fileName, HookahsAdapterForRecyclerView.ViewHolder viewHolder) {
-        File imagesDirectory = new File(internalStorageDir + "/HookahsImages/");
-        if (!imagesDirectory.exists()) {
-            imagesDirectory.mkdir();
-        }
-        System.out.println(imagesDirectory.getAbsolutePath());
-        File image = new File(internalStorageDir + "/HookahsImages/" + fileName);
-        System.out.println(image.getAbsolutePath());
-        if (image.exists()) {
-            viewHolder.setGeneralImage(Drawable.createFromPath(imagesDirectory + "/" + fileName));
-        } else {
-            try {
-                image.createNewFile();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-            System.out.println(h.getImages());
-            storageReference.child("HookahsImages/" + h.getId() + "/" + h.getImages().get(0)).getBytes(1024 * 1024).addOnSuccessListener(bytes -> {
-                try {
-                    System.out.println("downloading " + image.getAbsolutePath());
-                    FileOutputStream fileOutputStream = new FileOutputStream(image);
-                    fileOutputStream.write(bytes);
-                    viewHolder.setGeneralImage(Drawable.createFromPath(imagesDirectory + "/" + fileName));
-                } catch (IOException ex) {
-                    System.out.println(ex.getMessage());
-                }
-            });
-        }
-    }
-
-    public static void setAddMarkersCallBack(GoogleMapFragment.AddMarkersCallBack callBack){
+    public static void setAddMarkersCallBack(GoogleMapFragment.AddMarkersCallBack callBack) {
         addMarkersCallBack = callBack;
-    }
-
-    public static void uploadImage(String hookahID, byte[] data, HookahPage.SetImageCallback callback) {
-        String fileName = randomString(10) + ".jpg";
-        UploadTask uploadTask = FirebaseStorage.getInstance().getReference().child("HookahsImages/" + hookahID + "/" + fileName).putBytes(data);
-        FirebaseHookah hookah = Firebase.getHookahs().get(hookahID);
-        hookah.getImages().add(fileName);
-
-        uploadTask.addOnSuccessListener(taskSnapshot -> FirebaseFirestore.getInstance().collection(hookah.getCity()).document(hookahID).set(hookah).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-            callback.call();
-            }
-        }));
     }
 
     public static void addToFireBase(FirebaseHookah h, Context context) {
@@ -172,40 +124,4 @@ public class Firebase {
                 .addOnSuccessListener(aVoid -> System.out.println("succesfull added: " + h.getClubName()))
                 .addOnFailureListener(e -> System.out.println("fail!"));
     }
-
-    public static void importHookahBase(ArrayList<FirebaseHookah> hookahsForImport, Context context) {
-        ArrayList<String> ids = new ArrayList<>();
-        for (FirebaseHookah current : hookahsForImport) {
-            DocumentReference dr = FirebaseFirestore.getInstance().collection("hookahclubs").document();
-            String id = dr.getId();
-            ids.add(id);
-            current.setId(id);
-            dr.set(current).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("Succesfully hookah added (" + id + ")");
-                }
-            });
-        }
-        Path outputPath = Paths.get(context.getFilesDir() + "/importLog.txt");
-        try {
-            Files.createFile(outputPath);
-            FileWriter fileWriter = new FileWriter(outputPath.toFile());
-            IOUtils.writeLines(ids, "\n", fileWriter);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-
-    private static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static SecureRandom rnd = new SecureRandom();
-
-    private static String randomString( int len ){
-        StringBuilder sb = new StringBuilder( len );
-        for( int i = 0; i < len; i++ )
-            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
-        return sb.toString();
-    }
-
 }
