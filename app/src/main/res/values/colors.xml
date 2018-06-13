@@ -10,4 +10,5 @@
     <color name="yellow_rating_bar">#FFE261</color>
     <color name="purple">#D81B60</color>
     <color name="white">#fdd835</color>
+    <color name="successGreen">#aaf255</color>
 </resources>

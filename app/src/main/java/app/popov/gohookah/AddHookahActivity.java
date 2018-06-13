@@ -26,6 +26,7 @@ import java.util.List;
 import app.popov.gohookah.logic.Hookah;
 import app.popov.gohookah.logic.HookahAddress;
 import app.popov.gohookah.logic.database.Firebase;
+import app.popov.gohookah.logic.database.FirebaseHookah;
 
 public class AddHookahActivity extends AppCompatActivity {
     @Override
@@ -62,8 +63,8 @@ public class AddHookahActivity extends AppCompatActivity {
         });
 
         button.setOnClickListener(v -> {
-            Hookah hookah = new Hookah();
-            hookah.setName(editClubName.getText().toString());
+            FirebaseHookah hookah = new FirebaseHookah();
+            hookah.setClubName(editClubName.getText().toString());
             hookah.setMetro(editMetro.getText().toString());
             hookah.setCountry("Россия");
             hookah.setStreet(editStreet.getText().toString());

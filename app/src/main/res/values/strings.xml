@@ -107,4 +107,5 @@
     <string name="goTo">Перейти</string>
     <string name="your_rate">Ваша оценка</string>
     <string name="publicRate">Общая оценка</string>
+    <string name="loadingDescr">Cписок из лучших кальянных клубов вашего города уже мчится к вам...</string>
 </resources>

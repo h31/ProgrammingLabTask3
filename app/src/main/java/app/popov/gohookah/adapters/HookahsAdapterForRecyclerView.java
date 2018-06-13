@@ -1,6 +1,7 @@
 package app.popov.gohookah.adapters;
 
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +19,13 @@ import app.popov.gohookah.MainActivity;
 import app.popov.gohookah.R;
 import app.popov.gohookah.logic.Hookah;
 import app.popov.gohookah.logic.database.Firebase;
+import app.popov.gohookah.logic.database.FirebaseHookah;
+import app.popov.gohookah.logic.storage.Storage;
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 public class HookahsAdapterForRecyclerView extends RecyclerView.Adapter<HookahsAdapterForRecyclerView.ViewHolder> {
-    public ArrayList<Hookah> hookahs;
+    public ArrayList<FirebaseHookah> hookahs;
+    public Location current = null;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView hookahClubName;
@@ -32,6 +36,7 @@ public class HookahsAdapterForRecyclerView extends RecyclerView.Adapter<HookahsA
         public ImageView geoIcon;
         public TextView metroDescription;
         public ImageView metroIcon;
+        public TextView ad;
         public ViewHolder(View itemView){
             super(itemView);
             metroDescription = (TextView) itemView.findViewById(R.id.metroDescription);
@@ -42,6 +47,7 @@ public class HookahsAdapterForRecyclerView extends RecyclerView.Adapter<HookahsA
             distance = (TextView) itemView.findViewById(R.id.distanceDescription);
             generalImage = (ImageView) itemView.findViewById(R.id.imageInCard);
             metroIcon = (ImageView) itemView.findViewById(R.id.metroIcon);
+            ad = (TextView) itemView.findViewById(R.id.adMark);
         }
 
         public void setGeneralImage(Drawable generalImage) {
@@ -49,23 +55,14 @@ public class HookahsAdapterForRecyclerView extends RecyclerView.Adapter<HookahsA
         }
     }
 
-    public int getPositionFromHookahID(String id){
-        int position = 0;
-        for(Hookah hookah : hookahs){
-            if (hookah.getId().equals(id)) {
-                return position;
-            }
-            position++;
-        }
-        return -1;
-    }
 
-
-    public Hookah getHookahFromAdapter(int position){
-        return hookahs.get(position);
-    }
-    public HookahsAdapterForRecyclerView(ArrayList<Hookah> hookahs){
+    public HookahsAdapterForRecyclerView(ArrayList<FirebaseHookah> hookahs, Double latitude, Double longitude) {
         this.hookahs = hookahs;
+        if (latitude + longitude != 0){
+            current = new Location("passive");
+            current.setLongitude(longitude);
+            current.setLatitude(latitude);
+        }
     }
 
     @Override
@@ -88,37 +85,33 @@ public class HookahsAdapterForRecyclerView extends RecyclerView.Adapter<HookahsA
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Hookah h = hookahs.get(i);
-        viewHolder.hookahClubName.setText(h.getName());
-        viewHolder.materialRatingBar.setRating(4F);
-        viewHolder.metroDescription.setText(h.getMetro() != null ? h.getMetro() : "");
-        if (viewHolder.metroDescription.getText() == ""){
-            viewHolder.metroIcon.setVisibility(View.INVISIBLE);
+            FirebaseHookah h = hookahs.get(i);
+        if (h.getImages().size() != 0) {
+            Storage.getImage(h, viewHolder.generalImage);
+        } else {
+            viewHolder.setGeneralImage(null);
         }
-        if (h.getImagesNames().size() != 0) {
-           viewHolder.generalImage.setImageDrawable(Firebase.getImage(h, h.getImagesNames().get(0)));
+        if (current != null) {
+            Location hookahLocation = new Location("passive");
+            hookahLocation.setLatitude(h.getLatitude());
+            hookahLocation.setLongitude(h.getLongitude());
+            viewHolder.distance.setText(getKilometers(current.distanceTo(hookahLocation)));
+        } else {
+            viewHolder.distance.setVisibility(View.INVISIBLE);
+            viewHolder.geoIcon.setVisibility(View.INVISIBLE);
         }
-        h.setDistance(viewHolder);
+            viewHolder.hookahClubName.setText(h.getClubName());
+            viewHolder.materialRatingBar.setRating(4F);
+            viewHolder.metroDescription.setText(h.getMetro() != null ? h.getMetro() : "");
+            if (viewHolder.metroDescription.getText() == "") {
+                viewHolder.metroIcon.setVisibility(View.INVISIBLE);
+            }
+       viewHolder.ad.setVisibility(View.INVISIBLE);
+
+        }
+
+    public String getKilometers(Float distance){
+        Integer km = Math.round(distance / 1000);
+        return new StringBuilder().append("~").append(km).append("km ").append("от Вас").toString();
     }
-
-    public void update(ArrayList<Hookah> hookahArrayList){
-        hookahs.clear();
-        System.out.println(hookahArrayList);
-        hookahs.addAll(hookahArrayList);
-        notifyDataSetChanged();
-    }
-
-    public void removeItem(int position, RecyclerView rv){
-        rv.removeViewAt(position);
-        hookahs.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, hookahs.size());
-    }
-
-    public void addHookah(Hookah hookah, RecyclerView rv){
-        hookahs.add(hookah);
-        notifyDataSetChanged();
-    }
-
-
 }

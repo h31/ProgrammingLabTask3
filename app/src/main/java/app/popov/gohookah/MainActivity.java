@@ -1,101 +1,131 @@
 package app.popov.gohookah;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
-import android.graphics.drawable.Drawable;
-import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import app.popov.gohookah.adapters.HookahsAdapterForRecyclerView;
+import app.popov.gohookah.adapters.ViewPagerAdapter;
+import app.popov.gohookah.fragments.GoogleMapFragment;
+import app.popov.gohookah.fragments.MapViewFragment;
+import app.popov.gohookah.fragments.RatingAndContactsFragment;
+import app.popov.gohookah.fragments.RecyclerViewFragment;
+import app.popov.gohookah.fragments.ReviewsFragment;
 import app.popov.gohookah.listeners.GeneralHookahsClickListener;
 import app.popov.gohookah.logic.Hookah;
-import app.popov.gohookah.listeners.MyLocationListener;
 import app.popov.gohookah.logic.database.Firebase;
-
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import app.popov.gohookah.logic.database.FirebaseHookah;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    static RecyclerView hookahList;
 
     static AssetManager asset;
     static Context context;
-    static TextView description;
+
     static Location current;
-    static HookahsAdapterForRecyclerView adapter;
-    static int refreshAdapterAmount = 0;
+
+    RecyclerViewFragment recyclerViewFragment;
+    Bundle bundle;
+    GoogleMapFragment mapViewFragment;
+
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
+
+        Intent intentWithCoordinates = getIntent();
+        current = new Location("passive");
+        Double latitude = intentWithCoordinates.getDoubleExtra("latitude", 0.0);
+        Double longitude = intentWithCoordinates.getDoubleExtra("longitude", 0.0);
+        current.setLatitude(latitude);
+        current.setLongitude(longitude);
+        recyclerViewFragment = new RecyclerViewFragment();
+        bundle = new Bundle();
+        if (intentWithCoordinates.getStringExtra("locale") != null) {
+            bundle.putString("locale", intentWithCoordinates.getStringExtra("locale"));
+        } else {
+            bundle.putString("locale", null);
+        }
+        bundle.putDouble("latitude", latitude);
+        bundle.putDouble("longitude", longitude);
+        recyclerViewFragment.setArguments(bundle);
+        mapViewFragment = new GoogleMapFragment();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent intentWithCoordinates = getIntent();
-        current = new Location("passive");
-        current.setLatitude(intentWithCoordinates.getDoubleExtra("latitude", 0.0));
-        current.setLongitude(intentWithCoordinates.getDoubleExtra("longitude", 0.0));
-        description = (TextView) findViewById(R.id.mainActivityDescription);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        hookahList = (RecyclerView) findViewById(R.id.recyclerViewHookahs);
-        hookahList.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(context);
-        hookahList.setLayoutManager(llm);
-
-        setHookahListAdapter(Firebase.getHookahsForAdapter());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        fab.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, AddHookahActivity.class);
-            startActivity(intent);
+
+        viewPager = (ViewPager) findViewById(R.id.main_viewpager);
+        setupViewPager(viewPager);
+        tabLayout = (TabLayout) findViewById(R.id.main_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
         });
-        hookahList.addOnItemTouchListener(new GeneralHookahsClickListener(context, hookahList, new GeneralHookahsClickListener.OnItemClickListener() {
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_view_list_black_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_map_black_24dp);
+
+
+        ImageButton cityButton = (ImageButton) findViewById(R.id.citybutton);
+        cityButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                startActivity(new Intent(context, HookahPage.class).putExtra("position", position));
-
+            public void onClick(View v) {
+                startActivity(new Intent(context, SearchCityActivity.class));
+                overridePendingTransition(R.anim.enter, R.anim.exit);
             }
-
-            @Override
-            public void onLongItemClick(View view, int position) {
-
-            }
-        }));
+        });
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         asset = getAssets();
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(recyclerViewFragment, "");
+        adapter.addFragment(mapViewFragment, "");
+        viewPager.setAdapter(adapter);
     }
 
     @Override
@@ -108,27 +138,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -140,43 +149,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, AddHookahActivity.class);
             startActivity(intent);
         } else if (id == R.id.show_hookah_list) {
-        } else if (id == R.id.nav_share) {
-        } else if (id == R.id.nav_send) {
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
 
-    public static void setHookahListAdapter(ArrayList<Hookah> hookahs) {
-            if (hookahs.size() == 0) {
-                try {
-                    String city = new Geocoder(context).getFromLocation(current.getLatitude(), current.getLongitude(), 1).get(0).getLocality();
-                    description.setText("Нам очень жаль, но мы не знаем ни одного кальянного клуба в городе " + city);
-                } catch (IOException ex) {
-                    ex.getMessage();
-                }
-            } else {
-                description.setVisibility(View.INVISIBLE);
-                adapter = new HookahsAdapterForRecyclerView(hookahs);
-                hookahList.setAdapter(adapter);
-            }
-    }
-    public static int positionOfHookahFromID(String id){
-        return adapter.getPositionFromHookahID(id);
-    }
-
-    public static void removeFromAdapter(int position){
-        adapter.removeItem(position, hookahList);
-    }
-
-    public static void addNewHookahToAdapter(Hookah h){
-        adapter.addHookah(h, hookahList);
-    }
-
-    public static void updateAdapter(){
-        adapter.update(Firebase.getHookahsForAdapter());
     }
 }
 

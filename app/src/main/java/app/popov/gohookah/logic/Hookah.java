@@ -18,16 +18,16 @@ import app.popov.gohookah.adapters.HookahsAdapterForRecyclerView;
 
 public class Hookah {
 
-    public Hookah(DocumentSnapshot ds){
+    public Hookah(DocumentSnapshot ds) {
         this.id = ds.getId();
         this.name = ds.get("Name").toString();
         this.country = ds.get("Country").toString();
         this.street = ds.get("Street").toString();
         this.metro = ds.get("Metro").toString();
         this.houseNumber = ds.get("HouseNumber").toString();
-        if ((Double) ds.get("Longtiude") + (Double) ds.get("Latitude") != 0.0){
+        if ((Double) ds.get("Longtiude") + (Double) ds.get("Latitude") != 0.0) {
             this.locationOfClub = new Location("passive");
-            this.locationOfClub.setLongitude((Double) ds.get("Longtiude"));
+            this.locationOfClub.setLongitude((Double) ds.get("Longitude"));
             this.locationOfClub.setLatitude((Double) ds.get("Latitude"));
         }
         this.imagesNames = (ArrayList<String>) ds.get("ImagesNames");
@@ -94,6 +94,8 @@ public class Hookah {
     private String street;
     private String metro;
     private String houseNumber;
+    private String vk;
+    private String instagram;
 
 
     private Rating rating;
@@ -107,7 +109,7 @@ public class Hookah {
 
     private Float distance;
 
-    public Hookah(){
+    public Hookah() {
     }
 
     public Double getLongtiude() {
@@ -130,30 +132,35 @@ public class Hookah {
         return distance;
     }
 
-    public void setLocationOfClub(String latitude, String longtiude){
+    public String getVk() {
+        return vk;
+    }
+
+    public void setVk(String vk) {
+        this.vk = vk;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
+
+    public void setLocationOfClub(String latitude, String longtiude) {
         locationOfClub = new Location("passive");
         locationOfClub.setLatitude(Double.parseDouble(latitude));
         locationOfClub.setLongitude(Double.parseDouble(longtiude));
     }
 
-    public void setDistance(HookahsAdapterForRecyclerView.ViewHolder viewHolder){
-        viewHolder.distance.setText(getDistance() == 10000F ? "" : getKilometers(getDistance()));
-        if (viewHolder.distance.getText() == "") {
-            viewHolder.geoIcon.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    public String getKilometers(Float distance){
-        Integer km = Math.round(distance / 1000);
-        return new StringBuilder().append("~").append(km).append("km ").append("от Вас").toString();
-    }
-
-    public void setDistance(Location location) {
+    public void setDistanceBetweenUserAndHookah(Location location) {
         if (location != null && getLocationOfClub() != null) {
             distance = locationOfClub.distanceTo(location);
-        } else {distance = 10000F;}
+        } else {
+            distance = null;
+        }
     }
-
 
 
     public String getId() {
@@ -200,6 +207,23 @@ public class Hookah {
 
     @Override
     public String toString() {
-        return getName();
+        return "Hookah{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", metro='" + metro + '\'' +
+                ", houseNumber='" + houseNumber + '\'' +
+                ", vk='" + vk + '\'' +
+                ", instagram='" + instagram + '\'' +
+                ", rating=" + rating +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", longtiude=" + longtiude +
+                ", latitude=" + latitude +
+                ", locationOfClub=" + locationOfClub +
+                ", distance=" + distance +
+                ", imagesNames=" + imagesNames +
+                '}';
     }
 }
