@@ -1,73 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a4e50766-6801-4c55-9385-537a862489e8" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_coobird_thumbnailator_0_4_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_6_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/Client.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/proguard-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/androidTest/java/com/client/ExampleInstrumentedTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/java/com/client/AppCompatPreferenceActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/java/com/client/Drawing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/java/com/client/MainActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/java/com/client/SettingsActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/java/com/client/Shower.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/java/com/client/image/BitMapPreprocessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/java/com/client/image/Point.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/java/com/client/server/connection/ServerForwarder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/java/com/client/server/connection/UserInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/drawable/ic_info_black_24dp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/drawable/ic_notifications_black_24dp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/drawable/ic_sync_black_24dp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/menu/menu_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/values/ids.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/xml/pref_data_sync.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/xml/pref_general.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/xml/pref_headers.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/main/res/xml/pref_notification.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/app/src/test/java/com/client/ExampleUnitTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/local.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/settings.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="a4e50766-6801-4c55-9385-537a862489e8" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -163,7 +97,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
@@ -248,12 +182,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1529356029847</updated>
-      <workItem from="1529356031460" duration="884000" />
+      <workItem from="1529356031460" duration="1157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="467000" />
+    <option name="totallyTimeSpent" value="740000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-254" y="-1080" width="1920" height="1080" extended-state="0" />
@@ -266,9 +200,9 @@
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.32935324" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32935324" />
       <window_info id="Designer" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973376" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973376" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="SciView" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
