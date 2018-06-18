@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Карта кампуса</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="search">search</string>
+    <string name="button1">ПОЛНАЯ КАРТА</string>
+    <string name="todo">TODO</string>
+    <string name="hint_search">hint_search</string>
+    <string name="search1">Search</string>
+    <string name="button">Button</string>
+    <string-array name="buildings">
+        <item>Показать все</item>
+        <item>Главное здание</item>
+        <item>Гидрокорпус-1</item>
+        <item>Гидрокорпус-2</item>
+        <item>Фаблаб</item>
+        <item>Лабораторный корпус</item>
+        <item>Механический корпус</item>
+        <item>Химический корпус</item>
+        <item>1 корпус</item>
+        <item>2 корпус</item>
+        <item>3 корпус</item>
+        <item>4 корпус</item>
+        <item>9 корпус</item>
+        <item>11 корпус</item>
+        <item>20 корпус</item>
+        <item>СК Политехник</item>
+        <item>НИК</item>
+        <item>17 общежитие</item>
+        <item>18 общежитие</item>
+        <item>Комплекс общежитий на Лесной</item>
+        <item>Комплекс общежитий на Площади Мужества</item>
+        <item>Торговый институт (50 корпус)</item>
+        <item>ИМОП</item>
+        <item>Санкт-Петербургский национальный исследовательский Академический университет Российской академии наук</item>
+    </string-array>
+    <string name="title_activity_info">Информация</string>
+    <string name="large_text">
+        В процессе))0)
+    </string>
+    <string name="action_settings">Settings</string>
+</resources>
