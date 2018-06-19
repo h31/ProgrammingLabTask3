@@ -16,7 +16,7 @@ public class Block {
         rect = new Rectangle(currentPosition.x, currentPosition.y, widthOfBlock, heightOfBlock);
         if (rect.intersects(bodyOfRect)) {
             outPoint.y = -1;
-            outPoint.x = rnd.nextInt(3) - 1;
+            outPoint.x = rnd.nextInt(2) - 1;
             if (outPoint.x == 0) outPoint.x = 1;
         }
         return outPoint;
