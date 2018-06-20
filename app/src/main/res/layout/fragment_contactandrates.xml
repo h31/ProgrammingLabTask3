@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/first_fragment_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/iconsLayout">
+    <ImageView
+        android:id="@+id/viewsIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_remove_red_eye_black_24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:text="100"
+        android:id="@+id/viewAmount"
+        android:layout_toEndOf="@id/viewsIcon"
+        android:padding="10dp"
+        android:textSize="17sp"
+        android:textStyle="italic"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_below="@id/viewsIcon"
+        android:padding="10dp"
+        android:src="@drawable/ic_vk_social_network_logo"
+        android:id="@+id/vkIcon"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_below="@id/viewAmount"
+        android:layout_toEndOf="@id/vkIcon"
+        android:textAlignment="center"
+        android:text="navysote"
+        android:padding="10dp"
+        android:id="@+id/vkurl"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_instagram"
+        android:layout_below="@id/vkIcon"
+        android:id="@+id/instagramIcon"
+        android:padding="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_below="@id/vkurl"
+        android:layout_toEndOf="@id/instagramIcon"
+        android:textAlignment="center"
+        android:text="navysote"
+        android:padding="10dp"
+        android:id="@+id/instagramurl"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/timetableIcon"
+        android:layout_marginStart="200dp"
+        android:src="@drawable/ic_access_time_black_24dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:padding="10dp"
+        android:id="@+id/timetable"
+        android:text="10:00 - 03:00"
+        android:layout_toEndOf="@id/timetableIcon"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/addressIcon"
+        android:layout_below="@id/timetableIcon"
+        android:layout_marginStart="200dp"
+        android:src="@drawable/ic_location_on_blue_24dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:padding="10dp"
+        android:id="@+id/addressText"
+        android:layout_below="@id/timetable"
+        android:text="Котовского, 4"
+        android:layout_toEndOf="@id/timetableIcon"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/metroDescrIcon"
+        android:layout_marginStart="200dp"
+        android:src="@drawable/ic_baltimore_metro_logo_symbol"
+        android:layout_below="@id/addressIcon"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:padding="10dp"
+        android:id="@+id/metroDescr"
+        android:text="Горьковская"
+        android:layout_below="@id/addressText"
+        android:layout_toEndOf="@id/metroDescrIcon"/>
+</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Акции"
+            android:textAlignment="center"
+            />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Скидка студентам с 15:00 до 18:00"/>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Во вторник второй кальян за половину цены"/>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Среда - чай к каждому кальяну в подарок"/>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</LinearLayout>
