@@ -1,0 +1,36 @@
+.empty {
+   -fx-background-color: rgba(104, 104, 226, 0.6);
+   -fx-border-color: rgba(104, 104, 226, 0.8);
+}
+
+.empty:disabled, .empty:disabled > * {
+   -fx-opacity: 1.0;
+}
+
+.user_ship {
+   -fx-background-color: pink;
+   -fx-border-color: rgba(104, 104, 226, 0.8);
+}
+
+.user_ship:disabled, .user_ship:disabled > * {
+   -fx-opacity: 1.0;
+}
+
+.hidden_ship {
+   -fx-background-color: rgba(104, 104, 226, 0.6);
+   -fx-border-color: rgba(104, 104, 226, 0.8);
+}
+
+.injured_ship {
+   -fx-background-color: rgba(226, 34, 50, 0.6);
+   -fx-border-color: rgba(104, 104, 226, 0.8);
+}
+
+.injured_ship:disabled, .injured_ship:disabled > * {
+    -fx-opacity: 1.0;
+ }
+
+.miss {
+   -fx-background-color: rgba(107, 107, 227, 0.32);
+   -fx-border-color: rgba(104, 104, 226, 0.8);
+}
