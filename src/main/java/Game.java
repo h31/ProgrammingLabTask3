@@ -1,5 +1,5 @@
-import units.Hero;
-import units.Team;
+import units.teamOne.Knight;
+import units.teamTwo.Sectoid;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -7,8 +7,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.*;
 
 public class Game extends Canvas implements Runnable {
-    private Team first;
-    private Team second;
     private boolean running = false;
 
     public int xOffset, yOffset;
@@ -22,12 +20,24 @@ public class Game extends Canvas implements Runnable {
     private int width, height;
     public static int TILE_WIDTH = 64;
     public static int TILE_HEIGHT = 64;
-    public static String title = "COFIM Alpha v.0.0.000000001";
+    public static String title = "COFIM Alpha v.0.0.1";
 
     public int[][] world;
     public int x, y;
 
     private MouseManager mouseManager;
+
+    public int sectoidX = 0;
+    public int sectoidY = 0;
+    public int knightX;
+    public int knightY;
+
+    public Sectoid sectoid = new Sectoid();
+    public Knight knight = new Knight();
+
+    public int[][] getWorld() {
+        return world;
+    }
 
     public void init() {
         display = new Display(title,width, height);
@@ -76,19 +86,25 @@ public class Game extends Canvas implements Runnable {
                 if (world[x][y] == 0){
                     g.drawImage(Assets.grass,fx,fy,null);
                 } if (world[x][y] == 1) {
-                    g.drawImage(Assets.builds,fx,fy,null);
+                    g.drawImage(Assets.pit,fx,fy,null);
                 } else if (world[x][y] == 2) {
                     g.drawImage(Assets.dangers,fx,fy,null);
                 }
-                if (x == 0 && y == 0) {
-                    g.drawImage(Assets.knight,fx,fy,null);
-                }
-                if ( x == world.length - 1 && y == world[0].length - 1) {
-                    g.drawImage(Assets.enemy,fx,fy,null);
-                }
             }
         }
+            int[] coordsKnight = toIso(knightX, knightY);
+            int knightX = coordsKnight[0];
+            int knightY = coordsKnight[1];
+            g.drawImage(Assets.knight, knightX, knightY, null);
+            int[] coordsSectoid = toIso(sectoidX, sectoidY);
+            int sectoidX = coordsSectoid[0];
+            int sectoidY = coordsSectoid[1];
+            g.drawImage(Assets.sectoid, sectoidX, sectoidY, null);
         int[] coordsIsoSelected = toIso(x, y);
+        g.drawString("Здоровье Knight: " + knight.getHp(),30,40);
+        g.drawString("Кол-во аптечек у Knight: " + knight.getHeal(),30,55);
+        g.drawString("Здоровье Sectoid: " + sectoid.getHp(),30,70);
+        g.drawString("Кол-во аптечек у Sectoid: " + sectoid.getHeal(),30,85);
         g.drawImage(Assets.selected, coordsIsoSelected[0], coordsIsoSelected[1], TILE_WIDTH, TILE_HEIGHT, null);
         bs.show();
         g.dispose();
@@ -106,7 +122,7 @@ public class Game extends Canvas implements Runnable {
         double delta = 0;
         long now;
         long lastTime = System.nanoTime();
-        while (running) {
+        while (running && (knight.isAlive() && sectoid.isAlive())) {
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             lastTime = now;
@@ -116,19 +132,12 @@ public class Game extends Canvas implements Runnable {
                 delta--;
             }
         }
+        if (!sectoid.isAlive()) {
+            JOptionPane.showMessageDialog(null, "Победил knight!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Победил sectoid!");
+        }
         stop();
-    }
-
-    public MouseManager getMouseManager(){
-        return mouseManager;
-    }
-
-    public int getHEIGHT(){
-        return HEIGHT;
-    }
-
-    public int getWIDTH() {
-        return WIDTH;
     }
 
     public synchronized void start() {
@@ -170,11 +179,12 @@ public class Game extends Canvas implements Runnable {
         return new int[]{x,y};
     }
 
-
     public Game(int width, int height, int x, int y){
         this.height = height;
         this.width = width;
         this.mouseManager = new MouseManager(this);
         this.world = new int[x][y];
+        this.knightX = x - 1;
+        this.knightY = y - 1;
     }
 }

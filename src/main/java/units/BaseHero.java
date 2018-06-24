@@ -21,29 +21,31 @@ public class BaseHero implements Hero {
         this.moves = moves;
     }
 
+    public int getHp() {
+        return hp;
+    }
+
     public int getMoves() {
-        return moves;
+        return this.moves;
     }
 
     public int getRadiusAttack() {
-        return radiusAttack;
+        return this.radiusAttack;
     }
 
     @Override
     public void heal(Hero friend) {
-        if (heal > 0) {
+        if (this.heal > 0) {
             friend.healHit(this.healHit);
-            heal--;
+            this.heal--;
+        } else {
+            System.out.println("Аптечек больше нет.");
         }
     }
 
     @Override
     public void healHit(int value) {
-        if (this.hp + value >= hp){
-            this.hp += (hp - this.hp);
-        } else {
             this.hp += value;
-        }
     }
 
     @Override

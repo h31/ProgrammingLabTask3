@@ -5,7 +5,7 @@ import units.Hero;
 
 public class Sectoid implements Hero{
 
-    private final BaseHero hero;
+    private BaseHero hero;
     private int hp = 45;
     private int hit = 7;
     private int heal = 2;
@@ -18,18 +18,33 @@ public class Sectoid implements Hero{
         this.hero = new BaseHero(hp, hit, heal, healHit, kritical, radiusAttack, moves);
     }
 
+    public int getHeal() {
+        return this.heal;
+    }
+
+    public int getMoves() {
+        return this.moves;
+    }
+
+    public int getHp() {
+        return this.hp;
+    }
+
     public int getRadiusAttack() {
         return radiusAttack;
     }
 
     @Override
     public void heal(Hero friend) {
-        this.hero.heal(friend);
+        if (this.heal > 0){
+            this.hero.heal(friend);
+            this.heal--;
+        }
     }
 
     @Override
     public void healHit(int value) {
-        this.hero.healHit(healHit);
+        this.hp += healHit;
     }
 
     @Override
@@ -39,7 +54,11 @@ public class Sectoid implements Hero{
 
     @Override
     public void damage(int value) {
-        this.hp -= value;
+        if (Math.random() <= this.kritical){
+            this.hp -= value * 3;
+        } else {
+            this.hp -= value;
+        }
     }
 
     @Override
