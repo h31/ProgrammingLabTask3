@@ -92,19 +92,28 @@ public class Game extends Canvas implements Runnable {
                 }
             }
         }
-            int[] coordsKnight = toIso(knightX, knightY);
-            int knightX = coordsKnight[0];
-            int knightY = coordsKnight[1];
-            g.drawImage(Assets.knight, knightX, knightY, null);
-            int[] coordsSectoid = toIso(sectoidX, sectoidY);
-            int sectoidX = coordsSectoid[0];
-            int sectoidY = coordsSectoid[1];
-            g.drawImage(Assets.sectoid, sectoidX, sectoidY, null);
+        int[] coordsKnight = toIso(knightX, knightY);
+        int knightX = coordsKnight[0];
+        int knightY = coordsKnight[1];
+        g.drawImage(Assets.knight, knightX, knightY, null);
+
+        int[] coordsSectoid = toIso(sectoidX, sectoidY);
+        int sectoidX = coordsSectoid[0];
+        int sectoidY = coordsSectoid[1];
+        g.drawImage(Assets.sectoid, sectoidX, sectoidY, null);
+
         int[] coordsIsoSelected = toIso(x, y);
+
         g.drawString("Здоровье Knight: " + knight.getHp(),30,40);
         g.drawString("Кол-во аптечек у Knight: " + knight.getHeal(),30,55);
         g.drawString("Здоровье Sectoid: " + sectoid.getHp(),30,70);
         g.drawString("Кол-во аптечек у Sectoid: " + sectoid.getHeal(),30,85);
+        if (mouseManager.moveCounter % 2 == 0) {
+            g.drawString("Сейчас ход: Knight",30,25);
+        } else {
+            g.drawString("Сейчас ход: Sectoid",30,25);
+        }
+        g.drawString("Текущий ход: " + mouseManager.moveCounter, 30, 100);
         g.drawImage(Assets.selected, coordsIsoSelected[0], coordsIsoSelected[1], TILE_WIDTH, TILE_HEIGHT, null);
         bs.show();
         g.dispose();
@@ -133,9 +142,9 @@ public class Game extends Canvas implements Runnable {
             }
         }
         if (!sectoid.isAlive()) {
-            JOptionPane.showMessageDialog(null, "Победил knight!");
+            JOptionPane.showMessageDialog(null, "Победил knight! Закройте игру.");
         } else {
-            JOptionPane.showMessageDialog(null, "Победил sectoid!");
+            JOptionPane.showMessageDialog(null, "Победил sectoid! Закройте игру.");
         }
         stop();
     }

@@ -8,7 +8,7 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
     private boolean leftPressed, rightPressed;
     private int mouseX, mouseY;
-    private int moveCounter = 0;
+    int moveCounter = 0;
     private Game game;
     public MouseManager(Game game) {
         this.game = game;
@@ -84,8 +84,8 @@ public class MouseManager implements MouseListener, MouseMotionListener {
                     System.out.println("Радиус атаки сликшом мал. Подойдите ближе к врагу.");
                 }
             } else {
-                if (game.knight.getMoves() >= Math.sqrt(Math.pow(game.x - game.knightX,2))
-                        + Math.pow(game.y - game.knightY,2)) {
+                if (game.knight.getMoves() >= Math.sqrt(Math.pow(game.x - game.knightX,2)
+                        + Math.pow(game.y - game.knightY,2))) {
                     game.knightX = game.x;
                     game.knightY = game.y;
                     if (game.world[game.x][game.y] == 2){
@@ -112,8 +112,8 @@ public class MouseManager implements MouseListener, MouseMotionListener {
                 }
             }
             else {
-                if (game.sectoid.getMoves() >= Math.sqrt(Math.pow(game.x - game.sectoidX,2))
-                        + Math.pow(game.y - game.sectoidY,2)){
+                if (game.sectoid.getMoves() >= Math.sqrt(Math.pow(game.x - game.sectoidX,2)
+                        + Math.pow(game.y - game.sectoidY,2))) {
                     game.sectoidX = game.x;
                     game.sectoidY = game.y;
                     if (game.world[game.x][game.y] == 2){
