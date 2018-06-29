@@ -14,7 +14,7 @@ public class Display {
         createDisplay();
     }
 
-    private void createDisplay(){
+    private void createDisplay() {
         frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);

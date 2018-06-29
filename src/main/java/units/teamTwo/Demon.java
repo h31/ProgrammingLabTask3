@@ -1,20 +1,20 @@
-package units.teamOne;
+package units.teamTwo;
 
 import units.BaseHero;
 import units.Hero;
 
-public class Knight implements Hero {
+public class Demon implements Hero {
     private BaseHero hero;
-    private int hp = 35;
+    private int hp = 55;
     private int hit = 10;
-    private int heal = 2;
-    private int healHit = 10;
-    private double critical = 0.6;
+    private int heal = 1;
+    private int healHit = 9;
+    private double critical = 0.2;
     private double radiusAttack = 1.5;
-    private int moves = 5;
-    private String nameHero = "Knight";
+    private int moves = 4;
+    private String nameHero = "Demon";
 
-    public Knight() {
+    public Demon() {
         this.hero = new BaseHero(hp, hit, heal, healHit, critical, radiusAttack, moves, nameHero);
     }
 

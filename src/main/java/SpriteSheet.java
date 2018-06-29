@@ -9,6 +9,10 @@ public class SpriteSheet {
     }
 
     public BufferedImage corp(int x, int y, int width, int height) {
-        return sheet.getSubimage(x,y,width,height);
+        return sheet.getSubimage(x, y, width, height);
+    }
+
+    public BufferedImage corp(int x, int y) {
+        return sheet.getSubimage(x, y, 64, 64);
     }
 }
