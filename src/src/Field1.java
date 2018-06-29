@@ -7,10 +7,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
-/**
- * Created by infuntis on 15/01/17.
- */
-public class Field extends JPanel implements ActionListener {
+
+public class Field1 extends JPanel implements ActionListener {
     private final int SIZE = 320;
     private final int SNAKE_SIZE = 16;
     private final int ALL_CELLS = 400;
@@ -30,7 +28,7 @@ public class Field extends JPanel implements ActionListener {
     private boolean inGame = true;
 
 
-    public Field() {
+    public Field1() {
         setBackground(Color.decode("#8B008B"));
         gameImages();
         isSnakeInGame();
