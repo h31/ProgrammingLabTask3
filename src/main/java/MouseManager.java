@@ -49,7 +49,7 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
     }
 
-    public void moved(BaseHero player, int x, int y) {
+    public void move(BaseHero player, int x, int y) {
         if (player.getMoves() >= Math.sqrt(Math.pow(game.x - x, 2)
                 + Math.pow(game.y - y, 2))) {
             if (moveCounter % 2 == 0) {
@@ -89,6 +89,16 @@ public class MouseManager implements MouseListener, MouseMotionListener {
         }
     }
 
+    public void action (BaseHero player, BaseHero enemy, int playerX, int playerY, int enemyX, int enemyY) {
+        if (game.x == playerX && game.y == playerY) {
+            heal(player);
+        } else if (game.x == enemyX && game.y == enemyY) {
+            attack(player, enemy, playerX, playerY, enemyX, enemyY);
+        } else {
+            move(player, playerX, playerY);
+        }
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         if (game.x > game.getWorld().length - 1 || game.x < 0 || game.y > game.getWorld().length - 1 || game.y < 0) {
@@ -96,21 +106,9 @@ public class MouseManager implements MouseListener, MouseMotionListener {
         } else if (game.world[game.x][game.y] == 1) {
             System.out.println("Нельзя переместиться сюда.");
         } else if (moveCounter % 2 == 0) {
-            if (game.x == game.playerOneX && game.y == game.playerOneY) {
-                heal(game.playerOne);
-            } else if (game.x == game.playerTwoX && game.y == game.playerTwoY) {
-                attack(game.playerOne, game.playerTwo, game.playerOneX, game.playerOneY, game.playerTwoX, game.playerTwoY);
-            } else {
-                moved(game.playerOne, game.playerOneX, game.playerOneY);
-            }
+            action(game.playerOne, game.playerTwo, game.playerOneX, game.playerOneY, game.playerTwoX, game.playerTwoY);
         } else {
-            if (game.x == game.playerTwoX && game.y == game.playerTwoY) {
-                heal(game.playerTwo);
-            } else if (game.x == game.playerOneX && game.y == game.playerOneY) {
-                attack(game.playerTwo, game.playerOne, game.playerTwoX, game.playerTwoY, game.playerOneX, game.playerOneY);
-            } else {
-                moved(game.playerTwo, game.playerTwoX, game.playerTwoY);
-            }
+            action(game.playerTwo, game.playerOne, game.playerTwoX, game.playerTwoY, game.playerOneX, game.playerOneY);
         }
     }
 
