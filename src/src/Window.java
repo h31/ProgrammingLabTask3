@@ -1,8 +1,5 @@
 import javax.swing.*;
 
-/**
- * Created by infuntis on 15/01/17.
- */
 public class Window extends JFrame {
         public JPanel jPanel = new JPanel();
 
