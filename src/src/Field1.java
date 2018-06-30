@@ -94,11 +94,11 @@ public class Field1 extends JPanel implements ActionListener {
     }
 
     public void gameImages() {
-        ImageIcon iia = new ImageIcon("C:\\Users\\farru\\IdeaProjects\\ProgrammingLabTask3\\src\\src\\appleicon.png");
+        ImageIcon iia = new ImageIcon("res\\src\\appleicon.png");
         apple = iia.getImage();
-        ImageIcon iid = new ImageIcon("C:\\Users\\farru\\IdeaProjects\\ProgrammingLabTask3\\src\\src\\defmix_2733.png");
+        ImageIcon iid = new ImageIcon("res\\src\\defmix_2733.png");
         snakeImage = iid.getImage();
-        ImageIcon iihs = new ImageIcon("C:\\Users\\farru\\IdeaProjects\\ProgrammingLabTask3\\src\\src\\defmix_2443.png");
+        ImageIcon iihs = new ImageIcon("res\\src\\defmix_2443.png");
         headSnake = iihs.getImage();
     }
 
