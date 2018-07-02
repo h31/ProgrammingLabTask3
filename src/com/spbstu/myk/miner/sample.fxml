@@ -1,4 +1,0 @@
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane
-        xmlns:fx="http://javafx.com/fxml" fx:id="mainCol">
-</AnchorPane>
