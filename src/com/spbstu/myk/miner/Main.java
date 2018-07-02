@@ -24,7 +24,7 @@ public class Main extends Application {
         dialog.setHeaderText("Hello. Some TMT?)");
         dialog.setContentText("Please, enter number of rows");
         Optional<String> result = dialog.showAndWait();
-        result.ifPresent(ssize -> size = Integer.valueOf(ssize));
+        result.ifPresent(size -> this.size = Integer.valueOf(size));
         FXMLLoader r = new FXMLLoader(getClass().getResource("sample.fxml"));
         Controller c = new Controller(size);
         r.setController(c);
