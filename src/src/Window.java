@@ -1,16 +1,15 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Window extends JFrame {
-        public JPanel jPanel = new JPanel();
 
     public Window(){
-        setTitle("Змейка");
+        setTitle("Русские шашки");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(320,336);
-        setLocation(500,200);
-        add(new Field1());
-        ImageIcon icon = new ImageIcon("res\\src\\App-ksnake-icon.png");
-        setIconImage(icon.getImage());
+        setSize(720,560);
+        setLocation(200,50);
+        setBackground(Color.BLACK);
+        add(new Board());
         setVisible(true);
     }
     public static void main(String[] args) {
