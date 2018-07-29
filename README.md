@@ -1,2 +1,2 @@
 # ProgrammingLabTask3
-Programming Lab (Task 3)
+Campus Map for SPbSTU students
