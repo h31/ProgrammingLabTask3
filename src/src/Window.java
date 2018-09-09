@@ -4,15 +4,16 @@ import java.awt.*;
 public class Window extends JFrame {
 
     public Window(){
-        setTitle("Русские шашки");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(720,560);
-        setLocation(200,50);
-        setBackground(Color.BLACK);
-        add(new Board());
-        setVisible(true);
+
     }
     public static void main(String[] args) {
-        Window mw = new Window();
+        dragBallPanel p = new dragBallPanel();
+        p.setBackground(Color.YELLOW);
+        JFrame db = new JFrame("Drag Ball");
+        db.setSize(658,680);
+        Board board = new Board();
+        db.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        db.add(p);
+        db.setVisible(true);
     }
 }

@@ -4,15 +4,22 @@ import java.awt.*;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
-public class Board extends JPanel {
+public class Board extends JPanel implements MouseListener, MouseMotionListener {
     private BufferedImage image;
-    public int yPosition;
-    public int xPosition;
+    private int ballX[];
+    private int ballY[];
+    private int dragFromX[];
+    private int dragFromY[];
+
+    private boolean candrag[];
 
     public Board() {
         try {
@@ -20,15 +27,8 @@ public class Board extends JPanel {
         } catch (IOException ex) {
             System.out.println("Dont find picture");
         }
-        addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                xPosition = e.getX();
-                yPosition = e.getY();
-                repaint();
-            }
-        });
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
     }
 
     public void paintComponent(Graphics g) {
@@ -68,46 +68,41 @@ public class Board extends JPanel {
                 }
             }
         }
-        g.setColor(Color.BLACK);
-        g.drawString("X: " + xPosition + ", Y: " + yPosition, xPosition, yPosition);
-        if (xPosition <= 485 && xPosition >= 385 && yPosition <= 375 && yPosition >= 325) {
-            g.setColor(Color.gray);
-            g.fillRect(440, 260, 60, 60);
-            g.fillRect(320, 260, 60, 60);
-        }
-        if (xPosition <= 315 && xPosition >= 265 && yPosition <= 375 && yPosition >= 325) {
-            g.setColor(Color.gray);
-            g.fillRect(200, 260, 60, 60);
-            g.fillRect(320, 260, 60, 60);
-        }
-        if (xPosition <= 195 && xPosition >= 145 && yPosition <= 375 && yPosition >= 325) {
-            g.setColor(Color.gray);
-            g.fillRect(200, 260, 60, 60);
-            g.fillRect(80, 260, 60, 60);
-        }
-        if (xPosition <= 75 && xPosition >= 25 && yPosition <= 375 && yPosition >= 325) {
-            g.setColor(Color.gray);
-            g.fillRect(80, 260, 60, 60);
-        }
-        if (xPosition <= 485 && xPosition >= 385 && yPosition <= 195 && yPosition >= 145) {
-            g.setColor(Color.gray);
-            g.fillRect(380, 200, 60, 60);
-        }
-        if (xPosition <= 375 && xPosition >= 325 && yPosition <= 195 && yPosition >= 145) {
-            g.setColor(Color.gray);
-            g.fillRect(380, 200, 60, 60);
-            g.fillRect(260, 200, 60, 60);
-        }
-        if (xPosition <= 255 && xPosition >= 205 && yPosition <= 195 && yPosition >= 145) {
-            g.setColor(Color.gray);
-            g.fillRect(260, 200, 60, 60);
-            g.fillRect(140, 200, 60, 60);
-        }
-        if (xPosition <= 135 && xPosition >= 85 && yPosition <= 195 && yPosition >= 145) {
-            g.setColor(Color.gray);
-            g.fillRect(140, 200, 60, 60);
-            g.fillRect(20, 200, 60, 60);
-        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
 
     }
 }
