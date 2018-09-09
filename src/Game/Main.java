@@ -6,6 +6,7 @@ package Game;
         import java.awt.event.ActionListener;
         import java.awt.event.KeyAdapter;
         import java.awt.event.KeyEvent;
+        import java.util.Arrays;
 
 public class Main {
     public static int heightOfFrame;
@@ -287,7 +288,7 @@ public class Main {
 
         inputButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                if(inputCode.getPassword() == correctCode) {
+                if (Arrays.equals((inputCode).getPassword(), correctCode)){
                     JOptionPane.showMessageDialog(null, "Вы выиграли!");
                     System.exit(0);
                 }else {
