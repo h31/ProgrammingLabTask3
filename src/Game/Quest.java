@@ -8,7 +8,7 @@ package Game;
         import java.awt.event.KeyEvent;
         import java.util.Arrays;
 
-public class Main {
+public class Quest {
     public static int heightOfFrame;
     public static int widthOfFrame;
     public static void main(String[] args ) {
