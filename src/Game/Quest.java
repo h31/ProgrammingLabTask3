@@ -5,6 +5,7 @@ import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.*;
 import java.util.Arrays;
 
 public class Quest {
@@ -23,24 +24,15 @@ public class Quest {
     private static JButton backFromRooms = new JButton("Вернуться");
     private static JButton inputButton = new JButton("Ввод");
 
-    private static JLabel rules = new JLabel("В этой игре вам нужно выбраться из ловушки.");
-    private static JLabel environmentStart = new JLabel("<html>Вы по-прежнему не помните, как оказались взаперти.<br>" +
-            "Тут темно и холодно. Из-за этого вам поскорее хочется выбраться</html>");
-    private static JLabel environmentFirstRoom = new JLabel("<html>Вы заходите в комнату. Здесь посветлее. На стене вы видите картину.<br>" +
-            "На ней изображены зеленый паук, красный конь и синий жук.<br>" +
-            "Больше тут ничего нет.</html>");
-    private static JLabel environmentSecondRoom = new JLabel("<html>В этой комнате довольно светло, по центру комнаты стоит стол.<br>" +
-            "На нём лежат ручки разных цветов. Вы решаете посчитать их,<br>" +
-            "три фиолетовых, семь желтых, одна белая. Брать их бессмысленно, они не пишут.</html>");
-    private static JLabel environmentThirdRoom = new JLabel("<html>Эта комната почти также пуста, как и две другие.<br>" +
-            "Здесь вы видите только цветную пирамидку, сверху синий конус,<br>" +
-            "далее зеленый бублик, затем красный, желтый, фиолетовый и белый.<br>" +
-            "Кроме пирамидки тут ничего нет.</html>");
-    private static JLabel environmentDoorWithCode = new JLabel("Вы подходите к двери. На ней шестизначный кодовый замок.");
-    private static JLabel error = new JLabel("Пароль не подошёл");
-    private static JLabel inputLabel = new JLabel("Попробовать ввести код:");
-
+    private static Box environmentStart = Box.createVerticalBox();
+    private static Box environmentFirstRoom = Box.createVerticalBox();
+    private static Box environmentSecondRoom = Box.createVerticalBox();
+    private static Box environmentThirdRoom = Box.createVerticalBox();
+    private static Box environmentDoorWithCode = Box.createVerticalBox();
+    private static Box error = Box.createVerticalBox();
+    private static Box rules = Box.createVerticalBox();
     private static Box inputLocation = Box.createHorizontalBox();
+    private static Box inputLabel = Box.createVerticalBox();
     private static JPasswordField inputCode = new JPasswordField(6);
 
     public static void main(String[] args) {
@@ -58,15 +50,11 @@ public class Quest {
         widthOfFrame = frame.getWidth();
 
         inputCode.setEchoChar((char) 0);
+        inputCode.setFont(new Font("TimesRoman", Font.PLAIN, 19));
         ((AbstractDocument) inputCode.getDocument()).setDocumentFilter(new NewFilter());
 
         Color panelColor = new Color(233, 227, 175);
-
-        error.setForeground(Color.RED);
-
         variantPanel.setBackground(panelColor);
-
-        Font rulesFont = new Font("TimesRoman", Font.PLAIN, 19);
 
         buttonInitialization(startButton);
         buttonInitialization(rulesButton);
@@ -80,16 +68,14 @@ public class Quest {
         buttonInitialization(backButton);
         inputButton.setFont(new Font("TimesRoman", Font.PLAIN, 26));
 
-        inputLabel.setFont(rulesFont);
-        inputCode.setFont(rulesFont);
-        rules.setFont(rulesFont);
-
-        environmentStart.setFont(rulesFont);
-        environmentFirstRoom.setFont(rulesFont);
-        environmentSecondRoom.setFont(rulesFont);
-        environmentThirdRoom.setFont(rulesFont);
-        environmentDoorWithCode.setFont(rulesFont);
-        error.setFont(rulesFont);
+        reader(environmentStart, "data\\environmentStart.txt");
+        reader(environmentFirstRoom, "data\\environmentFirstRoom.txt");
+        reader(environmentSecondRoom, "data\\environmentSecondRoom.txt");
+        reader(environmentThirdRoom, "data\\environmentThirdRoom.txt");
+        reader(environmentDoorWithCode, "data\\environmentDoorWithCode.txt");
+        reader(error, "data\\error.txt");
+        reader(rules, "data\\rules.txt");
+        reader(inputLabel, "data\\inputLabel.txt");
 
         backButton.setVisible(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -105,7 +91,7 @@ public class Quest {
         error.setVisible(false);
         textPanel.add(lastLocation);
 
-        Dimension minSize = new Dimension(widthOfFrame / 200, heightOfFrame / 100);
+        Dimension minSize = new Dimension(widthOfFrame, heightOfFrame / 3);
         Dimension prefSize = new Dimension(widthOfFrame, heightOfFrame / 3);
         Dimension maxSize = new Dimension(widthOfFrame, heightOfFrame / 3);
         panel.add(new Box.Filler(minSize, prefSize, maxSize));
@@ -224,5 +210,26 @@ public class Quest {
         button.setBackground(buttonColor);
         button.setForeground(Color.BLACK);
         button.setFont(BigFontTR);
+    }
+
+    private static void reader(Box box, String inputFile) {
+        try {
+            Font rulesFont = new Font("TimesRoman", Font.PLAIN, 19);
+            File text = new File(inputFile);
+            FileReader readText = new FileReader(text);
+            BufferedReader readerOfText = new BufferedReader(readText);
+            String line;
+            while ((line = readerOfText.readLine()) != null) {
+                JLabel label = new JLabel(line);
+                if (box.equals(error)) label.setForeground(Color.RED);
+                label.setFont(rulesFont);
+                box.add(label);
+            }
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
