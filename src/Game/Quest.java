@@ -181,7 +181,7 @@ public class Quest {
         });
     }
 
-    private static void someActionWithButton(JButton button, boolean toRules, boolean startMenu, boolean isEnvironmentStart, int numberOfScene) {
+    public static void someActionWithButton(JButton button, boolean toRules, boolean startMenu, boolean isEnvironmentStart, int numberOfScene) {
         button.addActionListener(e -> {
             startButton.setVisible(startMenu);
             exitButton.setVisible(startMenu);
@@ -204,7 +204,7 @@ public class Quest {
         });
     }
 
-    private static void buttonInitialization(JButton button) {
+    public static void buttonInitialization(JButton button) {
         Color buttonColor = new Color(233, 179, 97);
         Font BigFontTR = new Font("TimesRoman", Font.PLAIN, 26);
         button.setBackground(buttonColor);
@@ -212,7 +212,7 @@ public class Quest {
         button.setFont(BigFontTR);
     }
 
-    private static void reader(Box box, String inputFile) {
+    public static void reader(Box box, String inputFile) {
         try {
             Font rulesFont = new Font("TimesRoman", Font.PLAIN, 19);
             File text = new File(inputFile);

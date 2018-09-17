@@ -30,6 +30,7 @@ dependencies {
 
     // To avoid compiler warnings about @API annotations in JUnit code
     testCompileOnly('org.apiguardian:apiguardian-api:1.0.0')
+    compile 'junit:junit:4.12'
 }
 
 compileJava {
