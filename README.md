@@ -1,2 +1,2 @@
-# ProgrammingLabTask3
-Application with Campus Map for SPbSTU students
+# Campus Map (ProgrammingLabTask3)
+Application for Android devices with realisation of Campus Map for SPbSTU students
