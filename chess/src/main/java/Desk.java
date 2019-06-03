@@ -7,8 +7,6 @@ import java.util.Map;
 class Desk {
     private Map<Figure, ImageIcon> whiteFigures = new HashMap<>();
     private Map<Figure, ImageIcon> blackFigures = new HashMap<>();
-
-
     private boolean equipped = false;
     boolean turn = true;
     private int currentX;
@@ -16,7 +14,7 @@ class Desk {
     private int endX;
     private int endY;
     private Icon currentIcon = null;
-
+    private Cell[][] field = new Cell[8][8];
     public enum Team {
         BLACK,
         WHITE,
@@ -32,7 +30,18 @@ class Desk {
         pawn;
     }
 
-    Cell[][] field = new Cell[8][8];
+
+    public Map<Figure, ImageIcon> getWhiteFigures() {
+        return whiteFigures;
+    }
+
+    public Map<Figure, ImageIcon> getBlackFigures() {
+        return blackFigures;
+    }
+
+    public Cell[][] getField() {
+        return field;
+    }
 
     void setInitialLocation() {
         whiteFigures.put(Figure.rook, new ImageIcon("img/Rook.png"));
@@ -181,7 +190,7 @@ class Desk {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (moveRules.moveIsRight(x, y, i, j, currentIcon, whiteFigures, blackFigures, revertCheckBoxOn) && !cancel) {
-                    if (field[j][i].cellColor.equals(new java.awt.Color(75, 22, 50))) {
+                    if (field[j][i].cellColor.equals(new java.awt.Color(150, 200, 50))) {
                         field[j][i].setBackground(darkBlue);
                     } else if (field[j][i].cellColor == java.awt.Color.WHITE) {
                         field[j][i].setBackground(lightBlue);

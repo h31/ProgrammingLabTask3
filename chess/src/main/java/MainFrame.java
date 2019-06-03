@@ -6,7 +6,8 @@ import java.awt.event.KeyEvent;
 public class MainFrame extends JFrame {
     private Desk desk = new Desk();
     private JPanel panel = new JPanel();
-
+    private JCheckBox moveCheckBox = new JCheckBox("показывать ходы");
+    private JCheckBox revertCheckBox = new JCheckBox("автоповорот");
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
         frame.setTitle("Chess");
@@ -22,13 +23,13 @@ public class MainFrame extends JFrame {
 
 
     MainFrame() {
+        JMenu menu = new JMenu("settings");
         JMenuItem revertItm = new JMenuItem("повернуть");
         JMenuItem restartItm = new JMenuItem("начать заново");
         revertItm.addActionListener(e -> {
             desk.revertDesk();
             desk.turn = !desk.turn;
         });
-        JMenu menu = new JMenu("settings");
         restartItm.addActionListener(e -> {
             restart();
         });
@@ -58,44 +59,43 @@ public class MainFrame extends JFrame {
 
     }
 
-    private JCheckBox moveCheckBox = new JCheckBox("показывать ходы");
-    private JCheckBox revertCheckBox = new JCheckBox("автоповорот");
+
     public void startJPanel() {
         desk.setInitialLocation();
         panel.removeAll();
         panel.setLayout(new GridLayout(8,8));
         panel.setPreferredSize(new Dimension(720, 720));
-        Color dark = new Color(75, 22, 50);
+        Color dark = new Color(150, 200, 50);
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                JButton btn = desk.field[i][j];
+                JButton btn = desk.getField()[i][j];
                 int finalI = i;
                 int finalJ = j;
                 if (Math.floorMod(i, 2) == 0) {
                     if (Math.floorMod(j, 2) == 0) {
                         btn.setBackground(Color.WHITE);
-                        desk.field[i][j].cellColor = Color.WHITE;
+                        desk.getField()[i][j].cellColor = Color.WHITE;
                     } else {
                         btn.setBackground(dark);
-                        desk.field[i][j].cellColor = dark;
+                        desk.getField()[i][j].cellColor = dark;
                     }
                 } else {
                     if (Math.floorMod(j, 2) == 0) {
                         btn.setBackground(dark);
-                        desk.field[i][j].cellColor = dark;
+                        desk.getField()[i][j].cellColor = dark;
                     } else {
                         btn.setBackground(Color.WHITE);
-                        desk.field[i][j].cellColor = Color.WHITE;
+                        desk.getField()[i][j].cellColor = Color.WHITE;
                     }
                 }
-                desk.field[i][j].addActionListener(e -> {
+                desk.getField()[i][j].addActionListener(e -> {
                     desk.move(finalI, finalJ, moveCheckBox.isSelected(), revertCheckBox.isSelected());
                     showWinFrame();
                     desk.whiteWin = false;
                     desk.blackWin = false;
                 });
                 panel.setVisible(true);
-                panel.add(desk.field[i][j]);
+                panel.add(desk.getField()[i][j]);
             }
         }
 
